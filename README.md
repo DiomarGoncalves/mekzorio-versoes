@@ -34,7 +34,7 @@ O `LEIA-ME.txt` de cada pacote explica o resto.
 | Sistema | Windows 10/11 ou Linux, 64 bits | — |
 | Processador | 2 núcleos | 4 núcleos |
 | Memória | 4 GB | 8 GB |
-| Placa de vídeo | Com Vulkan (NVIDIA GTX 600+, AMD Radeon HD 7000+, Intel HD 500+) | Dedicada |
+| Placa de vídeo | OpenGL 3.3 (quase todas desde 2012) | Com Vulkan (NVIDIA GTX 600+, AMD HD 7000+, Intel HD 500+) |
 | Disco | 500 MB | — |
 
 **Servidor dedicado**
@@ -46,6 +46,9 @@ O `LEIA-ME.txt` de cada pacote explica o resto.
 | Memória | 512 MB | 1 GB |
 | Disco | 300 MB + mundos | 1 GB |
 | Rede | Porta **UDP** liberada (padrão 27777) | — |
+
+**PC fraco:** Opções → Gráficos → Qualidade **Baixa**; se ainda travar, ligue **Modo leve (OpenGL)** e abra o jogo de
+novo. Sem Vulkan, o jogo abre sozinho no modo leve.
 
 Valores medidos na alfa (servidor com uma fábrica grande: ~75 MB de memória e ~6% de um núcleo); ainda não
 testados em PCs fracos.
