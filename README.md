@@ -25,6 +25,31 @@ o `Mekzorio.x86_64` (Linux). No Windows, se aparecer "O Windows protegeu o compu
 **Mais informações → Executar assim mesmo** (acontece com todo jogo que ainda não tem assinatura digital).
 O `LEIA-ME.txt` de cada pacote explica o resto.
 
+## Requisitos
+
+**Jogo**
+
+| | Mínimo | Recomendado |
+|---|---|---|
+| Sistema | Windows 10/11 ou Linux, 64 bits | — |
+| Processador | 2 núcleos | 4 núcleos |
+| Memória | 4 GB | 8 GB |
+| Placa de vídeo | Com Vulkan (NVIDIA GTX 600+, AMD Radeon HD 7000+, Intel HD 500+) | Dedicada |
+| Disco | 500 MB | — |
+
+**Servidor dedicado**
+
+| | Mínimo | Recomendado |
+|---|---|---|
+| Sistema | Linux 64 bits (x86-64), qualquer distribuição; ARM não é suportado | — |
+| Processador | 1 núcleo | 2 núcleos |
+| Memória | 512 MB | 1 GB |
+| Disco | 300 MB + mundos | 1 GB |
+| Rede | Porta **UDP** liberada (padrão 27777) | — |
+
+Valores medidos na alfa (servidor com uma fábrica grande: ~75 MB de memória e ~6% de um núcleo); ainda não
+testados em PCs fracos.
+
 ## Jogar com amigos
 
 - **Pelo próprio jogo:** quem hospeda abre um mundo, aperta Esc e escolhe **Abrir para a rede**. Os outros entram
