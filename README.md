@@ -30,8 +30,8 @@ O `LEIA-ME.txt` de cada pacote explica o resto.
 - **Pelo próprio jogo:** quem hospeda abre um mundo, aperta Esc e escolhe **Abrir para a rede**. Os outros entram
   em **Multijogador → Entrar por endereço** (IP:porta; a porta padrão é 27777, UDP).
 - **Servidor dedicado** (fica ligado sem ninguém jogando): use o `Mekzorio-servidor-linux.zip`. Para painel
-  Pterodactyl, importe o `Mekzorio-egg-pterodactyl.json`; o passo a passo está em `pterodactyl/LEIA-ME.md` dentro
-  do pacote do servidor.
+  Pterodactyl, importe o egg (sempre a versão mais nova em [pterodactyl/egg-mekzorio.json](pterodactyl/egg-mekzorio.json));
+  o passo a passo está em [pterodactyl/LEIA-ME.md](pterodactyl/LEIA-ME.md). O servidor usa a porta **UDP** 27777.
 - Todos precisam usar a **mesma versão** do jogo e do servidor.
 
 ## Imagens

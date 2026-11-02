@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-11-01T00:00:00+00:00",
+    "name": "MEKZORIO",
+    "author": "DiomarGoncalves@users.noreply.github.com",
+    "description": "Servidor dedicado do MEKZORIO (jogo de automação). UDP; mundo salvo em saves/, opções em servidor.json. Para desligar salvando: parar.",
+    "features": null,
+    "docker_images": {
+        "Debian": "ghcr.io/parkervcp/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": "MEKZORIO_PORTA={{SERVER_PORT}} ./Automacao.ServerApp servidor.json",
+    "config": {
+        "files": "{}",
+        "startup": "{\"done\": \"pronto na porta\"}",
+        "logs": "{}",
+        "stop": "parar"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\n# Instalador do servidor do MEKZORIO (roda no contêiner de instalação do painel; os arquivos do servidor ficam em /mnt/server).\n# Baixa o .zip de DOWNLOAD_URL e põe por cima do que já existe, sem apagar saves/ nem servidor.json.\n# Se o link estiver vazio ou não baixar (ex.: repositório privado), usa o Mekzorio-servidor-linux*.zip enviado pela aba Files.\nset -euo pipefail\nPASTA=\"${PASTA_SERVIDOR:-/mnt/server}\"\nmkdir -p \"$PASTA\" && cd \"$PASTA\"\n# Pasta de trabalho no disco do servidor: o /tmp do contêiner de instalação é um tmpfs de 100 MB (padrão do Wings)\n# e o pacote baixado + descompactado passa disso (o unzip ficava esperando \"disk full? Continue?\" para sempre).\nrm -rf \"$PASTA\"/.instalador.*                                # sobra de uma instalação interrompida\nTMP=\"$(mktemp -d -p \"$PASTA\" .instalador.XXXXXX)\"\ntrap 'rm -rf \"$TMP\"' EXIT\nexport DOTNET_BUNDLE_EXTRACT_BASE_DIR=\"$TMP/net\"             # o servidor (arquivo único) também extrai bibliotecas fora do /tmp\n\nENVIADO=\"$(ls -t Mekzorio-servidor-linux*.zip 2>/dev/null | head -n 1 || true)\"\nif [ -n \"${DOWNLOAD_URL:-}\" ] && echo \"Baixando $DOWNLOAD_URL\" && curl -fsSL --retry 3 -o \"$TMP/servidor.zip\" \"$DOWNLOAD_URL\"; then\n  :\nelif [ -n \"$ENVIADO\" ]; then\n  [ -n \"${DOWNLOAD_URL:-}\" ] && echo \"Não consegui baixar; usando o pacote enviado pela aba Files.\"\n  echo \"Usando o pacote enviado: $ENVIADO\"\n  cp \"$ENVIADO\" \"$TMP/servidor.zip\"\nelse\n  # Sem link que funcione e sem pacote enviado: não é erro de instalação, falta só o servidor.\n  mkdir -p saves\n  echo \"Falta o servidor: envie o Mekzorio-servidor-linux.zip na aba Files (sem descompactar) e clique em Settings → Reinstall Server.\"\n  exit 0\nfi\n\n# </dev/null e -o: o unzip nunca para esperando resposta (sem TTY, uma pergunta trava a instalação).\nunzip -oq \"$TMP/servidor.zip\" -d \"$TMP/x\" </dev/null \\\n  || { echo \"ERRO: falha ao descompactar o pacote (arquivo incompleto ou corrompido, ou falta espaço em disco: precisa de uns 400 MB livres).\"; exit 1; }\n# O .zip traz uma pasta (Mekzorio-servidor-linux/); aceita também os arquivos soltos.\nBIN=\"$(find \"$TMP/x\" -maxdepth 2 -type f -name Automacao.ServerApp | head -n 1)\"\n[ -n \"$BIN\" ] || { echo \"ERRO: o .zip não tem o Automacao.ServerApp (é o pacote do servidor?)\"; exit 1; }\nesperado=\"$(unzip -l \"$TMP/servidor.zip\" | awk '$4 ~ /(^|\\/)Automacao\\.ServerApp$/ {print $1; exit}')\"\nif [ -n \"$esperado\" ] && [ \"$(stat -c %s \"$BIN\")\" != \"$esperado\" ]; then\n  echo \"ERRO: o Automacao.ServerApp saiu incompleto ($(stat -c %s \"$BIN\") de $esperado bytes). Falta espaço em disco?\"; exit 1\nfi\nORIGEM=\"$(dirname \"$BIN\")\"   # dentro de $TMP/x: o laço abaixo nunca vê a própria pasta .instalador.*\n\nfor item in \"$ORIGEM\"/* \"$ORIGEM\"/.[!.]*; do\n  [ -e \"$item\" ] || continue\n  nome=\"$(basename \"$item\")\"\n  case \"$nome\" in\n    saves|servidor.json) ;;                               # nunca vêm no pacote; se vierem, os do painel ficam\n    mods)                                                 # troca só os mods do pacote; mods enviados à mão ficam\n      mkdir -p mods\n      for m in \"$item\"/*; do rm -rf \"mods/$(basename \"$m\")\"; cp -a \"$m\" mods/; done ;;\n    *) rm -rf \"./$nome\"; cp -a \"$item\" \"./$nome\" ;;\n  esac\ndone\nchmod +x Automacao.ServerApp iniciar-servidor.sh 2>/dev/null || true\nmkdir -p saves\n\nif [ ! -f servidor.json ]; then\n  # O próprio servidor escreve o arquivo com todas as opções; se não rodar aqui (ex.: pacote Alpine), um vazio vale o padrão.\n  ./Automacao.ServerApp --criar-config servidor.json || echo '{}' > servidor.json\nelse\n  echo \"servidor.json já existe: mantido.\"\nfi\necho \"Instalação concluída.\"\n",
+            "container": "ghcr.io/parkervcp/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Link do pacote do servidor",
+            "description": "De onde baixar o servidor (o padrão é a última versão publicada). Vazio ou sem acesso: usa o Mekzorio-servidor-linux.zip enviado pela aba Files. Vale ao instalar ou reinstalar.",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "https://github.com/DiomarGoncalves/mekzorio-versoes/releases/latest/download/Mekzorio-servidor-linux.zip",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Nome do servidor",
+            "description": "Nome que aparece para os jogadores.",
+            "env_variable": "MEKZORIO_NOME",
+            "default_value": "Servidor MEKZORIO",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Senha",
+            "description": "Senha para entrar. Vazio = sem senha.",
+            "env_variable": "MEKZORIO_SENHA",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Máximo de jogadores",
+            "description": "Quantas pessoas ao mesmo tempo.",
+            "env_variable": "MEKZORIO_MAX_JOGADORES",
+            "default_value": "8",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1,256",
+            "field_type": "text"
+        },
+        {
+            "name": "Nome do mundo",
+            "description": "Nome do mundo novo. Só vale quando o mundo é criado (saves/mundo ainda não existe).",
+            "env_variable": "MEKZORIO_MUNDO",
+            "default_value": "Mundo",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Seed",
+            "description": "Número que gera o mapa. Vazio = sorteado. Só vale quando o mundo é criado.",
+            "env_variable": "MEKZORIO_SEED",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|integer",
+            "field_type": "text"
+        }
+    ]
+}
