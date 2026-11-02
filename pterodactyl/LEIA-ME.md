@@ -56,8 +56,14 @@ topo do servidor no painel (IP e porta, por exemplo `200.150.10.20:27777`) e cli
 
 **Desligar:** o botão **Stop** do painel manda o comando `parar`, que salva o mundo antes de desligar.
 Evite o **Kill**: ele desliga na hora e perde o que foi feito desde o último salvamento automático (5 minutos).
-No console do painel também dá para digitar os comandos do servidor: `jogadores`, `info`, `salvar`,
-`dizer <texto>`, `expulsar <nome>`, `banir <nome>`, `desbanir <nome>`.
+No console do painel também dá para digitar os comandos do servidor: `jogadores`, `info`, `salvar`, `copia`,
+`dizer <texto>`, `expulsar <nome>`, `banir <nome>`, `desbanir <nome>`, `cargo <nome> admin|construtor|visitante`,
+`cargos`, `lista ligar|desligar`, `lista add|tirar <nome>`.
+
+**Administradores e cargos:** ponha o seu nome do jogo em `"admins": ["SeuNome"]` no `servidor.json` (aba **Files**)
+e reinicie. Aí você usa os mesmos comandos pelo chat do jogo, começando com `/` (ex.: `/cargo Ana visitante`).
+Visitante só anda, conversa e olha; com a **lista** ligada, só entra quem está nela.
+**Cópias de segurança:** a cada 60 minutos o mundo é copiado para `saves/mundo-copias/<data>` (as 24 últimas).
 
 ## 4. Onde ficam o mundo e a configuração
 
