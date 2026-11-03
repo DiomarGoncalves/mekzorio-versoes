@@ -1,5 +1,23 @@
 # Novidades
 
+## v0.1.2-alfa
+
+> Não conecta com servidores da v0.1.1-alfa: atualize o jogo e o servidor juntos. Mundos antigos abrem normalmente.
+
+- **Pesquisa em linha do tempo**: o começo é feito entregando itens pela janela de pesquisa, sem laboratório
+  (Ferro → Cobre → Energia → Ciência); depois cada era traz um pacote novo. A lista mostra as pesquisas separadas
+  por era.
+- **Rede de Reativação**: os Nós de cada região têm contratos; religar uma região recupera tecnologias que só
+  saem dela (eólica, solar, fundição elétrica e Automação 3). Na pesquisa, "ver no mapa" mostra onde fica o Nó.
+- **Interface nova** em todas as máquinas: miniatura 3D, estado em uma palavra, receita com setas, consumo real
+  e a lista do combustível que serve. Inventário com o equipamento identificado e pesquisa em três colunas.
+- **Veículos e vagões** com espaços de verdade: arraste itens para o porta-malas, o tanque e os vagões do trem.
+- **Busca** na fabricação (C) e nos itens do criativo (I).
+- **Mapa (M) e minimapa (N)**: aproximando, mostram o chão, o minério, as árvores e as máquinas como no jogo;
+  bem de perto (8x a 32x) o mapa vira uma janela do jogo visto de cima. Minimapa com zoom pela rodinha.
+- **PC fraco**: qualidade Baixa/Média/Alta e Modo leve (OpenGL) em Opções → Gráficos.
+- Correções: torreta com espaço de munição; poste e extrator de petróleo não pedem mais carvão.
+
 ## v0.1.1-alfa
 
 > Não conecta com servidores da v0.1.0-alfa: atualize o jogo e o servidor juntos.
