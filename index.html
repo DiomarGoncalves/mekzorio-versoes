@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MEKZORIO — jogo de automação industrial</title>
+  <meta name="description" content="MEKZORIO: jogo de fábrica para PC. Comece coletando à mão e termine com fábricas inteiras ligadas por esteiras, canos, trens e drones. Versão alfa gratuita para Windows e Linux, com multijogador cooperativo.">
+  <meta property="og:title" content="MEKZORIO — jogo de automação industrial">
+  <meta property="og:description" content="Construa, automatize e religue a Rede de Reativação. Alfa gratuita para Windows e Linux, com multijogador.">
+  <meta property="og:image" content="imagens/capa.jpg">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#14181e">
+  <link rel="icon" type="image/png" href="imagens/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <header class="topo" id="topo">
+    <a class="marca" href="#inicio" aria-label="MEKZORIO, início">
+      <img src="imagens/emblema.png" alt="" width="36" height="36">
+      <span>MEKZORIO</span>
+    </a>
+    <button class="menu-botao" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="menu" class="menu">
+      <a href="#jogo">O jogo</a>
+      <a href="#imagens">Imagens</a>
+      <a href="#novidades">Novidades</a>
+      <a href="#amigos">Com amigos</a>
+      <a class="menu-baixar" href="#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Capa -->
+    <section class="capa" id="inicio">
+      <div class="capa-fundo" style="background-image: url('imagens/fabrica.jpg')"></div>
+      <div class="capa-conteudo">
+        <span class="etiqueta">Versão alfa · grátis</span>
+        <h1>MEKZORIO</h1>
+        <p class="capa-frase">Rede de Reativação</p>
+        <p class="capa-texto">Jogo de automação industrial para PC. Comece coletando minério com as mãos e termine
+          com fábricas inteiras ligadas por esteiras, canos, trens e drones — sozinho ou com os amigos.</p>
+        <div class="capa-botoes">
+          <a class="botao botao-principal" id="baixar-agora" href="#baixar">Baixar o jogo</a>
+          <a class="botao botao-secundario" href="#imagens">Ver imagens</a>
+        </div>
+        <p class="capa-versao" id="versao-atual">Windows e Linux · 64 bits</p>
+      </div>
+    </section>
+
+    <!-- O jogo -->
+    <section class="secao" id="jogo">
+      <div class="secao-cabeca">
+        <span class="placa"></span>
+        <h2>O que dá para fazer</h2>
+        <p>Uma fábrica que cresce com você: cada máquina nova pede peças que outra máquina tem que fazer.</p>
+      </div>
+      <div class="cartoes">
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/assembler.png" alt="">
+          <h3>Do zero à fábrica</h3>
+          <p>Colete à mão, ponha fornalhas e mineradoras, e passe para montadoras em três níveis que fazem tudo sozinhas.</p>
+        </article>
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/transport_belt.png" alt="">
+          <h3>Esteiras de verdade</h3>
+          <p>Três velocidades, passagens subterrâneas e aéreas e braços mecânicos que pegam e soltam o que você mandar.</p>
+          <p class="breve"><span>em breve</span> duas fileiras de itens, divisor com filtro e balanceadores.</p>
+        </article>
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/solar_panel.png" alt="">
+          <h3>Energia</h3>
+          <p>Gerador a carvão, vapor, painéis solares que dormem à noite, turbinas de vento e baterias para guardar a sobra.</p>
+        </article>
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/sulfuric_acid.png" alt="">
+          <h3>Petróleo e química</h3>
+          <p>Extrator, refinaria e planta química: plástico, combustível sólido e canos para levar tudo.</p>
+          <p class="breve"><span>em breve</span> enxofre, ácido sulfúrico, lubrificante e rolamentos.</p>
+        </article>
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/locomotive.png" alt="">
+          <h3>Trens e veículos</h3>
+          <p>Ferrovias com sinais e estações automáticas, carro, helicóptero, avião, jetpack e drones de entrega.</p>
+        </article>
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/reactivation_node.png" alt="">
+          <h3>Rede de Reativação</h3>
+          <p>Religue os Nós de cada região cumprindo contratos em etapas. Cada região guarda um recurso que só existe lá.</p>
+        </article>
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/mechanical_scrap.png" alt="">
+          <h3>Guardiões mecânicos</h3>
+          <p>Ameaça opcional em quatro níveis, de pacífico a patrulhas: torres de vigia, sentinelas e um Guardião em cada Nó.</p>
+        </article>
+        <article class="cartao">
+          <img class="icone" src="imagens/icones/drone.png" alt="">
+          <h3>Com amigos e mods</h3>
+          <p>Multijogador cooperativo, servidor dedicado (até em painel Pterodactyl) e mods feitos só de dados.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Imagens -->
+    <section class="secao secao-escura" id="imagens">
+      <div class="secao-cabeca">
+        <span class="placa"></span>
+        <h2>Imagens</h2>
+        <p>Fotos do próprio jogo. Clique para ver grande.</p>
+      </div>
+      <div class="galeria">
+        <figure><button data-grande="imagens/fabrica.jpg"><img src="imagens/fabrica.jpg" alt="Fábrica com mineradoras, fornalhas e montadoras" loading="lazy"></button><figcaption>Uma fábrica no meio do jogo</figcaption></figure>
+        <figure><button data-grande="imagens/trem.jpg"><img src="imagens/trem.jpg" alt="Trem automático entre estações" loading="lazy"></button><figcaption>Trem automático entre estações</figcaption></figure>
+        <figure><button data-grande="imagens/guardioes.jpg"><img src="imagens/guardioes.jpg" alt="Combate contra sentinelas perto de uma torre de vigia" loading="lazy"></button><figcaption>Sentinelas guardando uma torre de vigia</figcaption></figure>
+        <figure><button data-grande="imagens/regiao_ampliada.jpg"><img src="imagens/regiao_ampliada.jpg" alt="Nó regional ampliado com feixe dourado" loading="lazy"></button><figcaption>Região ampliada: o Nó acende</figcaption></figure>
+        <figure><button data-grande="imagens/montadoras.jpg"><img src="imagens/montadoras.jpg" alt="Linha de montadoras" loading="lazy"></button><figcaption>Montadoras em linha</figcaption></figure>
+        <figure><button data-grande="imagens/jetpack.jpg"><img src="imagens/jetpack.jpg" alt="Personagem voando de jetpack" loading="lazy"></button><figcaption>De jetpack por cima da fábrica</figcaption></figure>
+        <figure><button data-grande="imagens/esteiras.jpg"><img src="imagens/esteiras.jpg" alt="Esteiras comum, rápida e expressa" loading="lazy"></button><figcaption>Esteiras nos três níveis <span class="breve-mini">em breve</span></figcaption></figure>
+        <figure><button data-grande="imagens/balanceador.jpg"><img src="imagens/balanceador.jpg" alt="Balanceador de quatro esteiras" loading="lazy"></button><figcaption>Balanceador 4 → 4 <span class="breve-mini">em breve</span></figcaption></figure>
+        <figure><button data-grande="imagens/quimica.jpg"><img src="imagens/quimica.jpg" alt="Refinaria e plantas químicas" loading="lazy"></button><figcaption>Química do enxofre <span class="breve-mini">em breve</span></figcaption></figure>
+        <figure><button data-grande="imagens/mapa.jpg"><img src="imagens/mapa.jpg" alt="Mapa do mundo com as regiões" loading="lazy"></button><figcaption>Mapa com as regiões da Rede</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- Novidades -->
+    <section class="secao" id="novidades">
+      <div class="secao-cabeca">
+        <span class="placa"></span>
+        <h2>Novidades</h2>
+        <p>O que entrou em cada versão de teste.</p>
+      </div>
+      <div class="novidades" id="lista-novidades">
+        <p class="aviso-carregando">Carregando as novidades… Se não aparecer, veja o arquivo <a href="NOVIDADES.md">NOVIDADES.md</a>.</p>
+      </div>
+    </section>
+
+    <!-- Baixar -->
+    <section class="secao secao-escura" id="baixar">
+      <div class="secao-cabeca">
+        <span class="placa"></span>
+        <h2>Baixar</h2>
+        <p id="versao-baixar">Sempre a versão mais nova. Todos que jogam juntos precisam da mesma versão.</p>
+      </div>
+      <div class="downloads">
+        <a class="download" data-so="windows" href="https://github.com/DiomarGoncalves/mekzorio-versoes/releases/latest/download/Mekzorio-jogo-windows.zip">
+          <span class="download-so">Windows</span>
+          <span class="download-desc">Windows 10 ou 11, 64 bits</span>
+          <span class="download-arquivo">Mekzorio-jogo-windows.zip <em data-tamanho="Mekzorio-jogo-windows.zip"></em></span>
+        </a>
+        <a class="download" data-so="linux" href="https://github.com/DiomarGoncalves/mekzorio-versoes/releases/latest/download/Mekzorio-jogo-linux.zip">
+          <span class="download-so">Linux</span>
+          <span class="download-desc">Qualquer distribuição, 64 bits</span>
+          <span class="download-arquivo">Mekzorio-jogo-linux.zip <em data-tamanho="Mekzorio-jogo-linux.zip"></em></span>
+        </a>
+      </div>
+      <div class="como-abrir">
+        <h3>Como abrir</h3>
+        <ol>
+          <li>Extraia o <code>.zip</code> inteiro numa pasta (não abra de dentro do <code>.zip</code>).</li>
+          <li>Abra o <code>Mekzorio.exe</code> (Windows) ou o <code>Mekzorio.x86_64</code> (Linux).</li>
+          <li>No Windows, se aparecer <strong>"O Windows protegeu o computador"</strong>, clique em
+            <strong>Mais informações → Executar assim mesmo</strong>. Acontece com todo jogo que ainda não tem
+            assinatura digital.</li>
+        </ol>
+        <p class="nota">É uma <strong>versão alfa</strong>: o jogo está em desenvolvimento e pode ter erros. Faça cópia
+          dos seus mundos. PC fraco? Em Opções → Gráficos escolha Qualidade <strong>Baixa</strong> ou o
+          <strong>Modo leve</strong>.</p>
+      </div>
+      <details class="requisitos">
+        <summary>Requisitos do computador</summary>
+        <div class="tabela">
+          <table>
+            <thead><tr><th></th><th>Mínimo</th><th>Recomendado</th></tr></thead>
+            <tbody>
+              <tr><th>Sistema</th><td>Windows 10/11 ou Linux, 64 bits</td><td>—</td></tr>
+              <tr><th>Processador</th><td>2 núcleos</td><td>4 núcleos</td></tr>
+              <tr><th>Memória</th><td>4 GB</td><td>8 GB</td></tr>
+              <tr><th>Placa de vídeo</th><td>OpenGL 3.3 (quase todas desde 2012)</td><td>Com Vulkan (GTX 600+, HD 7000+, Intel HD 500+)</td></tr>
+              <tr><th>Disco</th><td>500 MB</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- Com amigos -->
+    <section class="secao" id="amigos">
+      <div class="secao-cabeca">
+        <span class="placa"></span>
+        <h2>Jogar com amigos</h2>
+        <p>O jogo é cooperativo: todo mundo constrói a mesma fábrica.</p>
+      </div>
+      <div class="passos">
+        <div class="passo">
+          <span class="passo-num">1</span>
+          <h3>Pelo próprio jogo</h3>
+          <p>Quem hospeda abre um mundo, aperta <kbd>Esc</kbd> e escolhe <strong>Abrir para a rede</strong>. Os outros
+            entram em <strong>Multijogador → Entrar por endereço</strong> (IP:porta, padrão 27777 UDP).</p>
+        </div>
+        <div class="passo">
+          <span class="passo-num">2</span>
+          <h3>Servidor dedicado</h3>
+          <p>Fica ligado sem ninguém jogando. Baixe o <a href="https://github.com/DiomarGoncalves/mekzorio-versoes/releases/latest">servidor para Linux</a>
+            ou use o <a href="https://github.com/DiomarGoncalves/mekzorio-versoes/blob/main/pterodactyl/LEIA-ME.md">egg do Pterodactyl</a>. Libere a porta <strong>UDP 27777</strong>.</p>
+        </div>
+        <div class="passo">
+          <span class="passo-num">3</span>
+          <h3>Mesma versão</h3>
+          <p>Jogo e servidor precisam estar na mesma versão. Quando sair uma nova, todo mundo atualiza junto.</p>
+        </div>
+      </div>
+      <div class="erro">
+        <img src="imagens/icones/tree_cutter.png" alt="" class="icone">
+        <div>
+          <h3>Achou um erro?</h3>
+          <p>Conte o que aconteceu e o que você estava fazendo, se der com uma foto da tela.</p>
+        </div>
+        <a class="botao botao-secundario" href="https://github.com/DiomarGoncalves/mekzorio-versoes/issues/new/choose">Relatar um erro</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <img src="imagens/emblema.png" alt="" width="28" height="28">
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. ·
+      <a href="https://github.com/DiomarGoncalves/mekzorio-versoes/blob/main/TERMOS.md">Termos de uso</a> ·
+      <a href="https://github.com/DiomarGoncalves/mekzorio-versoes">Repositório das versões</a></p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-fechar" aria-label="Fechar">×</button>
+    <button class="lightbox-seta esquerda" aria-label="Anterior">‹</button>
+    <img alt="">
+    <button class="lightbox-seta direita" aria-label="Próxima">›</button>
+    <p class="lightbox-legenda"></p>
+  </div>
+
+  <script src="site.js"></script>
+</body>
+</html>

@@ -5,6 +5,8 @@
 Jogo de automação industrial para PC (Windows e Linux), com multijogador cooperativo e mods.
 Comece coletando à mão e termine com fábricas inteiras ligadas por esteiras, canos, trens e drones.
 
+**Site do jogo:** [diomargoncalves.github.io/mekzorio-versoes](https://diomargoncalves.github.io/mekzorio-versoes/)
+
 > **Versão alfa:** o jogo está em desenvolvimento e pode ter erros. Este repositório só tem as versões para
 > baixar; o código do jogo não é público.
 
