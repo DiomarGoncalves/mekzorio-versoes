@@ -1,5 +1,30 @@
 # Novidades
 
+## v0.1.4-alfa
+
+> Não conecta com servidores da v0.1.3-alfa: atualize o jogo e o servidor juntos. Mundos antigos abrem normalmente
+> (ruínas e MEKs abandonados aparecem nas partes do mapa ainda não exploradas).
+
+- **Correção para jogar em servidor:** jogo em português não entrava em servidor dedicado ("mods diferentes do
+  servidor"). Resolvido.
+- **Esteiras de duas fileiras:** cada esteira leva itens dos dois lados, sem misturar. Quem entra pela lateral cai na
+  fileira daquele lado; o braço solta na do lado de lá. Carregam o dobro.
+- **Logística 2 e 3:** divisor, esteira subterrânea e aérea rápidas (vermelhas) e expressas (azuis), com a esteira
+  expressa nova.
+- **Divisor com filtro e balanceadores:** escolha um item e o lado por onde ele sai; o divisor reparte igual entre as
+  saídas, então dá para montar balanceadores.
+- **Química do enxofre:** enxofre, ácido sulfúrico, lubrificante, rolamentos e wafers gravados (a esteira expressa e o
+  circuito de processamento passam a usá-los).
+- **Máquinas nível 2:** mineradora grande (5×5, o dobro da velocidade), poste grande (fio de 16 tiles) e baú de aço.
+- **Ruínas da Rede:** espalhadas pelo mapa, mais ricas e guardadas quanto mais longe. O cofre tem **módulos** de
+  velocidade e de eficiência, que você encaixa no espaço Módulo das máquinas elétricas.
+- **MEKs de segurança:** o Posto de segurança monta, com sucata mecânica, até 3 MEKs que patrulham a sua base e
+  enfrentam os guardiões. Pelo mapa, **MEKs abandonados** guardam as bases de longe e deixam saque.
+- **Filtros mais fáceis:** um espaço só; clique e escolha o item numa lista com busca.
+- **Mapa de teste** agora vem com o jogo (Novo mundo → Começar de). O jogo base não aparece mais em Mods.
+- Interface: tamanho da interface aplica ao soltar, letras mais nítidas, armazém com rolagem, tecla E fecha a máquina
+  junto com o inventário, pesquisa (T) abre sem travar.
+
 ## v0.1.3-alfa
 
 > Não conecta com servidores da v0.1.2-alfa: atualize o jogo e o servidor juntos. Mundos antigos abrem normalmente
