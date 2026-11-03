@@ -1,5 +1,22 @@
 # Novidades
 
+## v0.1.3-alfa
+
+> Não conecta com servidores da v0.1.2-alfa: atualize o jogo e o servidor juntos. Mundos antigos abrem normalmente
+> (as novidades de mapa e de guardiões valem para mundos novos).
+
+- **Guardiões mecânicos** (ameaça opcional, escolhida ao criar o mundo): Pacífico, Guardião do Nó, Territórios ou
+  Patrulhas. Torres de vigia com sentinelas, um Guardião grande que trava cada Nó regional e bases espalhadas pelo
+  mapa, mais fortes quanto mais longe. Segure o clique para atacar (arma no espaço Arma atira de longe); torretas
+  atiram sozinhas. Derrubados deixam **sucata** e **Destroços** com saque (placas, aço, baterias, pacotes…).
+- **Nós em etapas**: cada região religa, estabiliza e amplia, com pedidos em escala de fábrica; a última etapa dá
+  uma peça do Projeto Orbital. Aviso grande ao fechar etapa e um feixe de luz no Nó.
+- **Recursos exclusivos**: quartzo, lítio e petróleo só existem em volta do Nó da sua região (mundos novos).
+- **Subprodutos**: aço solta escória e silício solta pó de sílica; dá para reaproveitar na fornalha.
+- **Cortador de árvores** (pesquisa Silvicultura): corta em volta e replanta mudas. E **carvão vegetal**.
+- **Mapa (M) e minimapa (N)** com o visual do mundo ao aproximar; bem de perto, o próprio jogo visto de cima.
+- Sons novos dos guardiões; correções diversas.
+
 ## v0.1.2-alfa
 
 > Não conecta com servidores da v0.1.1-alfa: atualize o jogo e o servidor juntos. Mundos antigos abrem normalmente.
