@@ -1,5 +1,31 @@
 # Novidades
 
+## v0.1.5-alfa
+
+> Não conecta com servidores da v0.1.4-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
+> servidor; saves e `servidor.json` ficam). Mundos antigos abrem normalmente (o urânio da região 5 aparece em mundos
+> novos; nos antigos, só nas jazidas das ruínas ainda não exploradas).
+
+- **Fim do jogo: foguete orbital.** A pesquisa Projeto Orbital libera o **silo de lançamento**. Ele monta 100
+  segmentos de foguete (estrutura leve, combustível de foguete, unidades de controle e urânio empobrecido), e o
+  foguete vai aparecendo do poço. O primeiro lançamento leva as **cinco peças das regiões** e é a **vitória**. O
+  mundo continua.
+- **Depois da vitória:** cada foguete com **satélite** traz 500 **pacotes orbitais**. Eles servem para três
+  **pesquisas infinitas**: mineração, montagem e laboratório mais rápidos, a cada nível.
+- **Urânio e energia nuclear:**
+  - urânio na região 5 e perto das ruínas de longe, tirado pela **mineradora de lixiviação** com ácido sulfúrico;
+  - **centrífuga** para enriquecer o urânio e reprocessar as células gastas;
+  - **reator nuclear** que move seis motores a vapor. Sem água ele esquenta, avisa no chat e **explode**.
+- **Janelas menores:** espaços de item e janelas de máquina mais compactos. O tamanho da interface agora vai de 50%
+  a 160%.
+- **Janelas fixas:** a janela da máquina, do veículo e o inventário ficam presos no lado esquerdo, lado a lado.
+- **Tela inicial nova** e Novo mundo mais limpo.
+- **Esteiras sem pulinhos:** os itens andam lisos e estão mais bonitos.
+- **Multijogador:** entrar de outro computador com o mesmo nome volta ao mesmo jogador, com os itens.
+- **Versão diferente:** quando a versão do jogo e a do servidor não batem, a mensagem diz quem precisa atualizar.
+- **Correção:** motores a vapor alimentados na medida exata davam menos energia do que deviam.
+- Sons novos para as máquinas do urânio e para o silo; o mapa de teste ganhou a usina nuclear e o silo.
+
 ## v0.1.4-alfa
 
 > Não conecta com servidores da v0.1.3-alfa: atualize o jogo e o servidor juntos. Mundos antigos abrem normalmente
