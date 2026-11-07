@@ -19,6 +19,11 @@
 - **Trem por partes:** clique na locomotiva para combustível e roteiro; clique num vagão para a carga dele.
 - **Máquinas novas:** fornalha de aço (a carvão, o dobro da velocidade), braço de pilha (até 5 itens por viagem),
   laboratório 2 (o dobro da velocidade) e bomba de cano (empurra líquido num sentido só).
+- **Dia a dia mais fácil:** Alt + botão direito copia a configuração de uma máquina (receita, filtro, pedidos) e
+  Alt + clique cola em outra; a dica de cada item diz onde ele é feito e onde é usado; máquinas paradas mostram um
+  aviso em cima (sem energia, sem combustível, sem receita, saída cheia); marcadores com nome no mapa (M, botão direito)
+  que aparecem no minimapa.
+- **Caminho de pedra:** calce o chão arrastando o mouse e ande 30% mais rápido em cima.
 - **Etapa final mais justa:** o foguete pede bem menos petróleo (combustível sólido e de foguete mais baratos).
 - **Correções:** motores a vapor ligados na medida exata ao reator davam pouca energia; o monte de itens tinha colisão.
 - **Mods:** um segundo mod de exemplo, a Destilaria (com líquidos), aparece em Menu → Mods ao lado da Fornalha de
