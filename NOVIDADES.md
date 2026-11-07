@@ -1,5 +1,29 @@
 # Novidades
 
+## v0.1.6-alfa
+
+> Não conecta com servidores da v0.1.5-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
+> servidor). Mundos e saves antigos abrem normalmente — a partir desta versão isso é testado automaticamente com saves
+> reais de cada versão publicada.
+
+- **Interface nova:** janelas menores, nítidas (ícones sem borrar) e centralizadas, que se ajustam a qualquer tela —
+  de notebook até tela espelhada de celular. A escala automática acompanha a tela; "Tamanho da interface" ajusta por cima.
+- **Receita num espaço só:** montadoras, planta química e fornalhas mostram um espaço com a receita; o clique abre uma
+  lista com busca (como os filtros).
+- **Largar itens:** Z larga 1 item da barra no chão (Shift+Z, a pilha); arrastar do inventário para o chão também.
+  Na esteira, o item entra nela; no chão vira um monte que abre como baú e some quando esvazia.
+- **Troca direta:** divisor, passagem ou esteira de outro nível por cima de uma esteira troca sem precisar tirar antes.
+- **Divisor com saída preferida:** tudo sai por um lado; o outro só recebe a sobra.
+- **Líquidos à vista:** cada cano de máquina mostra uma gota com o nome do líquido que entra ou sai, e a janela da
+  máquina mostra os líquidos junto dos ingredientes.
+- **Trem por partes:** clique na locomotiva para combustível e roteiro; clique num vagão para a carga dele.
+- **Máquinas novas:** fornalha de aço (a carvão, o dobro da velocidade), braço de pilha (até 5 itens por viagem),
+  laboratório 2 (o dobro da velocidade) e bomba de cano (empurra líquido num sentido só).
+- **Etapa final mais justa:** o foguete pede bem menos petróleo (combustível sólido e de foguete mais baratos).
+- **Correções:** motores a vapor ligados na medida exata ao reator davam pouca energia; o monte de itens tinha colisão.
+- **Mods:** um segundo mod de exemplo, a Destilaria (com líquidos), aparece em Menu → Mods ao lado da Fornalha de
+  tijolos.
+
 ## v0.1.5-alfa
 
 > Não conecta com servidores da v0.1.4-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
