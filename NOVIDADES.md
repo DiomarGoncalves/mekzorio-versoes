@@ -32,6 +32,7 @@
 - **Fila de pesquisa:** até 5 pesquisas esperando; quando a atual termina, a próxima começa sozinha.
 - **Aviso de ataque:** sentinelas batendo na sua fábrica avisam na tela (distância e direção) e piscam no minimapa.
 - **Barra que lembra o item:** o espaço da barra que esvaziou guarda o item apagado e ele volta sozinho para lá.
+- **Dica com o estado:** passar o mouse numa máquina mostra o que ela faz, o andamento e o que a segura.
 - **Marcadores no mapa:** M, botão direito marca um ponto com nome; aparece no mapa e no minimapa de todos os jogadores
   (com o nome de quem marcou) e fica salvo no mundo.
 - **Gráfico de produção:** na janela de Produção (P), clique num item para ver quanto foi feito e gasto por minuto nos
