@@ -12,6 +12,9 @@ prospecção**: ligada na energia, ela sonda o subsolo e, a cada 2 minutos, reve
 cobre perto dela — muito mais rico que as jazidas comuns — e marca no mapa. Cada sonda acha 3. Os veios só saem com
 a **mineradora de lixiviação** e um pouco de ácido sulfúrico.
 
+- **Livros de projetos (blueprints):** na janela de projetos (B), junte projetos em livros e exporte o livro inteiro
+  de uma vez — como texto para colar para um amigo ou como arquivo (pasta "MEKZORIO - Projetos" nos Documentos) — e
+  importe de volta em outro mundo ou outro computador.
 - **Pegar os itens da esteira:** segure **X** com o mouse em cima da esteira e os itens dela vêm para o inventário
   (também pega um monte largado no chão). A tecla pode ser trocada em Opções → Controles.
 - **Servidor no painel (Pterodactyl) se atualiza sozinho:** ao ligar, ele confere se saiu versão nova e se atualiza
