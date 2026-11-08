@@ -1,10 +1,21 @@
 # Novidades
 
+## v0.1.8-alfa
+
+> Não conecta com servidores da v0.1.7-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
+> servidor). Mundos e saves antigos abrem normalmente — e agora, ao abrir um mundo de uma versão anterior, o jogo e o
+> servidor guardam antes uma cópia intacta dele (pasta `<mundo>.bak-antes-da-0.1.8`), para nada se perder na
+> atualização. Uma versão mais antiga não abre um mundo salvo por uma mais nova: ela avisa e não mexe em nada.
+
+- **Pegar os itens da esteira:** segure **X** com o mouse em cima da esteira e os itens dela vêm para o inventário
+  (também pega um monte largado no chão). A tecla pode ser trocada em Opções → Controles.
+- **Mapa de teste:** área nova com as máquinas de 07/11 funcionando (fornalha de aço, braço de pilha ao lado do comum,
+  laboratório 2 e bomba de cano levando água do lago ao tanque).
+
 ## v0.1.7-alfa
 
 > Não conecta com servidores da v0.1.6-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
-> servidor). Mundos e saves antigos abrem normalmente. Ao abrir um mundo de uma versão anterior, o jogo e o servidor
-> guardam antes uma cópia intacta dele (pasta `<mundo>.bak-antes-da-0.1.7`), para nada se perder na atualização.
+> servidor). Mundos e saves antigos abrem normalmente.
 
 **Vida mecânica: mais parceiros e mais inimigos.** Os inimigos novos são opcionais, como os guardiões: no modo
 Pacífico não existem, e nenhum deles vem atacar a base de surpresa.
@@ -23,8 +34,6 @@ Pacífico não existem, e nenhum deles vem atacar a base de surpresa.
 - **English:** Opções → Interface → Idioma troca a interface e os nomes para inglês (menus, inventário, fabricação,
   pesquisa, máquinas, avisos e mensagens; algumas janelas menos usadas ainda em português).
 - **Música:** trilha ambiente calma e original no menu e no jogo (com pausas entre as faixas); volume em Opções → Som.
-- **Pegar os itens da esteira:** segure **X** com o mouse em cima da esteira e os itens dela vêm para o inventário
-  (também pega um monte largado no chão). A tecla pode ser trocada em Opções → Controles.
 - **Correção:** com o jogo lento, o som do golpe das sentinelas às vezes não tocava.
 
 ## v0.1.6-alfa
