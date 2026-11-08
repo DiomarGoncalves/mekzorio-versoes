@@ -1,5 +1,26 @@
 # Novidades
 
+## v0.1.7-alfa
+
+> Não conecta com servidores da v0.1.6-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
+> servidor). Mundos e saves antigos abrem normalmente.
+
+**Vida mecânica: mais parceiros e mais inimigos.** Os inimigos novos são opcionais, como os guardiões: no modo
+Pacífico não existem, e nenhum deles vem atacar a base de surpresa.
+
+- **MEK ajudante** (pesquisa Automação): um robozinho que anda atrás de você com uma mochila de 16 espaços, recolhe os
+  itens largados no chão por perto e coleta junto quando você coleta minério ou madeira perto dele. Um por jogador;
+  botão direito nele guarda no inventário com tudo.
+- **Posto de segurança: Guarda ou Reparador.** O reparador conserta o que as sentinelas bateram e junta a sucata dos
+  destroços para o posto; o guarda agora acompanha você enquanto você está na área do posto.
+- **Coletor de sucata:** robozinho enferrujado das torres de vigia que rouba baús, saídas de máquinas e esteiras perto
+  da torre e foge de você. Derrubado, devolve tudo o que levou.
+- **Desmontador** (só no nível Patrulhas, nas torres de longe): desmonta máquinas paradas e deixa as peças no chão.
+- **Sentinela voadora:** drone de vigia das torres de longe; quando vê você, chama as sentinelas. Derrube primeiro.
+- **Bichinhos mecânicos:** besouros-robô e "pássaros" de lata pela grama — mais deles perto das regiões religadas.
+  Só enfeite (desligam com "Efeitos").
+- **Correção:** com o jogo lento, o som do golpe das sentinelas às vezes não tocava.
+
 ## v0.1.6-alfa
 
 > Não conecta com servidores da v0.1.5-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
@@ -33,6 +54,7 @@
 - **Aviso de ataque:** sentinelas batendo na sua fábrica avisam na tela (distância e direção) e piscam no minimapa.
 - **Barra que lembra o item:** o espaço da barra que esvaziou guarda o item apagado e ele volta sozinho para lá.
 - **Dica com o estado:** passar o mouse numa máquina mostra o que ela faz, o andamento e o que a segura.
+- **Pesquisa concluída** avisa na tela o que ela libera.
 - **Marcadores no mapa:** M, botão direito marca um ponto com nome; aparece no mapa e no minimapa de todos os jogadores
   (com o nome de quem marcou) e fica salvo no mundo.
 - **Gráfico de produção:** na janela de Produção (P), clique num item para ver quanto foi feito e gasto por minuto nos
