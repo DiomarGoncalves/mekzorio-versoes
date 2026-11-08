@@ -23,6 +23,8 @@ Pacífico não existem, e nenhum deles vem atacar a base de surpresa.
 - **English:** Opções → Interface → Idioma troca a interface e os nomes para inglês (menus, inventário, fabricação,
   pesquisa, máquinas, avisos e mensagens; algumas janelas menos usadas ainda em português).
 - **Música:** trilha ambiente calma e original no menu e no jogo (com pausas entre as faixas); volume em Opções → Som.
+- **Pegar os itens da esteira:** segure **X** com o mouse em cima da esteira e os itens dela vêm para o inventário
+  (também pega um monte largado no chão). A tecla pode ser trocada em Opções → Controles.
 - **Correção:** com o jogo lento, o som do golpe das sentinelas às vezes não tocava.
 
 ## v0.1.6-alfa
