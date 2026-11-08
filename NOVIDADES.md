@@ -7,6 +7,11 @@
 > servidor guardam antes uma cópia intacta dele (pasta `<mundo>.bak-antes-da-0.1.8`), para nada se perder na
 > atualização. Uma versão mais antiga não abre um mundo salvo por uma mais nova: ela avisa e não mexe em nada.
 
+**Prospecção (expansão nova).** A pesquisa Prospecção (depois do Processamento de urânio) libera a **sonda de
+prospecção**: ligada na energia, ela sonda o subsolo e, a cada 2 minutos, revela um **veio profundo** de ferro ou
+cobre perto dela — muito mais rico que as jazidas comuns — e marca no mapa. Cada sonda acha 3. Os veios só saem com
+a **mineradora de lixiviação** e um pouco de ácido sulfúrico.
+
 - **Pegar os itens da esteira:** segure **X** com o mouse em cima da esteira e os itens dela vêm para o inventário
   (também pega um monte largado no chão). A tecla pode ser trocada em Opções → Controles.
 - **Linux pelo apt:** instale uma vez com o apt (Ubuntu, Debian, Mint…) e as versões novas chegam no `apt upgrade`;
