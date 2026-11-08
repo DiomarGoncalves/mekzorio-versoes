@@ -9,6 +9,8 @@
 
 - **Pegar os itens da esteira:** segure **X** com o mouse em cima da esteira e os itens dela vêm para o inventário
   (também pega um monte largado no chão). A tecla pode ser trocada em Opções → Controles.
+- **Linux pelo apt:** instale uma vez com o apt (Ubuntu, Debian, Mint…) e as versões novas chegam no `apt upgrade`;
+  o jogo aparece no menu de aplicativos. Passo a passo no README.
 - **Mapa de teste:** área nova com as máquinas de 07/11 funcionando (fornalha de aço, braço de pilha ao lado do comum,
   laboratório 2 e bomba de cano levando água do lago ao tanque).
 
