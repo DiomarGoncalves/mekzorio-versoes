@@ -24,6 +24,8 @@
   aviso em cima (sem energia, sem combustível, sem receita, saída cheia).
 - **Modo detalhes (H):** em cima de cada máquina, o ícone do que ela está fazendo; em braços e divisores com filtro,
   o item do filtro. Q pega na mão a peça apontada (como o botão do meio).
+- **Desfazer (Ctrl+Z):** volta o último arrasto, colagem ou remoção (até 20); o que foi tirado volta com a receita
+  e o filtro.
 - **Marcadores no mapa:** M, botão direito marca um ponto com nome; aparece no mapa e no minimapa de todos os jogadores
   (com o nome de quem marcou) e fica salvo no mundo.
 - **Gráfico de produção:** na janela de Produção (P), clique num item para ver quanto foi feito e gasto por minuto nos
