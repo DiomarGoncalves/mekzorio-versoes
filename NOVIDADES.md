@@ -21,9 +21,14 @@
   laboratório 2 (o dobro da velocidade) e bomba de cano (empurra líquido num sentido só).
 - **Dia a dia mais fácil:** Alt + botão direito copia a configuração de uma máquina (receita, filtro, pedidos) e
   Alt + clique cola em outra; a dica de cada item diz onde ele é feito e onde é usado; máquinas paradas mostram um
-  aviso em cima (sem energia, sem combustível, sem receita, saída cheia); marcadores com nome no mapa (M, botão direito)
-  que aparecem no minimapa.
-- **Caminho de pedra:** calce o chão arrastando o mouse e ande 30% mais rápido em cima.
+  aviso em cima (sem energia, sem combustível, sem receita, saída cheia).
+- **Marcadores no mapa:** M, botão direito marca um ponto com nome; aparece no mapa e no minimapa de todos os jogadores
+  (com o nome de quem marcou) e fica salvo no mundo.
+- **Gráfico de produção:** na janela de Produção (P), clique num item para ver quanto foi feito e gasto por minuto nos
+  últimos 10 minutos.
+- **Chão:** caminho de pedra (ande 30% mais rápido) e, no meio do jogo, concreto (50% mais rápido, feito na planta
+  química). Calce arrastando o mouse; recolha segurando o clique.
+- **Servidor mais leve:** fábricas grandes gastam bem menos tempo por passo do servidor.
 - **Etapa final mais justa:** o foguete pede bem menos petróleo (combustível sólido e de foguete mais baratos).
 - **Correções:** motores a vapor ligados na medida exata ao reator davam pouca energia; o monte de itens tinha colisão.
 - **Mods:** um segundo mod de exemplo, a Destilaria (com líquidos), aparece em Menu → Mods ao lado da Fornalha de
