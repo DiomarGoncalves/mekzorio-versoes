@@ -77,6 +77,16 @@ Na aba **Files** (gerenciador de arquivos) do servidor:
 
 ## 5. Atualizar para uma versão nova
 
+**Sozinho (a partir da v0.1.8-alfa):** toda vez que o servidor liga, ele confere se saiu uma versão nova e, se saiu,
+baixa e se atualiza antes de abrir — no console aparece "Versão nova: … Baixando…" e depois "Atualizado para a …".
+Então, quando sair uma versão, basta **Restart**. A variável **Atualizar sozinho ao ligar** (aba **Startup**) em `0`
+desliga isso. Sem internet ou com o GitHub fora, ele só avisa e liga na versão que já tem.
+
+Para ganhar isso num servidor que já existia: importe o egg novo (**Admin → Nests → Import Egg**, por cima do antigo)
+e faça **um** Reinstall; dali em diante é automático.
+
+À mão (sempre funciona):
+
 1. Desligue o servidor (**Stop**).
 2. Na aba **Settings** do servidor, clique em **Reinstall Server**.
 

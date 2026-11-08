@@ -14,6 +14,8 @@ a **mineradora de lixiviação** e um pouco de ácido sulfúrico.
 
 - **Pegar os itens da esteira:** segure **X** com o mouse em cima da esteira e os itens dela vêm para o inventário
   (também pega um monte largado no chão). A tecla pode ser trocada em Opções → Controles.
+- **Servidor no painel (Pterodactyl) se atualiza sozinho:** ao ligar, ele confere se saiu versão nova e se atualiza
+  antes de abrir (mundos e configuração ficam). Para ganhar isso: importe o egg novo e faça um Reinstall uma vez.
 - **Linux pelo apt:** instale uma vez com o apt (Ubuntu, Debian, Mint…) e as versões novas chegam no `apt upgrade`;
   o jogo aparece no menu de aplicativos. Passo a passo no README.
 - **Equilíbrio do fim:** a pesquisa Projeto Orbital ficou um terço menor (1000 unidades em vez de 1500): era tão

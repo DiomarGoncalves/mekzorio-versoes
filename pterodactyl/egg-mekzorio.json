@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2026-11-01T00:00:00+00:00",
+    "exported_at": "2026-11-08T00:00:00+00:00",
     "name": "MEKZORIO",
     "author": "DiomarGoncalves@users.noreply.github.com",
     "description": "Servidor dedicado do MEKZORIO (jogo de automação). UDP; mundo salvo em saves/, opções em servidor.json. Para desligar salvando: parar.",
@@ -13,7 +13,7 @@
         "Debian": "ghcr.io/parkervcp/yolks:debian"
     },
     "file_denylist": [],
-    "startup": "MEKZORIO_PORTA={{SERVER_PORT}} ./Automacao.ServerApp servidor.json",
+    "startup": "[ -f atualiza-sozinho.txt ] && ./Automacao.ServerApp --atualizar-se; MEKZORIO_PORTA={{SERVER_PORT}} ./Automacao.ServerApp servidor.json",
     "config": {
         "files": "{}",
         "startup": "{\"done\": \"pronto na porta\"}",
@@ -30,7 +30,7 @@
     "variables": [
         {
             "name": "Link do pacote do servidor",
-            "description": "De onde baixar o servidor (o padrão é a última versão publicada). Vazio ou sem acesso: usa o Mekzorio-servidor-linux.zip enviado pela aba Files. Vale ao instalar ou reinstalar.",
+            "description": "De onde baixar o servidor (o padrão é a última versão publicada). Vazio ou sem acesso: usa o Mekzorio-servidor-linux.zip enviado pela aba Files. Vale ao instalar, ao reinstalar e na atualização automática ao ligar.",
             "env_variable": "DOWNLOAD_URL",
             "default_value": "https://github.com/DiomarGoncalves/mekzorio-versoes/releases/latest/download/Mekzorio-servidor-linux.zip",
             "user_viewable": true,
@@ -86,6 +86,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Atualizar sozinho ao ligar",
+            "description": "1 = toda vez que o servidor liga, ele confere se saiu uma versão nova do MEKZORIO e, se saiu, baixa e se atualiza antes de abrir (os mundos em saves/ e o servidor.json ficam). 0 = nunca (você atualiza com Reinstall).",
+            "env_variable": "MEKZORIO_ATUALIZAR",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|in:0,1",
             "field_type": "text"
         }
     ]
