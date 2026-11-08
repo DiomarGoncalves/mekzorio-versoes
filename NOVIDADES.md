@@ -26,6 +26,8 @@
   o item do filtro. Q pega na mão a peça apontada (como o botão do meio).
 - **Desfazer (Ctrl+Z):** volta o último arrasto, colagem ou remoção (até 20); o que foi tirado volta com a receita
   e o filtro. Sem nada na mão, **R** gira a esteira ou o braço apontado.
+- **Fabricar com os intermediários:** com as placas no inventário, pedir um braço ou uma esteira já faz antes as
+  engrenagens, os fios e os circuitos que faltam (a Fabricação mostra em dourado o que vai ser feito antes).
 - **Marcadores no mapa:** M, botão direito marca um ponto com nome; aparece no mapa e no minimapa de todos os jogadores
   (com o nome de quem marcou) e fica salvo no mundo.
 - **Gráfico de produção:** na janela de Produção (P), clique num item para ver quanto foi feito e gasto por minuto nos
