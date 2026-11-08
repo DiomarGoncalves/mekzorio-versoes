@@ -19,6 +19,7 @@ Pacífico não existem, e nenhum deles vem atacar a base de surpresa.
 - **Sentinela voadora:** drone de vigia das torres de longe; quando vê você, chama as sentinelas. Derrube primeiro.
 - **Bichinhos mecânicos:** besouros-robô e "pássaros" de lata pela grama — mais deles perto das regiões religadas.
   Só enfeite (desligam com "Efeitos").
+- **Música:** trilha ambiente calma e original no menu e no jogo (com pausas entre as faixas); volume em Opções → Som.
 - **Correção:** com o jogo lento, o som do golpe das sentinelas às vezes não tocava.
 
 ## v0.1.6-alfa
