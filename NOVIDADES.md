@@ -3,7 +3,8 @@
 ## v0.1.7-alfa
 
 > Não conecta com servidores da v0.1.6-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
-> servidor). Mundos e saves antigos abrem normalmente.
+> servidor). Mundos e saves antigos abrem normalmente. Ao abrir um mundo de uma versão anterior, o jogo e o servidor
+> guardam antes uma cópia intacta dele (pasta `<mundo>.bak-antes-da-0.1.7`), para nada se perder na atualização.
 
 **Vida mecânica: mais parceiros e mais inimigos.** Os inimigos novos são opcionais, como os guardiões: no modo
 Pacífico não existem, e nenhum deles vem atacar a base de surpresa.
