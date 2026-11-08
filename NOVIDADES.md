@@ -17,6 +17,7 @@
 - **Líquidos à vista:** cada cano de máquina mostra uma gota com o nome do líquido que entra ou sai, e a janela da
   máquina mostra os líquidos junto dos ingredientes.
 - **Trem por partes:** clique na locomotiva para combustível e roteiro; clique num vagão para a carga dele.
+- **Luminária:** perto de um poste ligado, acende sozinha à noite e ilumina a fábrica (pesquisa Energia).
 - **Máquinas novas:** fornalha de aço (a carvão, o dobro da velocidade), braço de pilha (até 5 itens por viagem),
   laboratório 2 (o dobro da velocidade) e bomba de cano (empurra líquido num sentido só).
 - **Dia a dia mais fácil:** Alt + botão direito copia a configuração de uma máquina (receita, filtro, pedidos) e
