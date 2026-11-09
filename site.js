@@ -1,5 +1,5 @@
-// MEKZORIO — página do jogo: menu no celular, versão mais nova (GitHub), novidades (NOVIDADES.md), botão de
-// download do sistema de quem visita, foto grande na galeria e cartões aparecendo ao rolar.
+// MEKZORIO — página do jogo: menu no celular, versão mais nova (GitHub), novidades (NOVIDADES.md), foto grande na
+// galeria e cartões aparecendo ao rolar. O jogo é vendido no itch.io.
 (() => {
   const REPO = 'DiomarGoncalves/mekzorio-versoes';
 
@@ -14,16 +14,7 @@
     if (e.target.tagName === 'A') { menu.classList.remove('aberto'); menuBotao.setAttribute('aria-expanded', 'false'); }
   });
 
-  // ---------- download do sistema de quem visita ----------
-  const ua = navigator.userAgent.toLowerCase();
-  const so = ua.includes('windows') ? 'windows' : ua.includes('linux') && !ua.includes('android') ? 'linux' : null;
-  if (so) {
-    const card = document.querySelector(`.download[data-so="${so}"]`);
-    card.classList.add('recomendado');
-    const botao = document.getElementById('baixar-agora');
-    botao.textContent = so === 'windows' ? 'Baixar para Windows' : 'Baixar para Linux';
-    botao.href = card.href;
-  }
+  // O jogo é vendido no itch.io (os botões de compra já apontam para lá); aqui só a versão e as novidades.
 
   // ---------- versão mais nova (tamanho dos arquivos e data) ----------
   const mb = bytes => `${Math.round(bytes / 1048576)} MB`;
@@ -33,7 +24,7 @@
       const data = new Date(rel.published_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
       document.getElementById('versao-atual').textContent = `Versão mais nova: ${rel.tag_name} · ${data} · Windows e Linux`;
       document.getElementById('versao-baixar').textContent =
-        `Versão ${rel.tag_name}, de ${data}. Todos que jogam juntos precisam da mesma versão.`;
+        `Versão ${rel.tag_name}, de ${data}, à venda no itch.io. Todos que jogam juntos precisam da mesma versão.`;
       for (const asset of rel.assets || []) {
         const el = document.querySelector(`[data-tamanho="${asset.name}"]`);
         if (el) el.textContent = `· ${mb(asset.size)}`;

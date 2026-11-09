@@ -7,40 +7,28 @@ Comece coletando à mão e termine com fábricas inteiras ligadas por esteiras, 
 
 **Site do jogo:** [diomargoncalves.github.io/mekzorio-versoes](https://diomargoncalves.github.io/mekzorio-versoes/)
 
-> **Versão alfa:** o jogo está em desenvolvimento e pode ter erros. Este repositório só tem as versões para
-> baixar; o código do jogo não é público.
+> **Versão alfa:** o jogo está em desenvolvimento e pode ter erros. Este repositório tem o servidor dedicado, as
+> novidades de cada versão e o lugar para reportar erros (aba Issues); o jogo é vendido no itch.io.
 
 ## Baixar
 
-Abra **[Releases](../../releases/latest)** e baixe o arquivo do seu sistema:
+**O jogo está à venda no itch.io: [diomarbr.itch.io/mekzorio](https://diomarbr.itch.io/mekzorio)** (Windows e Linux,
+com demo grátis). Instalando pelo **app do itch**, o jogo se atualiza sozinho; quem baixou o `.zip` vê um aviso no
+menu do jogo quando sai versão nova.
+
+Aqui, em **[Releases](../../releases/latest)**, ficam só os arquivos do **servidor dedicado** (de graça — ele não roda
+sem o jogo):
 
 | Arquivo | Para quê |
 |---|---|
-| `Mekzorio-jogo-windows.zip` | Jogar no Windows (10 ou 11, 64 bits) |
-| `Mekzorio-jogo-linux.zip` | Jogar no Linux (64 bits) |
 | `Mekzorio-servidor-linux.zip` | Servidor dedicado para Linux (qualquer distribuição) |
 | `Mekzorio-servidor-linux-alpine.zip` | Servidor dedicado para Alpine Linux |
-| `Mekzorio-egg-pterodactyl.json` | Egg para hospedar o servidor num painel Pterodactyl |
-| `mekzorio_amd64.deb` (e `Packages`, `Release`) | Instalar no Linux pelo apt (veja abaixo) |
+| `Mekzorio-egg-pterodactyl.json` | Egg para hospedar o servidor num painel Pterodactyl (ele se atualiza sozinho ao ligar) |
 
-**Como abrir:** extraia o `.zip` inteiro (não abra de dentro do `.zip`) e abra o `Mekzorio.exe` (Windows) ou
+**Como abrir o jogo:** extraia o `.zip` inteiro (não abra de dentro do `.zip`) e abra o `Mekzorio.exe` (Windows) ou
 o `Mekzorio.x86_64` (Linux). No Windows, se aparecer "O Windows protegeu o computador", clique em
 **Mais informações → Executar assim mesmo** (acontece com todo jogo que ainda não tem assinatura digital).
 O `LEIA-ME.txt` de cada pacote explica o resto.
-
-### Linux com apt (Ubuntu, Debian, Mint, Pop!_OS…) — a partir da v0.1.8-alfa
-
-Instale uma vez e as versões novas chegam junto com as atualizações do sistema:
-
-```bash
-echo "deb [trusted=yes] https://github.com/DiomarGoncalves/mekzorio-versoes/releases/latest/download ./" | sudo tee /etc/apt/sources.list.d/mekzorio.list
-sudo apt update && sudo apt install mekzorio
-```
-
-Depois é só abrir o **MEKZORIO** no menu de aplicativos (ou `mekzorio` no terminal). Para atualizar:
-`sudo apt update && sudo apt upgrade`. Para tirar: `sudo apt remove mekzorio` (seus mundos ficam em
-`~/.local/share/MEKZORIO`). O `trusted=yes` existe porque o repositório ainda não tem assinatura própria: o download
-vem direto das Releases deste repositório no GitHub, por HTTPS.
 
 ## Requisitos
 
