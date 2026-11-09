@@ -2,7 +2,8 @@
 
 ## v0.1.9-alfa
 
-> Conecta com servidores da v0.1.8-alfa (o jogo em rede não mudou), mas atualize o servidor também quando puder.
+> Não conecta com servidores da v0.1.8-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o
+> servidor, que ele se atualiza sozinho ao ligar; se não atualizar, Reinstalar o servidor).
 > Mundos e saves antigos abrem normalmente.
 
 **Câmera 3D (F7).** O jogo continua abrindo na visão de cima, e agora o **F7** troca para **primeira pessoa** (o mouse
