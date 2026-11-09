@@ -1,5 +1,27 @@
 # Novidades
 
+## v0.1.9-alfa
+
+> Conecta com servidores da v0.1.8-alfa (o jogo em rede não mudou), mas atualize o servidor também quando puder.
+> Mundos e saves antigos abrem normalmente.
+
+**Câmera 3D (F7).** O jogo continua abrindo na visão de cima, e agora o **F7** troca para **primeira pessoa** (o mouse
+olha em volta, a mira no centro escolhe onde construir; segure Alt para soltar o mouse) e **terceira pessoa** (arraste
+com o botão do meio para girar). Dirigindo carro, helicóptero, avião ou andando de trem, a câmera vai atrás do veículo
+e o mouse olha em volta. Nas câmeras 3D: céu com sol, lua, dois planetas e estrelas à noite, lanterna à noite, pulo
+no **espaço**, jetpack voando acima das máquinas, veículos maiores e itens em pé nas esteiras. Funciona em qualquer
+servidor (é só a câmera do seu computador). A tecla pode ser trocada em Opções → Controles.
+
+- **Wiki do jogo (F2):** busque qualquer item (sem acento: "braco" acha o braço) e veja uma **prévia ao vivo** dele
+  funcionando — a esteira levando placas, a fornalha recebendo minério e carvão por esteiras, o trem dando a volta —,
+  o que ele faz de verdade, os números de produção (itens por segundo, tempo da receita, energia), como se faz e onde
+  se usa.
+- **Shift + clique no inventário:** com só o inventário aberto, leva o item da barra de atalhos para a mochila e de
+  volta (junta nas pilhas iguais). Com máquina, carro ou trem aberto, continua mandando para eles.
+- **R gira o trilho:** aponte para um trilho e aperte R — reto, curva e desvio giram e se religam sozinhos. Antes de
+  pôr um trilho solto, o R escolhe se ele fica deitado ou em pé.
+- **Correção:** com chuva, neblina ou neve, a visão de cima não fica mais toda cinza.
+
 ## v0.1.8-alfa
 
 > Não conecta com servidores da v0.1.7-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: Reinstalar o
