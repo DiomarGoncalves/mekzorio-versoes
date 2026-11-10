@@ -41,6 +41,8 @@
 <li><a href="#commands">commands</a></li>
 <li><a href="#buildings">buildings</a></li>
 <li><a href="#o-objeto-de-uma-construcao-b">O objeto de uma construção (b)</a></li>
+<li><a href="#enemies">enemies</a></li>
+<li><a href="#o-objeto-de-um-inimigo-e">O objeto de um inimigo (e)</a></li>
 <li><a href="#ui">ui</a></li>
 <li><a href="#research">research</a></li>
 <li><a href="#contracts">contracts</a></li>
@@ -54,7 +56,8 @@
     </aside>
     <article class="doc-texto"><h1 id="api-dos-scripts-de-mod-referencia">API dos scripts de mod (referência)</h1>
 <p>Gerada do próprio jogo (<code>src/Automacao.Session/Scripting/ScriptApiDocs.cs</code>): não edite à mão. Como começar: <a href="como-fazer-um-mod.html">Como fazer um mod</a>, seção Scripts. Campos do JSON: <a href="campos-do-json.html">Campos do JSON</a>. Para o VS Code mostrar tudo isto enquanto você escreve, copie <a href="mekzorio.d.ts"><code>mekzorio.d.ts</code></a> para a pasta <code>scripts/</code> do seu mod.</p>
-<pre><code class="language-js">import { events, world, players, storage, commands, buildings, ui, research, contracts, after, random, console } from &quot;mekzorio&quot;;
+<p>Esta é a <strong>API de mods 1</strong> (<code>"apiVersion": 1</code> no <code>manifest.json</code>; sem o campo, vale 1).</p>
+<pre><code class="language-js">import { events, world, players, storage, commands, buildings, enemies, ui, research, contracts, after, random, console } from &quot;mekzorio&quot;;
 </code></pre>
 <h2 id="events"><code>events</code></h2>
 <p>Eventos do jogo: o script registra funções que o jogo chama.</p>
@@ -115,8 +118,8 @@
 <td>Um foguete foi lançado.</td>
 </tr>
 <tr>
-<td><code>events.onEnemyDefeated(fn: (e: { id: number; kind: string; x: number; y: number }) =&gt; void): void</code></td>
-<td>Um inimigo foi derrubado.</td>
+<td><code>events.onEnemyDefeated(fn: (e: EnemyDefeated) =&gt; void): void</code></td>
+<td>Um inimigo foi derrubado (<code>type</code>: o id dele no JSON; <code>ai</code>: o comportamento; <code>data</code>: o que este mod guardou nele com <code>e.data</code>). O mesmo que <code>enemies.onDefeated</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -408,6 +411,142 @@
 </tr>
 </tbody>
 </table>
+<h2 id="enemies"><code>enemies</code></h2>
+<p>Inimigos e MEKs: criar, procurar, um código por tipo a cada tick. O comportamento de cada um é um dos 7 do jogo (<code>ai</code> no JSON); o script pode assumir o controle com ordens.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enemies.types(): EnemyType[]</code></td>
+<td>Todos os inimigos que existem (do jogo e dos mods), com os números do JSON.</td>
+</tr>
+<tr>
+<td><code>enemies.spawn(type: string, x: number, y: number): Enemy \| null</code></td>
+<td>Cria um inimigo no ponto (a casa dele fica ali). <code>null</code> no mundo Pacífico, em chão onde não se anda e para o MEK de segurança (que precisa de um Posto). Até 50 por tick.</td>
+</tr>
+<tr>
+<td><code>enemies.get(id: number): Enemy \| null</code></td>
+<td>Um inimigo vivo pelo id.</td>
+</tr>
+<tr>
+<td><code>enemies.list(opts?: { type?: string; x?: number; y?: number; radius?: number }): Enemy[]</code></td>
+<td>Os vivos (até 500); com <code>radius</code>, só os perto de x, y, do mais perto ao mais longe.</td>
+</tr>
+<tr>
+<td><code>enemies.near(x: number, y: number, radius?: number, type?: string): Enemy[]</code></td>
+<td>Os vivos até <code>radius</code> tiles (padrão 16) do ponto, do mais perto ao mais longe.</td>
+</tr>
+<tr>
+<td><code>enemies.onTick(type: string, ticks: number, fn: (e: Enemy) =&gt; void): void</code></td>
+<td>Chama <code>fn</code> para cada inimigo vivo do tipo (ex.: <code>"meu_mod:sucateiro"</code>) a cada <code>ticks</code> ticks.</td>
+</tr>
+<tr>
+<td><code>enemies.onDefeated(fn: (e: EnemyDefeated) =&gt; void): void</code></td>
+<td>Um inimigo foi derrubado, com os dados que este mod guardou nele (<code>e.data</code>). Como <code>events.onEnemyDefeated</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="o-objeto-de-um-inimigo-e">O objeto de um inimigo (<code>e</code>)</h2>
+<p>O objeto de um inimigo (o <code>e</code> de <code>enemies.onTick</code> e afins). Posição em tiles, com fração (10.5 = meio do tile 10).</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>readonly id: number</code></td>
+<td>Número do inimigo.</td>
+</tr>
+<tr>
+<td><code>readonly info: EnemyInfo \| null</code></td>
+<td>Tudo de uma vez (<code>null</code> se ele caiu ou sumiu).</td>
+</tr>
+<tr>
+<td><code>readonly type: string</code></td>
+<td>Id do inimigo no JSON.</td>
+</tr>
+<tr>
+<td><code>readonly ai: string</code></td>
+<td>O comportamento: <code>sentinel</code>, <code>warden</code>, <code>mek</code>, <code>rogue_mek</code>, <code>scavenger</code>, <code>dismantler</code> ou <code>watcher</code>.</td>
+</tr>
+<tr>
+<td><code>readonly x: number</code></td>
+<td>Posição (tiles, com fração).</td>
+</tr>
+<tr>
+<td><code>readonly y: number</code></td>
+<td>Posição (tiles, com fração).</td>
+</tr>
+<tr>
+<td><code>readonly exists: boolean</code></td>
+<td>Se ainda está vivo no mundo.</td>
+</tr>
+<tr>
+<td><code>health: number</code></td>
+<td>Vida. Mudar cura ou fere (até <code>maxHealth</code>); 0 derruba, como um golpe (solta a sucata).</td>
+</tr>
+<tr>
+<td><code>readonly maxHealth: number</code></td>
+<td>Vida cheia (do JSON).</td>
+</tr>
+<tr>
+<td><code>readonly friendly: boolean</code></td>
+<td><code>true</code> para o MEK de segurança do jogador.</td>
+</tr>
+<tr>
+<td><code>readonly state: string</code></td>
+<td><code>guarding</code> (parado), <code>chasing</code> (andando/lutando), <code>returning</code>, <code>patrol</code> ou <code>dying</code>.</td>
+</tr>
+<tr>
+<td><code>readonly controlled: boolean</code></td>
+<td><code>true</code> enquanto segue ordens do script (o comportamento do jogo fica parado). Não vai no save: ao abrir o mundo ele volta ao normal até o script mandar de novo.</td>
+</tr>
+<tr>
+<td><code>moveTo(x: number, y: number): void</code></td>
+<td>Ordem: andar até o ponto (contorna água e construções) e parar lá.</td>
+</tr>
+<tr>
+<td><code>attackPlayer(player: Player \| number): boolean</code></td>
+<td>Ordem: ir atrás do jogador e bater. Quando ele cai, fica parado esperando ordem.</td>
+</tr>
+<tr>
+<td><code>attackBuilding(b: Building \| BuildingInfo \| number): boolean</code></td>
+<td>Ordem: ir até a construção e bater até derrubar.</td>
+</tr>
+<tr>
+<td><code>attackEnemy(e: Enemy \| number): boolean</code></td>
+<td>Ordem: lutar com outro inimigo ou MEK.</td>
+</tr>
+<tr>
+<td><code>stop(): void</code></td>
+<td>Ordem: ficar parado onde está (também assume o controle).</td>
+</tr>
+<tr>
+<td><code>release(): void</code></td>
+<td>Devolve ao comportamento do jogo (ele volta para casa ou segue o que fazia).</td>
+</tr>
+<tr>
+<td><code>damage(amount: number, by?: Player \| number): void</code></td>
+<td>Fere. Se cair, a sucata vai para <code>by</code> (ou para quem estiver perto).</td>
+</tr>
+<tr>
+<td><code>remove(): boolean</code></td>
+<td>Some do mundo sem soltar nada e sem o evento de derrubado.</td>
+</tr>
+<tr>
+<td><code>readonly data: { get(key: string): any; set(key: string, value: any): void; delete(key: string): void }</code></td>
+<td>Dados deste mod neste inimigo, salvos com o mundo. Quando ele cai, vêm no evento <code>onDefeated</code> (<code>data</code>) e depois somem.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="ui"><code>ui</code></h2>
 <p>Telas: janelas com as peças do jogo, avisos e texto no HUD.</p>
 <table>
@@ -568,6 +707,9 @@
 <p><code>ts
   interface Player { id: number; name: string; x: number; y: number; health: number; online: boolean; vehicle: number | null }
   interface BuildingInfo { id: number; type: string; x: number; y: number; width: number; height: number; rotation: number; working: boolean }
+  interface EnemyType { id: string; name: string; ai: string; health: number; damage: number; speed: number; sight: number; leash: number; scrap: number; weight: number; friendly: boolean }
+  interface EnemyDefeated { id: number; type: string | null; ai: string; kind: string; x: number; y: number; data: Record&lt;string, any&gt; | null }
+  interface EnemyInfo { id: number; type: string | null; ai: string; x: number; y: number; health: number; maxHealth: number; damage: number; friendly: boolean; state: string; controlled: boolean; homeX: number; homeY: number; order: "move" | "stop" | "attackPlayer" | "attackBuilding" | "attackEnemy" | null }
   interface Tile { x: number; y: number; terrain: string; resource: string | null; amount: number; flora: string | null; building: number | null; walkable: boolean }
   interface Stack { item: string; count: number }
   interface MachineSlots { input: Stack | null; fuel: Stack | null; output: Stack | null; byproduct: Stack | null }
@@ -576,11 +718,12 @@
   interface ContractState { region: number; contract: string | null; item: string | null; perMinute: number; seconds: number; ratePerMinute: number; sustainedSeconds: number; index: number; count: number }
   /** Uma peça de janela. type: text, button, field, row, bar, icon, image, list, tabs, graph, separator. */
   interface Piece {
-    type: "text" | "button" | "field" | "row" | "bar" | "icon" | "image" | "list" | "tabs" | "graph" | "separator";
+    type: "text" | "button" | "field" | "row" | "bar" | "icon" | "image" | "list" | "tabs" | "graph" | "separator" | "slot" | "slots";
     id?: string; text?: string; size?: number; color?: string; primary?: boolean; disabled?: boolean; tooltip?: string;
     label?: string; value?: string | number; placeholder?: string; children?: Piece[]; item?: string; count?: number;
     src?: string; width?: number; height?: number; items?: (string | { icon?: string; text: string })[];
     tabs?: { title: string; body: Piece[] }[]; series?: { values: number[]; color?: string }[];
+    slot?: number; hint?: string; from?: number; columns?: number;   // slot/slots: espaços do baú da construção da janela (building)
   }
   interface Form { id?: string; title?: string; width?: number; building?: number; body: Piece[] }</code></p></article>
   </main>

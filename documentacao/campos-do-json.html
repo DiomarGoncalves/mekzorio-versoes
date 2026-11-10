@@ -138,6 +138,10 @@ erro (não passa despercebido), e cada erro diz o arquivo, o id e o motivo.</p>
 <td>Versões do jogo em que funciona (<code>"&gt;=0.2.0"</code>).</td>
 </tr>
 <tr>
+<td><code>apiVersion</code></td>
+<td>Versão da API de mods (JSON e scripts) para a qual o mod foi feito: hoje <code>1</code> (o padrão, sem o campo). Se um dia a API mudar algo que os mods usam, ela sobe para <code>2</code> e o jogo continua rodando os mods <code>1</code> como antes; um mod de uma API mais nova que a do jogo é recusado com o aviso "atualize o jogo".</td>
+</tr>
+<tr>
 <td><code>dependencies</code></td>
 <td>Outros mods que ele precisa, com a versão: <code>{ "base": "&gt;=0.2.0" }</code> (para o <code>base</code>, use <code>&gt;=</code>). Carregam antes.</td>
 </tr>
@@ -762,7 +766,7 @@ seguintes levam o <code>payload</code> e trazem a <code>reward</code>.</p>
 <tr>
 <td><code>weight</code></td>
 <td>1</td>
-<td>Com mais de um inimigo do mesmo <code>ai</code>, a torre sorteia por esse peso (0 = nunca sozinho).</td>
+<td>Com mais de um inimigo do mesmo <code>ai</code>, a torre sorteia por esse peso (0 = nunca sozinho: só quando um script cria, com <code>enemies.spawn</code>).</td>
 </tr>
 <tr>
 <td><code>model</code></td>

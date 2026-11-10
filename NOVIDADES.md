@@ -8,11 +8,16 @@
 
 **Mods com scripts.** Além de dados (JSON), modelos do Blockbench e sons, um mod agora pode trazer **scripts em
 JavaScript**: máquinas com comportamento próprio, janelas com as peças do jogo, peças do modelo girando, comandos no
-chat, pesquisas e contratos. Os scripts rodam **só no servidor e trancados** — sem acesso aos seus arquivos, à
-internet ou ao resto do computador, com limite de memória e de tempo. Para começar, o jogo traz o mod de exemplo
-**Mecânica**: um motor rotativo a carvão e uma caixa de engrenagem que prensa placas em engrenagens. A
-**[documentação completa](documentacao/index.html)** e a **[aba Mods](mods.html)** estão no site.
+chat, pesquisas, contratos e inimigos com ordens (andar, atacar, fugir). Os scripts rodam **só no servidor e
+trancados** — sem acesso aos seus arquivos, à internet ou ao resto do computador, com limite de memória e de tempo; os
+mods com script têm a marca **SCRIPTS** na lista. Para começar, em **Menu → Mods → Criar mod** você dá um nome e o jogo
+monta um mod que já funciona (uma prensa com script e a janela dela). O jogo também traz o mod de exemplo
+**Mecânica**: um motor rotativo a carvão, uma caixa de engrenagem que prensa placas em engrenagens e um ladrão de
+engrenagens (comando `/ladrao`) que vem roubar da sua caixa. A **[documentação completa](documentacao/index.html)** e
+a **[aba Mods](mods.html)** estão no site.
 
+- **Janelas de mod com espaços de item:** a máquina de um mod pode ter a própria janela, com os espaços arrastáveis
+  como nos baús do jogo (Shift + clique e Ctrl também).
 - **Mods no servidor como no Bedrock:** ao entrar num servidor com mods, o jogo mostra a lista e baixa só o que falta,
   só para aquela partida. Os seus mods não mudam.
 - **Modo desenvolvedor** (Opções → Interface): **F8** abre o console dos mods (o que os scripts escrevem, erros com

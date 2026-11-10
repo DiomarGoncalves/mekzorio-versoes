@@ -66,7 +66,10 @@ precisa de um comportamento que o JSON não tem (uma máquina que reage ao jogad
 eventos), o mod traz um script. Os scripts rodam <strong>só no servidor</strong>, trancados: sem acesso aos seus arquivos, à
 internet ou ao resto do computador, com limite de memória e de tempo (veja <a href="#scripts-javascript">Scripts</a>).</p>
 <p>O jogo base é carregado pelo mesmo sistema: tudo o que <code>mods/base</code> faz, um mod também pode fazer.</p>
-<p>O jeito mais rápido de começar é <strong>copiar um mod de exemplo</strong> e mudar o que quiser:</p>
+<p>O jeito mais rápido de começar é o botão <strong>Criar mod</strong> (Menu → Mods): você dá um nome e o jogo monta a pasta com um
+item, uma máquina com script (uma prensa que faz peças) e a janela dela, o <code>mekzorio.d.ts</code> para o VS Code completar e um
+<code>LEIA-ME.txt</code> com os próximos passos — o mod já funciona do jeito que sai. Outro jeito é <strong>copiar um mod de exemplo</strong> e
+mudar o que quiser:</p>
 <ul>
 <li><code>mods/fornalha_tijolos</code>: o mais simples (item, construção com portas, receita, pesquisa, ícone, modelo e som);</li>
 <li><code>mods/exemplo_destilaria</code>: com líquidos (líquido novo, tanques, portas de cano, categoria de receita nova);</li>
@@ -107,6 +110,7 @@ pesquisas infinitas, regiões, plantas…) está em <a href="campos-do-json.html
   &quot;authors&quot;: [ &quot;Seu nome&quot; ],
   &quot;description&quot;: { &quot;pt-BR&quot;: &quot;O que o mod faz.&quot; },
   &quot;gameVersion&quot;: &quot;&gt;=0.2.0&quot;,              // versões do jogo em que ele funciona
+  &quot;apiVersion&quot;: 1,                       // versão da API de mods (hoje 1; sem o campo, também 1)
   &quot;dependencies&quot;: { &quot;base&quot;: &quot;&gt;=0.2.0&quot;, &quot;?outro_mod&quot;: &quot;*&quot; },
   &quot;side&quot;: &quot;both&quot;
 }
@@ -360,6 +364,10 @@ events.onTick(30 * 60, () =&gt; console.log(&quot;mais um minuto&quot;, world.ti
 <td><code>buildings</code></td>
 <td><code>onTick(tipo, ticks, fn(b))</code>, <code>get(id)</code>, <code>at(x, y)</code>, <code>find({...})</code>, <code>build(tipo, x, y, rotação)</code>; e <code>world.build</code>/<code>world.remove(id)</code></td>
 </tr>
+<tr>
+<td><code>enemies</code></td>
+<td><code>spawn(tipo, x, y)</code>, <code>get(id)</code>, <code>list({...})</code>, <code>near(x, y, raio)</code>, <code>types()</code>, <code>onTick(tipo, ticks, fn(e))</code>, <code>onDefeated(fn)</code></td>
+</tr>
 </tbody>
 </table>
 <p><strong>Máquina nova com script:</strong> no JSON, uma construção com um comportamento pronto (geralmente <code>container</code>, que dá os
@@ -378,6 +386,20 @@ trabalho:</p>
 qualquer uma), <code>wantsPower</code>, <code>inventory</code>, <code>slots</code> (entrada, combustível, saída, subproduto), <code>fluids</code>, <code>count(item)</code>,
 <code>insert(item, n)</code>, <code>extract(item, n)</code>, <code>addFluid(líquido, n)</code>, <code>takeFluid(líquido, n)</code>, <code>neighbors()</code> (vizinhas com o
 lado), <code>data.get/set/delete</code>, <code>remove()</code>, <code>animate(...)</code> e <code>pose(...)</code> (abaixo).</p>
+<p><strong>Inimigos e MEKs pelo script:</strong> o inimigo novo vem do JSON (lista <code>enemies</code>, abaixo) e o comportamento dele é um dos
+7 do jogo. O script cria, procura e dá ordens; com uma ordem, o comportamento do jogo para e ele só obedece até
+<code>e.release()</code>:</p>
+<pre><code class="language-js">const e = enemies.spawn(&quot;meu_mod:sucateiro&quot;, 120.5, 80.5);   // null no mundo Pacífico ou em água
+e.moveTo(130, 80);            // anda (contorna o que bloqueia) e para lá
+e.attackBuilding(b);          // ou attackPlayer(jogador), attackEnemy(outro); e.stop() fica parado
+e.health = e.maxHealth;       // cura; e.damage(50, jogador) fere (caindo, a sucata vai para o jogador)
+e.data.set(&quot;chefe&quot;, true);    // dados deste inimigo, salvos com o mundo; quando ele cai, vêm no onDefeated
+enemies.onTick(&quot;meu_mod:sucateiro&quot;, 15, e =&gt; { /* a cada meio segundo, para cada um vivo */ });
+enemies.onDefeated(d =&gt; { if (d.data?.chefe) world.dropItems(d.x, d.y, &quot;iron_gear&quot;, 20); });
+</code></pre>
+<p>As ordens não vão no save: ao abrir o mundo, ele volta ao comportamento normal até o script mandar de novo (por isso
+vale mandar a ordem no <code>onTick</code>). Com <code>"weight": 0</code> no JSON, o inimigo só aparece quando o script cria. O mod
+<code>mecanica_exemplo</code> tem um exemplo completo: o comando <code>/ladrao</code> chama um ladrão de engrenagens.</p>
 <p><strong>Animações:</strong> o <code>.bbmodel</code> pode ter quantas animações quiser. Sem script, pelo estado, no JSON da construção:
 <code>"animations": { "working": "work", "idle": "parado", "noPower": "sem_energia" }</code> (trabalhando — padrão <code>work</code> —,
 parada e sem energia); no do inimigo: <code>"animations": { "walk": "andar", "idle": "respirar" }</code>. Pelo script:</p>
@@ -401,8 +423,15 @@ escala). O jogador recebe só a descrição, nunca código.</p>
 <p>Peças: <code>text</code> (text, size, color), <code>button</code> (id, text, primary, disabled, tooltip), <code>field</code> (id, label, value,
 placeholder; Enter conta como clique com o id do campo), <code>row</code> (children), <code>bar</code> (value 0..1, text, color), <code>icon</code> (item,
 count, size), <code>image</code> (src: PNG da pasta do mod, width, height), <code>list</code> (items: texto ou { icon, text }, height), <code>tabs</code>
-(tabs: [{ title, body }]), <code>graph</code> (series: [{ values, color }], height), <code>separator</code>. Cores: <code>accent</code>, <code>danger</code>,
-<code>energy</code>, <code>dim</code>, <code>text</code> ou <code>#rrggbb</code>. Mandar <code>ui.show</code> de novo com o mesmo <code>id</code> atualiza a janela (o que o jogador
+(tabs: [{ title, body }]), <code>graph</code> (series: [{ values, color }], height), <code>separator</code>, <code>slot</code> (slot: o número do
+espaço, label, hint, color, size) e <code>slots</code> (from, count, columns, color). Cores: <code>accent</code>, <code>danger</code>,
+<code>energy</code>, <code>dim</code>, <code>text</code> ou <code>#rrggbb</code>.</p>
+<p><strong>Espaços de item na janela:</strong> numa janela com <code>building</code> (a construção dela), <code>slot</code> e <code>slots</code> mostram os espaços do
+baú da construção (<code>"container"</code> no JSON; o primeiro é o 0), ao vivo e arrastáveis como nos baús do jogo: arrastar,
+Ctrl + arrastar (metade), Shift + clique (vai para o inventário; no inventário, Shift + clique manda para a máquina).
+Com espaços, a janela do mod faz o papel da janela da máquina: a do jogo não abre junto e o inventário encosta nela.
+Quem decide se o item pode ir é o servidor (alcance e permissão, como sempre). Exemplo: a caixa de engrenagem do
+<code>mecanica_exemplo</code> (<code>{ type: "slots", from: 0, count: 4, columns: 4 }</code>). Mandar <code>ui.show</code> de novo com o mesmo <code>id</code> atualiza a janela (o que o jogador
 digitou continua). Também: <code>ui.close(jogador, id)</code>, <code>ui.toast(jogador, texto, cor)</code> (aviso embaixo) e
 <code>ui.hud(jogador, id, texto)</code> (linha fixa no alto da tela; <code>null</code> tira).</p>
 <p><strong>Pesquisas e contratos:</strong> <code>research.list()</code> (cada uma com <code>done</code>, <code>available</code>, <code>current</code>, <code>units</code>, <code>unitsDone</code>,
