@@ -12,6 +12,8 @@
   deita a asa na curva.
 - **Braço puxador** (violeta, pesquisa Automação): pega o item a 2 tiles atrás (por cima de uma esteira, por exemplo)
   e solta encostado, no tile da frente. Para mods: campo `dropReach` no braço.
+- **Veículos sem pulinhos:** carros, helicóptero, avião e trens andam lisos na tela, em qualquer câmera (antes davam
+  uns trancos, principalmente em monitores de 75/144 Hz e jogando pela internet).
 - **Ícones em cima das máquinas:** na primeira pessoa ficam desligados (tela limpa); a tecla H liga e desliga os da
   câmera que você está usando, e há duas opções em Opções → Interface.
 
