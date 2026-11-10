@@ -1,5 +1,20 @@
 # Novidades
 
+## v0.2.2-alfa
+
+> Não conecta com a v0.2.1-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
+
+- **Voo com Espaço e Shift:** o helicóptero fica no chão até você apertar Espaço; Espaço sobe e Shift desce, bem mais
+  alto que antes (helicóptero até 16 tiles, avião até 22). O avião corre na pista e só decola com Espaço depois de
+  pegar velocidade. Os dois só pousam em chão livre: em cima de água ou de construções, ficam pairando baixinho.
+- **Inclinações no voo:** o helicóptero abaixa o bico ao andar e deita na curva; o avião levanta o bico subindo e
+  deita a asa na curva.
+- **Braço puxador** (violeta, pesquisa Automação): pega o item a 2 tiles atrás (por cima de uma esteira, por exemplo)
+  e solta encostado, no tile da frente. Para mods: campo `dropReach` no braço.
+- **Ícones em cima das máquinas:** na primeira pessoa ficam desligados (tela limpa); a tecla H liga e desliga os da
+  câmera que você está usando, e há duas opções em Opções → Interface.
+
 ## v0.2.1-alfa
 
 > Não conecta com a v0.2.0-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
