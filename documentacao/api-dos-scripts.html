@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API dos scripts — MEKZORIO</title>
+  <meta name="description" content="Cada função que o script do mod pode usar (gerada do próprio jogo).">
+  <meta name="theme-color" content="#14181e">
+  <link rel="icon" type="image/png" href="../imagens/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="../index.html" aria-label="MEKZORIO, início">
+      <img src="../imagens/emblema.png" alt="" width="36" height="36">
+      <span>MEKZORIO</span>
+    </a>
+    <button class="menu-botao" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="menu" class="menu">
+      <a href="../index.html">O jogo</a>
+      <a href="../mods.html">Mods</a>
+      <a href="index.html">Documentação</a>
+      <a class="menu-baixar" href="../index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main class="doc">
+    <aside class="doc-lado">
+      <nav class="doc-paginas"><a href="como-fazer-um-mod.html">Como fazer um mod</a><a href="campos-do-json.html">Campos do JSON</a><a href="api-dos-scripts.html" aria-current="page">API dos scripts</a></nav>
+      <div class="doc-indice"><p>Nesta página</p><div class="toc">
+<ul>
+<li><a href="#events">events</a></li>
+<li><a href="#world">world</a></li>
+<li><a href="#players">players</a></li>
+<li><a href="#storage">storage</a></li>
+<li><a href="#commands">commands</a></li>
+<li><a href="#buildings">buildings</a></li>
+<li><a href="#o-objeto-de-uma-construcao-b">O objeto de uma construção (b)</a></li>
+<li><a href="#ui">ui</a></li>
+<li><a href="#research">research</a></li>
+<li><a href="#contracts">contracts</a></li>
+<li><a href="#random">random</a></li>
+<li><a href="#console">console</a></li>
+<li><a href="#funcoes-soltas">Funções soltas</a></li>
+<li><a href="#tipos">Tipos</a></li>
+</ul>
+</div>
+</div>
+    </aside>
+    <article class="doc-texto"><h1 id="api-dos-scripts-de-mod-referencia">API dos scripts de mod (referência)</h1>
+<p>Gerada do próprio jogo (<code>src/Automacao.Session/Scripting/ScriptApiDocs.cs</code>): não edite à mão. Como começar: <a href="como-fazer-um-mod.html">Como fazer um mod</a>, seção Scripts. Campos do JSON: <a href="campos-do-json.html">Campos do JSON</a>. Para o VS Code mostrar tudo isto enquanto você escreve, copie <a href="mekzorio.d.ts"><code>mekzorio.d.ts</code></a> para a pasta <code>scripts/</code> do seu mod.</p>
+<pre><code class="language-js">import { events, world, players, storage, commands, buildings, ui, research, contracts, after, random, console } from &quot;mekzorio&quot;;
+</code></pre>
+<h2 id="events"><code>events</code></h2>
+<p>Eventos do jogo: o script registra funções que o jogo chama.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>events.onTick(ticks: number, fn: (tick: number) =&gt; void): void</code></td>
+<td>Chama <code>fn</code> a cada <code>ticks</code> ticks (30 ticks = 1 segundo). <code>onTick(fn)</code> = todo tick.</td>
+</tr>
+<tr>
+<td><code>events.on(name: string, fn: (data: any) =&gt; void): void</code></td>
+<td>Forma geral dos eventos abaixo, pelo nome (<code>"playerJoin"</code>, <code>"craft"</code>…).</td>
+</tr>
+<tr>
+<td><code>events.onPlayerJoin(fn: (player: Player) =&gt; void): void</code></td>
+<td>Um jogador entrou.</td>
+</tr>
+<tr>
+<td><code>events.onPlayerLeave(fn: (p: { id: number; name: string }) =&gt; void): void</code></td>
+<td>Um jogador saiu.</td>
+</tr>
+<tr>
+<td><code>events.onChat(fn: (m: { player: Player; text: string }) =&gt; void): void</code></td>
+<td>Mensagem no chat (comandos <code>/…</code> não chegam aqui).</td>
+</tr>
+<tr>
+<td><code>events.onBuild(fn: (b: BuildingInfo) =&gt; void): void</code></td>
+<td>Uma construção foi posta (por jogador ou script).</td>
+</tr>
+<tr>
+<td><code>events.onRemove(fn: (r: { id: number; x: number; y: number }) =&gt; void): void</code></td>
+<td>Uma construção saiu do mundo.</td>
+</tr>
+<tr>
+<td><code>events.onCraft(fn: (c: { building: BuildingInfo; recipe: string }) =&gt; void): void</code></td>
+<td>Uma máquina terminou uma receita. Só é registrado se algum script ouve (não pesa à toa).</td>
+</tr>
+<tr>
+<td><code>events.onResearch(fn: (r: { tech: string }) =&gt; void): void</code></td>
+<td>Uma pesquisa terminou (infinita: a cada nível).</td>
+</tr>
+<tr>
+<td><code>events.onContract(fn: (c: { contract: string; region: number }) =&gt; void): void</code></td>
+<td>Um contrato de Nó foi cumprido.</td>
+</tr>
+<tr>
+<td><code>events.onDeath(fn: (d: { player: Player }) =&gt; void): void</code></td>
+<td>Um jogador caiu.</td>
+</tr>
+<tr>
+<td><code>events.onRocketLaunch(fn: (r: { building: number; x: number; y: number; victory: boolean; launches: number }) =&gt; void): void</code></td>
+<td>Um foguete foi lançado.</td>
+</tr>
+<tr>
+<td><code>events.onEnemyDefeated(fn: (e: { id: number; kind: string; x: number; y: number }) =&gt; void): void</code></td>
+<td>Um inimigo foi derrubado.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="world"><code>world</code></h2>
+<p>O mundo: tempo, chão, construções, itens no chão, mensagem a todos.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>world.readonly tick: number</code></td>
+<td>Tick atual do mundo (30 por segundo).</td>
+</tr>
+<tr>
+<td><code>world.readonly seed: number</code></td>
+<td>Semente do mundo.</td>
+</tr>
+<tr>
+<td><code>world.readonly name: string</code></td>
+<td>Nome do mundo.</td>
+</tr>
+<tr>
+<td><code>world.readonly timeOfDay: number</code></td>
+<td>Hora do dia de 0 a 1 (0 = meia-noite, 0.5 = meio-dia).</td>
+</tr>
+<tr>
+<td><code>world.readonly day: number</code></td>
+<td>Número do dia.</td>
+</tr>
+<tr>
+<td><code>world.message(text: string): void</code></td>
+<td>Mensagem para todos no chat.</td>
+</tr>
+<tr>
+<td><code>world.tile(x: number, y: number): Tile</code></td>
+<td>O que há num tile: terreno, jazida, vegetação, construção.</td>
+</tr>
+<tr>
+<td><code>world.buildingAt(x: number, y: number): BuildingInfo \| null</code></td>
+<td>A construção que ocupa o tile.</td>
+</tr>
+<tr>
+<td><code>world.findBuildings(opts?: { type?: string; x?: number; y?: number; radius?: number }): BuildingInfo[]</code></td>
+<td>Construções numa área (até 500; <code>radius</code> em tiles, padrão 32).</td>
+</tr>
+<tr>
+<td><code>world.dropItems(x: number, y: number, item: string, count?: number): number</code></td>
+<td>Larga itens num monte no chão; devolve quantos couberam.</td>
+</tr>
+<tr>
+<td><code>world.build(type: string, x: number, y: number, rotation?: number): Building \| null</code></td>
+<td>Constrói sem jogador e sem gastar item (<code>rotation</code> 0–3). <code>null</code> se não cabe.</td>
+</tr>
+<tr>
+<td><code>world.remove(id: number): boolean</code></td>
+<td>Tira uma construção do mundo (sem devolver nada).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="players"><code>players</code></h2>
+<p>Jogadores: lista, mensagens, teleporte, inventário.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>players.list(): Player[]</code></td>
+<td>Todos os jogadores do mundo (online ou não).</td>
+</tr>
+<tr>
+<td><code>players.get(id: number): Player \| null</code></td>
+<td>Um jogador pelo id.</td>
+</tr>
+<tr>
+<td><code>players.message(id: number, text: string): void</code></td>
+<td>Mensagem só para um jogador.</td>
+</tr>
+<tr>
+<td><code>players.teleport(id: number, x: number, y: number): boolean</code></td>
+<td>Leva o jogador até (x, y) se ali dá para ficar (não dentro de veículo).</td>
+</tr>
+<tr>
+<td><code>players.give(id: number, item: string, count?: number): number</code></td>
+<td>Põe itens no inventário; devolve quantos couberam.</td>
+</tr>
+<tr>
+<td><code>players.take(id: number, item: string, count?: number): number</code></td>
+<td>Tira itens do inventário; devolve quantos saíram.</td>
+</tr>
+<tr>
+<td><code>players.count(id: number, item: string): number</code></td>
+<td>Quantos daquele item o jogador tem.</td>
+</tr>
+<tr>
+<td><code>players.isAdmin(id: number): boolean</code></td>
+<td>Se o jogador é administrador do servidor.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="storage"><code>storage</code></h2>
+<p>Dados do mod salvos com o mundo (qualquer valor que vire JSON; até 1 milhão de caracteres).</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>storage.get(key: string): any</code></td>
+<td>Lê um valor guardado (<code>null</code> se não há).</td>
+</tr>
+<tr>
+<td><code>storage.set(key: string, value: any): void</code></td>
+<td>Guarda um valor (vai no save do mundo).</td>
+</tr>
+<tr>
+<td><code>storage.delete(key: string): void</code></td>
+<td>Apaga um valor.</td>
+</tr>
+<tr>
+<td><code>storage.keys(): string[]</code></td>
+<td>As chaves guardadas.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="commands"><code>commands</code></h2>
+<p>Comandos no chat (/nome).</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>commands.register(name: string, fn: (player: Player, args: string[], text: string) =&gt; string \| void, opts?: { admin?: boolean; description?: string }): void</code></td>
+<td>Cria <code>/name</code> no chat. O que <code>fn</code> devolve vai só para quem digitou. <code>admin: true</code> = só administradores.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="buildings"><code>buildings</code></h2>
+<p>Construções: máquinas com script, clique, procurar, construir.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>buildings.onTick(type: string, ticks: number, fn: (b: Building) =&gt; void): void</code></td>
+<td>Chama <code>fn</code> para cada construção do tipo (ex.: <code>"meu_mod:prensa"</code>) a cada <code>ticks</code> ticks — é assim que se faz máquina nova.</td>
+</tr>
+<tr>
+<td><code>buildings.onInteract(type: string, fn: (b: Building, player: Player) =&gt; void): void</code></td>
+<td>Um jogador clicou numa construção do tipo (precisa de <code>"script": true</code> no JSON).</td>
+</tr>
+<tr>
+<td><code>buildings.get(id: number): Building \| null</code></td>
+<td>Uma construção pelo id.</td>
+</tr>
+<tr>
+<td><code>buildings.at(x: number, y: number): Building \| null</code></td>
+<td>A construção que ocupa o tile.</td>
+</tr>
+<tr>
+<td><code>buildings.find(opts?: { type?: string; x?: number; y?: number; radius?: number }): Building[]</code></td>
+<td>Como <code>world.findBuildings</code>, já como objetos.</td>
+</tr>
+<tr>
+<td><code>buildings.build(type: string, x: number, y: number, rotation?: number): Building \| null</code></td>
+<td>Como <code>world.build</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="o-objeto-de-uma-construcao-b">O objeto de uma construção (<code>b</code>)</h2>
+<p>O objeto de uma construção (o <code>b</code> de <code>buildings.onTick</code> e afins).</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>readonly id: number</code></td>
+<td>Número da construção.</td>
+</tr>
+<tr>
+<td><code>readonly info: BuildingInfo &amp; { enabled: boolean; power: number; recipe: string \| null; inventory: Stack[]; slots: MachineSlots; fluids: FluidBox[] } \| null</code></td>
+<td>Tudo de uma vez (<code>null</code> se ela não existe mais).</td>
+</tr>
+<tr>
+<td><code>readonly type: string</code></td>
+<td>Tipo (id da construção no JSON).</td>
+</tr>
+<tr>
+<td><code>readonly x: number</code></td>
+<td>Canto de origem (tile).</td>
+</tr>
+<tr>
+<td><code>readonly y: number</code></td>
+<td>Canto de origem (tile).</td>
+</tr>
+<tr>
+<td><code>readonly exists: boolean</code></td>
+<td>Se ainda está no mundo.</td>
+</tr>
+<tr>
+<td><code>readonly working: boolean</code></td>
+<td>Se está trabalhando agora.</td>
+</tr>
+<tr>
+<td><code>readonly power: number</code></td>
+<td>Quanto da energia pedida chegou (0 a 1).</td>
+</tr>
+<tr>
+<td><code>enabled: boolean</code></td>
+<td><code>false</code> desliga a máquina (qualquer uma): não trabalha nem pede energia. Vai no save.</td>
+</tr>
+<tr>
+<td><code>wantsPower: boolean</code></td>
+<td>Máquina de mod com <code>"power"</code> no JSON: <code>true</code> enquanto quer energia (veja quanto chegou em <code>power</code>).</td>
+</tr>
+<tr>
+<td><code>readonly inventory: Stack[]</code></td>
+<td>Itens do baú (<code>container</code>).</td>
+</tr>
+<tr>
+<td><code>readonly slots: MachineSlots</code></td>
+<td>Máquina: entrada, combustível, saída e subproduto.</td>
+</tr>
+<tr>
+<td><code>readonly fluids: FluidBox[]</code></td>
+<td>Tanques de líquido.</td>
+</tr>
+<tr>
+<td><code>count(item: string): number</code></td>
+<td>Quantos daquele item ela tem (baú e espaços da máquina).</td>
+</tr>
+<tr>
+<td><code>insert(item: string, count?: number): number</code></td>
+<td>Põe itens como um braço poria; devolve quantos entraram.</td>
+</tr>
+<tr>
+<td><code>extract(item?: string, count?: number): number</code></td>
+<td>Tira itens (somem); sem <code>item</code>, qualquer um. Devolve quantos saíram.</td>
+</tr>
+<tr>
+<td><code>addFluid(fluid: string, amount: number): number</code></td>
+<td>Põe líquido nos tanques; devolve quanto entrou.</td>
+</tr>
+<tr>
+<td><code>takeFluid(fluid: string, amount: number): number</code></td>
+<td>Tira líquido; devolve quanto saiu.</td>
+</tr>
+<tr>
+<td><code>neighbors(): { side: "east" \| "south" \| "west" \| "north"; building: Building }[]</code></td>
+<td>Construções encostadas, com o lado.</td>
+</tr>
+<tr>
+<td><code>readonly data: { get(key: string): any; set(key: string, value: any): void; delete(key: string): void }</code></td>
+<td>Dados deste mod nesta construção, salvos com o mundo (somem quando ela sai).</td>
+</tr>
+<tr>
+<td><code>remove(): boolean</code></td>
+<td>Tira do mundo (sem devolver nada).</td>
+</tr>
+<tr>
+<td><code>animate(name: string \| null, opts?: { loop?: boolean; speed?: number }): void</code></td>
+<td>Toca uma animação do <code>.bbmodel</code> (qualquer uma). <code>null</code> volta à do estado (<code>animations</code> no JSON).</td>
+</tr>
+<tr>
+<td><code>pose(bone: string, pose: { rotation?: [number, number, number]; position?: [number, number, number]; spin?: [number, number, number] } \| null): void</code></td>
+<td>Pose de um osso, somada à animação: <code>rotation</code> (graus), <code>position</code>, <code>spin</code> (graus por segundo, girando sempre). <code>null</code> tira.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ui"><code>ui</code></h2>
+<p>Telas: janelas com as peças do jogo, avisos e texto no HUD.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ui.show(player: Player \| number, form: Form, onEvent?: (e: { button: string; fields: Record&lt;string, string&gt;; closed: boolean; player: Player }) =&gt; void): void</code></td>
+<td>Abre (ou atualiza, com o mesmo <code>id</code>) uma janela para o jogador. Clique, Enter num campo e fechar chamam <code>onEvent</code>.</td>
+</tr>
+<tr>
+<td><code>ui.close(player: Player \| number, id?: string): void</code></td>
+<td>Fecha a janela.</td>
+</tr>
+<tr>
+<td><code>ui.toast(player: Player \| number, text: string, color?: string): void</code></td>
+<td>Aviso rápido embaixo da tela (<code>color</code>: <code>accent</code>, <code>danger</code>, <code>energy</code> ou <code>#rrggbb</code>).</td>
+</tr>
+<tr>
+<td><code>ui.hud(player: Player \| number, id: string, text: string \| null): void</code></td>
+<td>Linha fixa no alto da tela (até 8); <code>null</code> tira.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="research"><code>research</code></h2>
+<p>Pesquisas.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>research.list(): Tech[]</code></td>
+<td>Todas as pesquisas com o estado de cada uma.</td>
+</tr>
+<tr>
+<td><code>research.readonly current: string \| null</code></td>
+<td>A pesquisa em andamento.</td>
+</tr>
+<tr>
+<td><code>research.select(id: string \| null): boolean</code></td>
+<td>Escolhe a pesquisa do laboratório (<code>null</code> = nenhuma).</td>
+</tr>
+<tr>
+<td><code>research.isDone(id: string): boolean</code></td>
+<td>Se a pesquisa está concluída.</td>
+</tr>
+<tr>
+<td><code>research.level(id: string): number</code></td>
+<td>Nível de uma pesquisa infinita.</td>
+</tr>
+<tr>
+<td><code>research.grant(id: string): boolean</code></td>
+<td>Conclui (e libera as receitas); infinita: +1 nível.</td>
+</tr>
+<tr>
+<td><code>research.progress(units?: number): void</code></td>
+<td>Unidades de presente para a pesquisa atual.</td>
+</tr>
+<tr>
+<td><code>research.bonus(effect: string): number</code></td>
+<td>Soma das infinitas com esse efeito (<code>mining_speed</code>, <code>crafting_speed</code>, <code>research_speed</code> ou um do mod).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contracts"><code>contracts</code></h2>
+<p>Contratos dos Nós (um por região).</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>contracts.list(): ContractState[]</code></td>
+<td>O contrato ativo de cada região, com o ritmo e o tempo mantido.</td>
+</tr>
+<tr>
+<td><code>contracts.finish(region: number): boolean</code></td>
+<td>O contrato ativo da região fecha no próximo tick, com as recompensas.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="random"><code>random</code></h2>
+<p>Sorteio com semente do mundo (igual em todo servidor que roda o mesmo mundo).</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>random.next(): number</code></td>
+<td>Número de 0 a 1 (igual a <code>Math.random()</code>, que também tem semente).</td>
+</tr>
+<tr>
+<td><code>random.int(min: number, max: number): number</code></td>
+<td>Inteiro de <code>min</code> a <code>max</code> (inclusive).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="console"><code>console</code></h2>
+<p>Mensagens para o console (F8 no modo desenvolvedor, ou o console do servidor).</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>console.log(...values: any[]): void</code></td>
+<td>Mensagem.</td>
+</tr>
+<tr>
+<td><code>console.info(...values: any[]): void</code></td>
+<td>Mensagem.</td>
+</tr>
+<tr>
+<td><code>console.warn(...values: any[]): void</code></td>
+<td>Aviso (amarelo).</td>
+</tr>
+<tr>
+<td><code>console.error(...values: any[]): void</code></td>
+<td>Erro (vermelho).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="funcoes-soltas">Funções soltas</h2>
+<p>Funções soltas.</p>
+<table>
+<thead>
+<tr>
+<th>Membro</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>after(ticks: number, fn: () =&gt; void): void</code></td>
+<td>Chama <code>fn</code> uma vez, daqui a <code>ticks</code> ticks.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tipos">Tipos</h2>
+<p><code>ts
+  interface Player { id: number; name: string; x: number; y: number; health: number; online: boolean; vehicle: number | null }
+  interface BuildingInfo { id: number; type: string; x: number; y: number; width: number; height: number; rotation: number; working: boolean }
+  interface Tile { x: number; y: number; terrain: string; resource: string | null; amount: number; flora: string | null; building: number | null; walkable: boolean }
+  interface Stack { item: string; count: number }
+  interface MachineSlots { input: Stack | null; fuel: Stack | null; output: Stack | null; byproduct: Stack | null }
+  interface FluidBox { fluid: string | null; amount: number; capacity: number; input: boolean }
+  interface Tech { id: string; name: string; done: boolean; available: boolean; current: boolean; units: number; unitsDone: number; level: number; repeat: boolean; delivery: boolean; effect: string | null }
+  interface ContractState { region: number; contract: string | null; item: string | null; perMinute: number; seconds: number; ratePerMinute: number; sustainedSeconds: number; index: number; count: number }
+  /** Uma peça de janela. type: text, button, field, row, bar, icon, image, list, tabs, graph, separator. */
+  interface Piece {
+    type: "text" | "button" | "field" | "row" | "bar" | "icon" | "image" | "list" | "tabs" | "graph" | "separator";
+    id?: string; text?: string; size?: number; color?: string; primary?: boolean; disabled?: boolean; tooltip?: string;
+    label?: string; value?: string | number; placeholder?: string; children?: Piece[]; item?: string; count?: number;
+    src?: string; width?: number; height?: number; items?: (string | { icon?: string; text: string })[];
+    tabs?: { title: string; body: Piece[] }[]; series?: { values: number[]; color?: string }[];
+  }
+  interface Form { id?: string; title?: string; width?: number; building?: number; body: Piece[] }</code></p></article>
+  </main>
+
+  <footer class="rodape">
+    <img src="../imagens/emblema.png" alt="" width="28" height="28">
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.1.9-alfa).</p>
+  </footer>
+  <script src="../site.js"></script>
+</body>
+</html>

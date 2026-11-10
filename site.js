@@ -1,5 +1,5 @@
 // MEKZORIO — página do jogo: menu no celular, versão mais nova (GitHub), novidades (NOVIDADES.md), foto grande na
-// galeria e cartões aparecendo ao rolar. O jogo é vendido no itch.io.
+// galeria e cartões aparecendo ao rolar. As páginas da documentação e dos mods usam só o menu e os cartões. O jogo é vendido no itch.io.
 (() => {
   const REPO = 'DiomarGoncalves/mekzorio-versoes';
 
@@ -18,7 +18,7 @@
 
   // ---------- versão mais nova (tamanho dos arquivos e data) ----------
   const mb = bytes => `${Math.round(bytes / 1048576)} MB`;
-  fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
+  if (document.getElementById('versao-atual')) fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
     .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
     .then(rel => {
       const data = new Date(rel.published_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
@@ -60,7 +60,7 @@
   }
 
   const lista = document.getElementById('lista-novidades');
-  fetch('NOVIDADES.md')
+  if (lista) fetch('NOVIDADES.md')
     .then(r => (r.ok ? r.text() : Promise.reject(r.status)))
     .then(md => {
       const vs = versoes(md);
@@ -81,41 +81,43 @@
     })
     .catch(() => { /* abrindo o arquivo direto do disco: fica o aviso com o link */ });
 
-  // ---------- foto grande ----------
+  // ---------- foto grande (só na página do jogo) ----------
   const caixa = document.getElementById('lightbox');
-  const grande = caixa.querySelector('img');
-  const legenda = caixa.querySelector('.lightbox-legenda');
-  const fotos = [...document.querySelectorAll('.galeria button')];
-  let atual = 0;
-  function mostrar(i) {
-    atual = (i + fotos.length) % fotos.length;
-    const b = fotos[atual];
-    grande.src = b.dataset.grande;
-    grande.alt = b.querySelector('img').alt;
-    legenda.textContent = b.closest('figure').querySelector('figcaption').textContent;
+  if (caixa) {
+    const grande = caixa.querySelector('img');
+    const legenda = caixa.querySelector('.lightbox-legenda');
+    const fotos = [...document.querySelectorAll('.galeria button')];
+    let atual = 0;
+    function mostrar(i) {
+      atual = (i + fotos.length) % fotos.length;
+      const b = fotos[atual];
+      grande.src = b.dataset.grande;
+      grande.alt = b.querySelector('img').alt;
+      legenda.textContent = b.closest('figure').querySelector('figcaption').textContent;
+    }
+    function abrir(i) { mostrar(i); caixa.hidden = false; document.body.style.overflow = 'hidden'; caixa.querySelector('.lightbox-fechar').focus(); }
+    function fechar() { caixa.hidden = true; document.body.style.overflow = ''; fotos[atual].focus(); }
+    fotos.forEach((b, i) => b.addEventListener('click', () => abrir(i)));
+    caixa.querySelector('.lightbox-fechar').addEventListener('click', fechar);
+    caixa.querySelector('.esquerda').addEventListener('click', () => mostrar(atual - 1));
+    caixa.querySelector('.direita').addEventListener('click', () => mostrar(atual + 1));
+    caixa.addEventListener('click', e => { if (e.target === caixa) fechar(); });
+    document.addEventListener('keydown', e => {
+      if (caixa.hidden) return;
+      if (e.key === 'Escape') fechar();
+      if (e.key === 'ArrowLeft') mostrar(atual - 1);
+      if (e.key === 'ArrowRight') mostrar(atual + 1);
+    });
+    // Arrastar o dedo para os lados troca a foto no celular.
+    let toqueX = null;
+    caixa.addEventListener('touchstart', e => { toqueX = e.touches[0].clientX; }, { passive: true });
+    caixa.addEventListener('touchend', e => {
+      if (toqueX === null) return;
+      const dx = e.changedTouches[0].clientX - toqueX;
+      if (Math.abs(dx) > 50) mostrar(atual + (dx < 0 ? 1 : -1));
+      toqueX = null;
+    });
   }
-  function abrir(i) { mostrar(i); caixa.hidden = false; document.body.style.overflow = 'hidden'; caixa.querySelector('.lightbox-fechar').focus(); }
-  function fechar() { caixa.hidden = true; document.body.style.overflow = ''; fotos[atual].focus(); }
-  fotos.forEach((b, i) => b.addEventListener('click', () => abrir(i)));
-  caixa.querySelector('.lightbox-fechar').addEventListener('click', fechar);
-  caixa.querySelector('.esquerda').addEventListener('click', () => mostrar(atual - 1));
-  caixa.querySelector('.direita').addEventListener('click', () => mostrar(atual + 1));
-  caixa.addEventListener('click', e => { if (e.target === caixa) fechar(); });
-  document.addEventListener('keydown', e => {
-    if (caixa.hidden) return;
-    if (e.key === 'Escape') fechar();
-    if (e.key === 'ArrowLeft') mostrar(atual - 1);
-    if (e.key === 'ArrowRight') mostrar(atual + 1);
-  });
-  // Arrastar o dedo para os lados troca a foto no celular.
-  let toqueX = null;
-  caixa.addEventListener('touchstart', e => { toqueX = e.touches[0].clientX; }, { passive: true });
-  caixa.addEventListener('touchend', e => {
-    if (toqueX === null) return;
-    const dx = e.changedTouches[0].clientX - toqueX;
-    if (Math.abs(dx) > 50) mostrar(atual + (dx < 0 ? 1 : -1));
-    toqueX = null;
-  });
 
   // ---------- aparecer ao rolar ----------
   const alvos = document.querySelectorAll('.cartao, .galeria figure, .passo, .download');

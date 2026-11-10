@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mods — MEKZORIO</title>
+  <meta name="description" content="Mods para o MEKZORIO escolhidos a dedo: baixe, ponha na pasta dos seus mods e ative no jogo.">
+  <meta name="theme-color" content="#14181e">
+  <link rel="icon" type="image/png" href="imagens/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="MEKZORIO, início">
+      <img src="imagens/emblema.png" alt="" width="36" height="36">
+      <span>MEKZORIO</span>
+    </a>
+    <button class="menu-botao" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="menu" class="menu">
+      <a href="index.html">O jogo</a>
+      <a href="mods.html" aria-current="page">Mods</a>
+      <a href="documentacao/index.html">Documentação</a>
+      <a class="menu-baixar" href="index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="secao-cabeca">
+        <span class="placa" aria-hidden="true"></span>
+        <h2>Mods</h2>
+        <p>Mods testados e escolhidos um por um. Cada um diz com qual versão do jogo funciona.</p>
+      </div>
+
+      <ol class="mods-passos">
+        <li><strong>Baixe</strong> o mod e descompacte: sai uma pasta com o nome dele.</li>
+        <li>No jogo, abra <strong>Menu → Mods → Abrir pasta dos meus mods</strong> e ponha a pasta lá.</li>
+        <li>Volte ao jogo, <strong>ative</strong> o mod na lista e crie ou abra um mundo.</li>
+      </ol>
+
+      <div class="mods-lista" id="lista-mods">
+        <p class="mods-aviso">Carregando a lista… Se não aparecer nada, abra o site pelo endereço da internet (a lista vem do arquivo <a href="mods.json">mods.json</a>).</p>
+      </div>
+
+      <div class="doc-baixar">
+        <h3>Jogando com amigos</h3>
+        <p>Num servidor com mods, quem entra vê a lista e o jogo baixa só o que falta, só para aquela partida, como no
+        Bedrock. Os mods do servidor não se misturam com os seus.</p>
+        <h3>Fez um mod?</h3>
+        <p>Leia a <a href="documentacao/index.html">documentação</a> e mande o link do seu mod para o MEKZORIO no itch.io.
+        Os que entram aqui são testados antes. Scripts de mod rodam trancados no servidor: não leem seus arquivos nem a internet.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <img src="imagens/emblema.png" alt="" width="28" height="28">
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Mods de terceiros são de seus autores.</p>
+  </footer>
+  <script src="site.js"></script>
+  <script src="mods.js"></script>
+</body>
+</html>

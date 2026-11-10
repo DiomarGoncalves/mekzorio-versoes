@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campos do JSON — MEKZORIO</title>
+  <meta name="description" content="Cada lista e cada campo que um mod pode declarar, com o valor padrão e o limite.">
+  <meta name="theme-color" content="#14181e">
+  <link rel="icon" type="image/png" href="../imagens/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="../index.html" aria-label="MEKZORIO, início">
+      <img src="../imagens/emblema.png" alt="" width="36" height="36">
+      <span>MEKZORIO</span>
+    </a>
+    <button class="menu-botao" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="menu" class="menu">
+      <a href="../index.html">O jogo</a>
+      <a href="../mods.html">Mods</a>
+      <a href="index.html">Documentação</a>
+      <a class="menu-baixar" href="../index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main class="doc">
+    <aside class="doc-lado">
+      <nav class="doc-paginas"><a href="como-fazer-um-mod.html">Como fazer um mod</a><a href="campos-do-json.html" aria-current="page">Campos do JSON</a><a href="api-dos-scripts.html">API dos scripts</a></nav>
+      <div class="doc-indice"><p>Nesta página</p><div class="toc">
+<ul>
+<li><a href="#convencoes">Convenções</a></li>
+<li><a href="#manifesto-manifestjson">Manifesto (manifest.json)</a></li>
+<li><a href="#itens-items">Itens (items)</a><ul>
+<li><a href="#veiculos-vehicle-dentro-do-item">Veículos (vehicle dentro do item)</a></li>
+</ul>
+</li>
+<li><a href="#construcoes-buildings">Construções (buildings)</a><ul>
+<li><a href="#campos-de-toda-construcao">Campos de toda construção</a></li>
+<li><a href="#comportamento-exatamente-um-por-construcao">Comportamento (exatamente um por construção)</a></li>
+<li><a href="#crafter">crafter</a></li>
+<li><a href="#reactor">reactor</a></li>
+<li><a href="#silo">silo</a></li>
+</ul>
+</li>
+<li><a href="#receitas-recipes">Receitas (recipes)</a></li>
+<li><a href="#pesquisas-research">Pesquisas (research)</a></li>
+<li><a href="#contratos-contracts">Contratos (contracts)</a></li>
+<li><a href="#recursos-resources-e-terrenos-terrain">Recursos (resources) e terrenos (terrain)</a></li>
+<li><a href="#plantas-flora">Plantas (flora)</a></li>
+<li><a href="#inimigos-e-meks-enemies">Inimigos e MEKs (enemies)</a></li>
+<li><a href="#jogador-player-e-mundo-worldgen">Jogador (player) e mundo (worldgen)</a></li>
+<li><a href="#teto-da-demo-demo">Teto da demo (demo)</a></li>
+<li><a href="#arte-som-e-idiomas">Arte, som e idiomas</a></li>
+<li><a href="#exemplos-que-vem-com-o-jogo">Exemplos que vêm com o jogo</a></li>
+</ul>
+</div>
+</div>
+    </aside>
+    <article class="doc-texto"><h1 id="referencia-de-mods-do-mekzorio">Referência de mods do MEKZORIO</h1>
+<p>Manual completo de tudo o que um mod pode declarar (a API dos scripts está em <a href="api-dos-scripts.html">API dos scripts</a>). Para começar do zero, leia antes o <a href="como-fazer-um-mod.html">Como fazer um mod</a> (passo a passo,
+pastas, manifesto, multijogador). Esta página é a consulta: cada lista, cada campo, o valor padrão e o limite aceito.</p>
+<p>Tudo aqui foi tirado do carregador do jogo (<code>src/Automacao.Core/Content/ContentLoader.cs</code>). Campo com nome errado vira
+erro (não passa despercebido), e cada erro diz o arquivo, o id e o motivo.</p>
+<h2 id="convencoes">Convenções</h2>
+<table>
+<thead>
+<tr>
+<th>Assunto</th>
+<th>Regra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arquivos</td>
+<td><code>content/*.json</code> no mod. Aceita comentários <code>//</code> e vírgula sobrando no fim. Os arquivos são lidos em ordem alfabética.</td>
+</tr>
+<tr>
+<td>Ids</td>
+<td>Letras minúsculas, números e <code>_</code>. Sem prefixo, o id é do seu mod (<code>"forno"</code> vira <code>meu_mod:forno</code>). Para usar algo de outro mod, ponha o prefixo: <code>"base:iron_plate"</code>.</td>
+</tr>
+<tr>
+<td>Textos</td>
+<td><code>{ "pt-BR": "Forno", "en": "Oven" }</code>. Sem a língua do jogador, usa a outra que existir.</td>
+</tr>
+<tr>
+<td>Cores</td>
+<td><code>"#rrggbb"</code>. É a cor usada enquanto não há ícone ou modelo.</td>
+</tr>
+<tr>
+<td>Tempos</td>
+<td>Em segundos (o jogo roda a 30 passos por segundo).</td>
+</tr>
+<tr>
+<td>Ordem</td>
+<td>Algo só pode ser usado depois de carregado: num mod anterior (dependência) ou mais acima no mesmo arquivo. Itens antes das construções e receitas que os usam.</td>
+</tr>
+</tbody>
+</table>
+<p>Listas que um arquivo pode ter: <code>items</code>, <code>terrain</code>, <code>resources</code>, <code>flora</code>, <code>buildings</code>, <code>recipes</code>, <code>research</code>,
+<code>contracts</code>, <code>worldgen</code> e <code>player</code> (os dois últimos normalmente só o <code>base</code> usa).</p>
+<h2 id="manifesto-manifestjson">Manifesto (<code>manifest.json</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Nome do mod (letras minúsculas, números e <code>_</code>); é o prefixo dos ids dele (<code>meu_mod:forno</code>).</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Nome que aparece na tela de Mods (<code>{ "pt-BR": …, "en": … }</code>).</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Versão do mod (<code>1.0.0</code>). Servidor e jogador precisam da mesma.</td>
+</tr>
+<tr>
+<td><code>authors</code></td>
+<td>Lista de autores.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Texto da tela de Mods.</td>
+</tr>
+<tr>
+<td><code>gameVersion</code></td>
+<td>Versões do jogo em que funciona (<code>"&gt;=0.2.0"</code>).</td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td>Outros mods que ele precisa, com a versão: <code>{ "base": "^0.2.0" }</code>. Carregam antes.</td>
+</tr>
+<tr>
+<td><code>side</code></td>
+<td><code>"both"</code> (padrão).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="itens-items">Itens (<code>items</code>)</h2>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;tijolo_refratario&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Tijolo refratário&quot;, &quot;en&quot;: &quot;Fire brick&quot; },
+  &quot;stackSize&quot;: 100, &quot;color&quot;: &quot;#b0563c&quot; }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stackSize</code></td>
+<td>50</td>
+<td>Quantos cabem num espaço (1 a 100000).</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>—</td>
+<td>Obrigatório.</td>
+</tr>
+<tr>
+<td><code>fuel</code></td>
+<td>0</td>
+<td>Segundos que o item mantém uma máquina queimando (0 a 3600). Carvão = 20. Item com <code>fuel</code> serve de combustível.</td>
+</tr>
+<tr>
+<td><code>fluid</code></td>
+<td>false</td>
+<td>É um líquido (água, vapor, óleo). Líquido não vai para o inventário: anda em canos e tanques.</td>
+</tr>
+<tr>
+<td><code>ammo</code></td>
+<td>0</td>
+<td>É munição: % do dano da arma ou torreta (100 = normal, 170 = perfurante).</td>
+</tr>
+<tr>
+<td><code>module</code></td>
+<td>—</td>
+<td>Módulo de máquina: <code>{ "speed": 25, "energy": 0 }</code> = % a mais de velocidade e de gasto de energia (negativo economiza).</td>
+</tr>
+<tr>
+<td><code>jetpack</code></td>
+<td>false</td>
+<td>Equipado nas costas, J liga o voo. Use junto com <code>"equip": { "slot": "back" }</code>.</td>
+</tr>
+<tr>
+<td><code>equip</code></td>
+<td>—</td>
+<td>Equipamento: <code>slot</code> (<code>back</code>, <code>body</code>, <code>hand</code> ou <code>weapon</code>); <code>miningSpeed</code> (ferramenta na mão: coleta N vezes mais rápido); <code>armor</code> (no corpo: % a mais de vida); <code>weapon</code> (<code>range</code> tiles, <code>damage</code>, <code>cooldown</code> s).</td>
+</tr>
+<tr>
+<td><code>vehicle</code></td>
+<td>—</td>
+<td>Veículo (ver abaixo).</td>
+</tr>
+<tr>
+<td><code>floor</code></td>
+<td>—</td>
+<td>Item de chão: o id do terreno que ele põe (o jogador calça arrastando; recolher devolve o item).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="veiculos-vehicle-dentro-do-item">Veículos (<code>vehicle</code> dentro do item)</h3>
+<pre><code class="language-jsonc">&quot;vehicle&quot;: { &quot;type&quot;: &quot;cargo&quot;, &quot;slots&quot;: 32, &quot;fuelSlots&quot;: 0, &quot;maxSpeed&quot;: 8, &quot;capacity&quot;: 0 }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><code>type</code></th>
+<th>O que é</th>
+<th>Campos que importam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>locomotive</code></td>
+<td>puxa o trem, queima combustível</td>
+<td><code>fuelSlots</code> (1 a 10), <code>maxSpeed</code> (tiles/s)</td>
+</tr>
+<tr>
+<td><code>cargo</code></td>
+<td>vagão de carga</td>
+<td><code>slots</code> (até 200)</td>
+</tr>
+<tr>
+<td><code>fluid</code></td>
+<td>vagão de líquido</td>
+<td><code>capacity</code> (até 100000)</td>
+</tr>
+<tr>
+<td><code>car</code></td>
+<td>carro livre (sem trilho)</td>
+<td><code>slots</code> (porta-malas), <code>fuelSlots</code>, <code>maxSpeed</code></td>
+</tr>
+<tr>
+<td><code>helicopter</code>, <code>airplane</code></td>
+<td>voam por cima de tudo</td>
+<td><code>slots</code>, <code>fuelSlots</code>, <code>maxSpeed</code> (até 60)</td>
+</tr>
+</tbody>
+</table>
+<p>Locomotivas e vagões são postos em cima do trilho; o carro e os aéreos, no chão.</p>
+<h2 id="construcoes-buildings">Construções (<code>buildings</code>)</h2>
+<pre><code class="language-jsonc">{
+  &quot;id&quot;: &quot;forno_tijolo&quot;, &quot;item&quot;: &quot;forno_tijolo&quot;, &quot;color&quot;: &quot;#a4513a&quot;, &quot;size&quot;: [ 2, 2 ],
+  &quot;crafter&quot;: { &quot;category&quot;: &quot;smelting&quot;, &quot;fuel&quot;: true, &quot;speed&quot;: 2 },
+  &quot;ports&quot;: [ { &quot;x&quot;: 0, &quot;y&quot;: 0, &quot;side&quot;: &quot;west&quot;, &quot;type&quot;: &quot;input&quot; }, { &quot;x&quot;: 1, &quot;y&quot;: 0, &quot;side&quot;: &quot;east&quot;, &quot;type&quot;: &quot;output&quot; } ]
+}
+</code></pre>
+<h3 id="campos-de-toda-construcao">Campos de toda construção</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>item</code></td>
+<td>O item que a coloca (precisa existir; cada item coloca uma construção só).</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td><code>[largura, altura]</code> em tiles, de 1 a 8.</td>
+</tr>
+<tr>
+<td><code>ports</code></td>
+<td>Portas de item: <code>x</code>, <code>y</code> (tile dentro da construção, na orientação original: a frente é o <strong>leste</strong>), <code>side</code> (<code>east</code>, <code>south</code>, <code>west</code>, <code>north</code>) e <code>type</code> (<code>input</code> ou <code>output</code>). Esteiras e braços entram e saem por elas; no jogo aparecem como setas ciano (entra) e amarelas (sai).</td>
+</tr>
+<tr>
+<td><code>power</code></td>
+<td><code>{ "use": 90 }</code> (kW, 1 a 100000): a máquina usa eletricidade. Para máquinas (<code>miner</code>, <code>crafter</code>, <code>lab</code>, <code>inserter</code>, <code>droneHub</code>, <code>pump</code>, <code>lamp</code>…), não para esteira, baú, gerador, poste ou divisor; com <code>"fuel": false</code>. Liga sozinha, por cabo, ao poste mais perto no alcance dele.</td>
+</tr>
+<tr>
+<td><code>fluidBoxes</code></td>
+<td>Tanques de líquido: lista de <code>{ "type": "input" ou "output", "capacity": 100, "filter": "base:water" }</code>. <code>filter</code> (opcional) prende o tanque a um líquido.</td>
+</tr>
+<tr>
+<td><code>fluidPorts</code></td>
+<td>Onde o cano liga: <code>{ "x", "y", "side", "box" }</code> (<code>box</code> = índice em <code>fluidBoxes</code>). No jogo aparecem como uma gota com o nome do líquido.</td>
+</tr>
+<tr>
+<td><code>wall</code></td>
+<td>Muro: aguenta mais golpes.</td>
+</tr>
+<tr>
+<td><code>script</code></td>
+<td><code>true</code>: máquina de mod controlada por script (<code>buildings.onTick</code>, <code>buildings.onInteract</code>); o clique avisa o servidor. Com <code>script</code>, um <code>container</code> pode ter <code>power</code>.</td>
+</tr>
+<tr>
+<td><code>ownWindow</code></td>
+<td>Com <code>script</code>: o clique abre só a janela do script (<code>ui.show</code>), não a janela padrão da máquina.</td>
+</tr>
+<tr>
+<td><code>animations</code></td>
+<td>Animações do <code>.bbmodel</code> por estado: <code>{ "working": "work", "idle": "parado", "noPower": "sem_energia" }</code> (trabalhando — padrão <code>work</code> —, parada, sem energia). O script também toca qualquer uma (<code>b.animate</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comportamento-exatamente-um-por-construcao">Comportamento (exatamente um por construção)</h3>
+<table>
+<thead>
+<tr>
+<th>Bloco</th>
+<th>Para quê</th>
+<th>Campos (padrão)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>belt</code></td>
+<td>esteira</td>
+<td><code>speed</code> (1.875 itens/s por fileira), <code>texture</code>, <code>rail</code> (texturas)</td>
+</tr>
+<tr>
+<td><code>splitter</code></td>
+<td>divisor 1×2</td>
+<td><code>buffer</code> (2, de 1 a 16), <code>speed</code> (1.875)</td>
+</tr>
+<tr>
+<td><code>tunnel</code></td>
+<td>esteira subterrânea ou aérea</td>
+<td><code>range</code> (5, de 2 a 16), <code>speed</code> (1.875), <code>aerial</code> (false)</td>
+</tr>
+<tr>
+<td><code>inserter</code></td>
+<td>braço (1×1)</td>
+<td><code>time</code> (0.8 s por viagem), <code>reach</code> (1 a 3 tiles), <code>stack</code> (1 a 12 itens do mesmo tipo por viagem)</td>
+</tr>
+<tr>
+<td><code>miner</code></td>
+<td>mineradora</td>
+<td><code>time</code> (2 s por minério), <code>fuel</code> (true), <code>trees</code> (alcance para cortar árvores; 0 = mineradora comum)</td>
+</tr>
+<tr>
+<td><code>crafter</code></td>
+<td>fornalha, montadora, planta</td>
+<td>ver abaixo</td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td>baú</td>
+<td><code>slots</code> (16), <code>logistics</code> (<code>none</code>, <code>provider</code> = drones pegam daqui, <code>requester</code> = drones trazem o pedido)</td>
+</tr>
+<tr>
+<td><code>generator</code></td>
+<td>gerador</td>
+<td><code>output</code> (kW), <code>source</code> (<code>fuel</code>, <code>solar</code>, <code>wind</code>, <code>steam</code>), <code>fuelRate</code> (1), <code>steamPerSecond</code> (vapor; precisa do tanque de entrada 0)</td>
+</tr>
+<tr>
+<td><code>battery</code></td>
+<td>banco de baterias</td>
+<td><code>capacity</code> (kJ), <code>rate</code> (kW)</td>
+</tr>
+<tr>
+<td><code>pole</code></td>
+<td>poste</td>
+<td><code>reach</code> (7 tiles de fio), <code>cable</code> (alcance do cabo até as máquinas; padrão = <code>reach</code>), <code>top</code> (altura do fio)</td>
+</tr>
+<tr>
+<td><code>lab</code></td>
+<td>laboratório</td>
+<td><code>slots</code> (4, de 1 a 16), <code>speed</code> (1; 2 = o dobro, de 0.1 a 20)</td>
+</tr>
+<tr>
+<td><code>droneHub</code></td>
+<td>central de drones</td>
+<td><code>range</code> (25), <code>slots</code> (16), <code>speed</code> (6), <code>cargo</code> (5)</td>
+</tr>
+<tr>
+<td><code>pipe</code></td>
+<td>cano ou tanque</td>
+<td><code>capacity</code> (100), <code>underground</code> (0 = cano comum; N = passa por baixo até N tiles)</td>
+</tr>
+<tr>
+<td><code>offshorePump</code></td>
+<td>bomba d'água</td>
+<td><code>rate</code> (100 por segundo), <code>fluid</code> (o líquido que tira); precisa de um tanque de saída</td>
+</tr>
+<tr>
+<td><code>wagonPump</code></td>
+<td>bomba de vagão</td>
+<td><code>rate</code> (50)</td>
+</tr>
+<tr>
+<td><code>pump</code></td>
+<td>bomba de cano</td>
+<td><code>rate</code> (200 por segundo); precisa de 2 <code>fluidBoxes</code> (entrada 0, saída 1) e de <code>power</code></td>
+</tr>
+<tr>
+<td><code>rail</code>, <code>trainStop</code>, <code>railSignal</code></td>
+<td>trilho, estação, sinal</td>
+<td><code>{}</code> (sem campos)</td>
+</tr>
+<tr>
+<td><code>turret</code></td>
+<td>torreta</td>
+<td><code>range</code> (10), <code>damage</code> (10), <code>cooldown</code> (0.5 s); gasta itens com <code>ammo</code></td>
+</tr>
+<tr>
+<td><code>security</code></td>
+<td>posto de MEKs</td>
+<td><code>meks</code> (3), <code>scrap</code> (10 por MEK), <code>time</code> (30 s), <code>radius</code> (14)</td>
+</tr>
+<tr>
+<td><code>reactor</code></td>
+<td>reator</td>
+<td>ver abaixo</td>
+</tr>
+<tr>
+<td><code>lamp</code></td>
+<td>luminária</td>
+<td><code>true</code> (sem campos); precisa de <code>power</code>: pede energia só à noite e acende sozinha (cubos <code>glow*</code> do modelo brilham e o jogo põe uma luz quente)</td>
+</tr>
+<tr>
+<td><code>prospector</code></td>
+<td>sonda de prospecção</td>
+<td><code>{ "radius": 24, "seconds": 120, "finds": 3, "patch": 3, "amount": [4000, 8000], "resources": [ids] }</code>; precisa de <code>power</code>: a cada <code>seconds</code> com energia revela um veio <code>patch</code>×<code>patch</code> de um dos <code>resources</code> (todos com <code>"prospected": true</code>) num lugar livre a até <code>radius</code> tiles, com <code>amount</code> por tile, e marca no mapa; para depois de <code>finds</code> veios</td>
+</tr>
+<tr>
+<td><code>silo</code></td>
+<td>silo de foguete</td>
+<td>ver abaixo (junto com <code>crafter</code> de receita fixa)</td>
+</tr>
+<tr>
+<td><code>node</code></td>
+<td>Nó de Reativação</td>
+<td><code>slots</code> (8) — o mundo cria os Nós; um mod normalmente não precisa</td>
+</tr>
+<tr>
+<td><code>pile</code>, <code>wreck</code>, <code>ruin</code></td>
+<td>monte de itens, destroços, ruína</td>
+<td><code>true</code> + <code>container</code> — saque que some quando esvazia (o jogo cria)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crafter"><code>crafter</code></h3>
+<pre><code class="language-jsonc">&quot;crafter&quot;: { &quot;categories&quot;: [ &quot;assembling&quot;, &quot;hand&quot; ], &quot;fuel&quot;: false, &quot;selectRecipe&quot;: true, &quot;speed&quot;: 1, &quot;maxIngredients&quot;: 4 }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code> / <code>categories</code></td>
+<td>—</td>
+<td>Que tipos de receita faz.</td>
+</tr>
+<tr>
+<td><code>fuel</code></td>
+<td>true</td>
+<td>Queima combustível (fornalha de pedra). Elétrica: <code>false</code> + <code>power</code>.</td>
+</tr>
+<tr>
+<td><code>selectRecipe</code></td>
+<td>false</td>
+<td><code>true</code> = o jogador escolhe a receita (montadora). <code>false</code> = escolhe pelo que entra (fornalha).</td>
+</tr>
+<tr>
+<td><code>speed</code></td>
+<td>1</td>
+<td>2 = o dobro (de 0.1 a 20).</td>
+</tr>
+<tr>
+<td><code>maxIngredients</code></td>
+<td>—</td>
+<td>Nível da montadora: quantos ingredientes diferentes a receita pode ter (1 a 6).</td>
+</tr>
+<tr>
+<td><code>recipe</code></td>
+<td>—</td>
+<td>Máquina de uma receita só (caldeira, refinaria, silo).</td>
+</tr>
+</tbody>
+</table>
+<p>Para receitas com líquido, declare <code>fluidBoxes</code> (entradas e saídas) e <code>fluidPorts</code>. O n-ésimo tanque de entrada recebe o
+n-ésimo líquido de entrada da receita; o mesmo vale na saída.</p>
+<h3 id="reactor"><code>reactor</code></h3>
+<pre><code class="language-jsonc">&quot;reactor&quot;: { &quot;fuel&quot;: &quot;uranium_fuel_cell&quot;, &quot;spent&quot;: &quot;spent_fuel_cell&quot;, &quot;cellSeconds&quot;: 200, &quot;steamPerSecond&quot;: 180, &quot;maxHeat&quot;: 1000, &quot;explodeRadius&quot;: 6 },
+&quot;fluidBoxes&quot;: [ { &quot;type&quot;: &quot;input&quot;, &quot;capacity&quot;: 600, &quot;filter&quot;: &quot;water&quot; }, { &quot;type&quot;: &quot;output&quot;, &quot;capacity&quot;: 600 } ]
+</code></pre>
+<p>Precisa de 2 tanques: água na entrada 0, vapor na saída 1. Vapor sem saída abaixa as barras; sem água ele esquenta,
+avisa aos 50% e explode no máximo (<code>explodeRadius</code> tiles).</p>
+<h3 id="silo"><code>silo</code></h3>
+<pre><code class="language-jsonc">&quot;crafter&quot;: { &quot;categories&quot;: [ &quot;rocket_building&quot; ], &quot;recipe&quot;: &quot;rocket_segment&quot;, &quot;fuel&quot;: false },
+&quot;silo&quot;: { &quot;segments&quot;: 100, &quot;pieces&quot;: [ &quot;a&quot;, &quot;b&quot; ], &quot;payload&quot;: &quot;orbital_satellite&quot;, &quot;reward&quot;: { &quot;orbital_pack&quot;: 500 },
+          &quot;countdownSeconds&quot;: 10, &quot;ascentSeconds&quot;: 12 }
+</code></pre>
+<p>Monta <code>segments</code> (1 a 10000) com a receita do <code>crafter</code>. O primeiro lançamento leva as <code>pieces</code> (a vitória); os
+seguintes levam o <code>payload</code> e trazem a <code>reward</code>.</p>
+<h2 id="receitas-recipes">Receitas (<code>recipes</code>)</h2>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;forno_tijolo&quot;, &quot;category&quot;: &quot;hand&quot;, &quot;group&quot;: &quot;production&quot;, &quot;time&quot;: 1.5,
+  &quot;inputs&quot;: { &quot;base:stone_brick&quot;: 10 }, &quot;outputs&quot;: { &quot;forno_tijolo&quot;: 1 } }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td>—</td>
+<td>Onde é feita (ver tabela). Categoria nova só funciona se alguma construção a fizer.</td>
+</tr>
+<tr>
+<td><code>group</code></td>
+<td>automático</td>
+<td>Aba da Fabricação: <code>logistics</code>, <code>production</code>, <code>energy</code>, <code>intermediates</code>, <code>science</code>, <code>combat</code>. Sem ele: construções vão para <code>production</code>, o resto para <code>intermediates</code>.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>1</td>
+<td>Segundos (na velocidade 1).</td>
+</tr>
+<tr>
+<td><code>inputs</code>, <code>outputs</code></td>
+<td>—</td>
+<td>Item → quantidade. Pode ter líquidos (não em <code>hand</code> nem <code>smelting</code>). Um segundo item de saída vira <strong>subproduto</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>Categorias do jogo base: <code>hand</code> (na mão e na montadora), <code>smelting</code> (fornalhas; 1 ingrediente), <code>assembling</code>
+(montadora), <code>vehicles</code> (montadora: veículos), <code>chemistry</code> (planta química), <code>refining</code> (refinaria), <code>boiling</code>
+(caldeira), <code>centrifuging</code> (centrífuga), <code>rocket_building</code> (silo).</p>
+<h2 id="pesquisas-research">Pesquisas (<code>research</code>)</h2>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;forno_tijolo&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Fornalha de tijolos&quot; }, &quot;description&quot;: { &quot;pt-BR&quot;: &quot;…&quot; },
+  &quot;cost&quot;: { &quot;base:automation_pack&quot;: 1 }, &quot;units&quot;: 15, &quot;time&quot;: 10,
+  &quot;prerequisites&quot;: [ &quot;base:automation&quot; ], &quot;unlocks&quot;: [ &quot;forno_tijolo&quot; ] }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cost</code></td>
+<td>—</td>
+<td>Pacotes gastos por unidade.</td>
+</tr>
+<tr>
+<td><code>units</code></td>
+<td>10</td>
+<td>Quantas unidades. <code>0</code> = já vem pesquisada (organiza a árvore).</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>5</td>
+<td>Segundos por unidade.</td>
+</tr>
+<tr>
+<td><code>prerequisites</code></td>
+<td>—</td>
+<td>Pesquisas antes desta.</td>
+</tr>
+<tr>
+<td><code>unlocks</code></td>
+<td>—</td>
+<td>Receitas liberadas; começam <strong>bloqueadas</strong> até a pesquisa terminar.</td>
+</tr>
+<tr>
+<td><code>deliver</code></td>
+<td>—</td>
+<td>Pesquisa de entrega (era 0): itens que o jogador entrega na tela (sem laboratório).</td>
+</tr>
+<tr>
+<td><code>nodeOnly</code></td>
+<td>false</td>
+<td>Só um contrato da Rede libera (<code>rewardResearch</code>); o laboratório não pesquisa.</td>
+</tr>
+<tr>
+<td><code>repeat</code></td>
+<td>—</td>
+<td>Pesquisa infinita: <code>{ "effect": "mining_speed" / "crafting_speed" / "research_speed", "perLevel": 10 }</code> (% por nível). Cada nível custa <code>units × (nível + 1)</code>. Outro nome em <code>effect</code> (letras minúsculas, números e <code>_</code>) é efeito do mod: o jogo só soma <code>perLevel × nível</code> e o script aplica (<code>research.bonus("nome")</code>).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="contratos-contracts">Contratos (<code>contracts</code>)</h2>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;tijolos&quot;, &quot;region&quot;: 1, &quot;stage&quot;: 1, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;…&quot; }, &quot;item&quot;: &quot;base:stone_brick&quot;,
+  &quot;perMinute&quot;: 20, &quot;seconds&quot;: 120, &quot;rewards&quot;: { &quot;base:iron_plate&quot;: 50 }, &quot;rewardResearch&quot;: [ &quot;forno_tijolo&quot; ] }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>region</code></td>
+<td>0</td>
+<td>0 = Nó do início; 1, 2… = Nós regionais. Cada região tem a sua fila.</td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td>1</td>
+<td>1 religar, 2 estabilizar, 3 ampliar.</td>
+</tr>
+<tr>
+<td><code>item</code>, <code>perMinute</code>, <code>seconds</code></td>
+<td>—</td>
+<td>Pede produção contínua: <code>perMinute</code> do item, mantida por <code>seconds</code>.</td>
+</tr>
+<tr>
+<td><code>rewards</code></td>
+<td>—</td>
+<td>Itens que vão para o depósito do Nó.</td>
+</tr>
+<tr>
+<td><code>rewardResearch</code></td>
+<td>—</td>
+<td>Pesquisas concedidas (incluindo as <code>nodeOnly</code>).</td>
+</tr>
+</tbody>
+</table>
+<p>O carregador recusa uma pesquisa <code>nodeOnly</code> que nenhum contrato libera.</p>
+<h2 id="recursos-resources-e-terrenos-terrain">Recursos (<code>resources</code>) e terrenos (<code>terrain</code>)</h2>
+<pre><code class="language-jsonc">&quot;terrain&quot;: [ { &quot;id&quot;: &quot;areia_vermelha&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Areia vermelha&quot; }, &quot;color&quot;: &quot;#b0603a&quot;, &quot;walkable&quot;: true } ],
+&quot;resources&quot;: [ { &quot;id&quot;: &quot;estanho&quot;, &quot;item&quot;: &quot;estanho_minerio&quot;, &quot;color&quot;: &quot;#c8c8b4&quot;, &quot;terrain&quot;: [ &quot;base:rocky&quot; ],
+  &quot;generation&quot;: { &quot;scale&quot;: 40, &quot;coverage&quot;: 0.02, &quot;minAmount&quot;: 100, &quot;maxAmount&quot;: 800, &quot;starting&quot;: false, &quot;region&quot;: 0 },
+  &quot;miningFluid&quot;: { &quot;base:sulfuric_acid&quot;: 10 } } ]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>terrain</code></td>
+<td>—</td>
+<td>Em que terrenos a jazida aparece.</td>
+</tr>
+<tr>
+<td><code>generation.scale</code></td>
+<td>40</td>
+<td>Tamanho das manchas (4 a 1024).</td>
+</tr>
+<tr>
+<td><code>generation.coverage</code></td>
+<td>0.02</td>
+<td>Fração do mapa coberta (até 0.5).</td>
+</tr>
+<tr>
+<td><code>minAmount</code>, <code>maxAmount</code></td>
+<td>100, 800</td>
+<td>Minério por tile.</td>
+</tr>
+<tr>
+<td><code>starting</code></td>
+<td>false</td>
+<td>Garante uma jazida perto do início.</td>
+</tr>
+<tr>
+<td><code>region</code></td>
+<td>0</td>
+<td>0 = mapa todo; N = só em volta do Nó da região N (não pode ser <code>starting</code>).</td>
+</tr>
+<tr>
+<td><code>miningFluid</code></td>
+<td>—</td>
+<td>Líquido gasto por minério (uma mineradora com tanque de entrada é necessária).</td>
+</tr>
+<tr>
+<td><code>prospected</code></td>
+<td>false</td>
+<td><code>true</code> = não nasce no mapa (o <code>generation</code> é ignorado): só uma construção <code>prospector</code> revela.</td>
+</tr>
+</tbody>
+</table>
+<p>Terreno com <code>"walkable": false</code> vira água ou obstáculo. <code>"walkSpeed"</code> (100) é a % da velocidade de andar em cima dele (de 25 a 300; o caminho de pedra usa 130).</p>
+<h2 id="plantas-flora">Plantas (<code>flora</code>)</h2>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;pinheiro&quot;, &quot;kind&quot;: &quot;tree&quot;, &quot;item&quot;: &quot;base:wood&quot;, &quot;amount&quot;: 4, &quot;density&quot;: { &quot;base:forest&quot;: 0.3 },
+  &quot;sapling&quot;: &quot;muda_pinheiro&quot;, &quot;grows&quot;: &quot;pinheiro&quot;, &quot;growSeconds&quot;: 300 }
+</code></pre>
+<p><code>kind</code>: <code>tree</code> (corta e dá <code>amount</code> de <code>item</code>) ou <code>decor</code> (só enfeite). <code>density</code> = chance por bioma. <code>sapling</code>,
+<code>grows</code> e <code>growSeconds</code> deixam replantar.</p>
+<h2 id="inimigos-e-meks-enemies">Inimigos e MEKs (<code>enemies</code>)</h2>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;sentinela_blindada&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Sentinela blindada&quot; }, &quot;ai&quot;: &quot;sentinel&quot;,
+  &quot;health&quot;: 900, &quot;damage&quot;: 9, &quot;hitTime&quot;: 2, &quot;speed&quot;: 10, &quot;sight&quot;: 10, &quot;leash&quot;: 28, &quot;scrap&quot;: 4, &quot;weight&quot;: 1,
+  &quot;model&quot;: &quot;sentinela_blindada&quot;, &quot;animations&quot;: { &quot;walk&quot;: &quot;andar&quot;, &quot;idle&quot;: &quot;respirar&quot; } }
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ai</code></td>
+<td>—</td>
+<td>Comportamento: <code>sentinel</code>, <code>warden</code> (Guardião do Nó), <code>mek</code> (MEK do jogador), <code>rogue_mek</code>, <code>scavenger</code>, <code>dismantler</code>, <code>watcher</code> (voa).</td>
+</tr>
+<tr>
+<td><code>health</code></td>
+<td>120</td>
+<td>Vida (1 a 1000000).</td>
+</tr>
+<tr>
+<td><code>damage</code></td>
+<td>4</td>
+<td>Dano por golpe (0 = não bate).</td>
+</tr>
+<tr>
+<td><code>hitTime</code></td>
+<td>1</td>
+<td>Segundos entre golpes.</td>
+</tr>
+<tr>
+<td><code>speed</code></td>
+<td>17</td>
+<td>Velocidade (sentinela 17, Guardião 12, coletor 22).</td>
+</tr>
+<tr>
+<td><code>sight</code></td>
+<td>10</td>
+<td>Até quantos tiles enxerga.</td>
+</tr>
+<tr>
+<td><code>leash</code></td>
+<td>28</td>
+<td>Até quantos tiles se afasta de casa perseguindo.</td>
+</tr>
+<tr>
+<td><code>scrap</code></td>
+<td>2</td>
+<td>Sucata mecânica que deixa ao cair.</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>1</td>
+<td>Com mais de um inimigo do mesmo <code>ai</code>, a torre sorteia por esse peso (0 = nunca sozinho).</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>o id</td>
+<td>O <code>.bbmodel</code> (<code>"base:warden"</code> usa um do jogo).</td>
+</tr>
+<tr>
+<td><code>animations</code></td>
+<td>—</td>
+<td><code>walk</code> (andando) e <code>idle</code> (parado); sem elas, toca a <code>work</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jogador-player-e-mundo-worldgen">Jogador (<code>player</code>) e mundo (<code>worldgen</code>)</h2>
+<p><code>"player": { "startingItems": { "base:burner_miner": 1 } }</code> dá itens no começo da Carreira.</p>
+<p><code>worldgen</code> é do <code>base</code>; um mod só mexe se quiser um mundo diferente (o último mod que define vale):</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Padrão</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>elevationScale</code></td>
+<td>96</td>
+<td>Tamanho (tiles) das ondas de relevo que escolhem as faixas.</td>
+</tr>
+<tr>
+<td><code>bands</code></td>
+<td>—</td>
+<td>Faixas de terreno por altura: <code>[{ "terrain": "base:water", "coverage": 0.12 }, …]</code> (de baixo para cima; <code>coverage</code> = fração do mapa).</td>
+</tr>
+<tr>
+<td><code>startingArea</code></td>
+<td>—</td>
+<td>Área do começo: <code>radius</code> (48: terra firme e plana em volta do início), <code>patchRadius</code> (6: raio das jazidas iniciais), <code>minDistance</code>/<code>maxDistance</code> (12 / 36: a que distância do início elas ficam).</td>
+</tr>
+<tr>
+<td><code>biomeScale</code></td>
+<td>600</td>
+<td>Tamanho (tiles) das regiões de bioma.</td>
+</tr>
+<tr>
+<td><code>biomes</code></td>
+<td>—</td>
+<td>Lista de biomas: <code>id</code>, <code>name</code>, <code>color</code>, <code>temperature</code> e <code>moisture</code> (<code>[mín, máx]</code>, 0 a 100), <code>terrains</code> (que terrenos aparecem) e <code>resources</code> (multiplicador das jazidas: <code>{ "base:iron_ore": 1.5 }</code>).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="teto-da-demo-demo">Teto da demo (<code>demo</code>)</h2>
+<p>Um objeto só (o último mod que definir vence), usado apenas em mundos com a regra Demo (pacote demo do jogo):
+<code>"demo": { "research": [ ids ], "contracts": [ ids ] }</code>. Pesquisa fora de <code>research</code> aparece com "Disponível na
+versão completa" e não pode ser escolhida (as de nascença sempre valem; uma ganha de presente por contrato também);
+o contrato fora de <code>contracts</code> para a fila do Nó dele. Ids que não existem dão erro ao carregar. O jogo base define o
+seu em <code>mods/base/content/demo.json</code>.</p>
+<h2 id="arte-som-e-idiomas">Arte, som e idiomas</h2>
+<p>Por convenção de pastas, sem declarar nada:</p>
+<table>
+<thead>
+<tr>
+<th>Arquivo no mod</th>
+<th>Usado como</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>textures/items/&lt;id&gt;.png</code></td>
+<td>ícone do item, 16×16 pixel art (aparece em 32 px, nítido)</td>
+</tr>
+<tr>
+<td><code>textures/resources/&lt;id&gt;.png</code>, <code>textures/terrain/&lt;id&gt;.png</code></td>
+<td>jazida e chão</td>
+</tr>
+<tr>
+<td><code>models/&lt;id da construção&gt;.bbmodel</code></td>
+<td>modelo 3D (Blockbench): 16 unidades = 1 tile, frente em +X</td>
+</tr>
+<tr>
+<td><code>sounds/&lt;id da construção&gt;_loop.wav</code></td>
+<td>som da máquina trabalhando (WAV mono 16 bits, em laço)</td>
+</tr>
+<tr>
+<td><code>sounds/&lt;nome&gt;_1.wav</code>, <code>_2.wav</code>…</td>
+<td>variações de um efeito; um mod pode trocar um som do <code>base</code> com o mesmo nome</td>
+</tr>
+<tr>
+<td><code>icon.png</code> (ao lado do manifesto)</td>
+<td>ícone do mod na lista, 32×32</td>
+</tr>
+</tbody>
+</table>
+<p>Peças do modelo: nome com <code>chimney</code>/<code>stack</code>/<code>exhaust</code> solta fumaça; começando com <code>glow</code> brilha; com <code>accent</code> pega a
+cor do jogador. A animação <code>work</code> toca enquanto a máquina trabalha. Sem arte, o jogo usa <code>color</code> e um modelo simples.</p>
+<h2 id="exemplos-que-vem-com-o-jogo">Exemplos que vêm com o jogo</h2>
+<table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Mostra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mods/fornalha_tijolos</code></td>
+<td>item, construção com portas, receita, pesquisa (o mais simples)</td>
+</tr>
+<tr>
+<td><code>mods/exemplo_destilaria</code></td>
+<td>líquidos: tanques de entrada e saída, portas de cano, receita com líquido, categoria nova</td>
+</tr>
+<tr>
+<td><code>mods/mecanica_exemplo</code></td>
+<td><strong>script</strong>: motor rotativo a carvão + caixa de engrenagem que prensa engrenagens; máquina nova (<code>script: true</code>), dados por máquina, vizinhos, peças do modelo girando (<code>pose</code> com <code>spin</code>), janela própria com botões e barra (<code>ui.show</code>, <code>onInteract</code>); modelos gerados por <code>arte/mecanica_exemplo_modelos.py</code></td>
+</tr>
+<tr>
+<td><code>mods/base</code></td>
+<td>tudo o que o jogo tem (é carregado pelo mesmo sistema)</td>
+</tr>
+</tbody>
+</table>
+<p>Os exemplos são carregados por testes automáticos: se uma mudança do jogo quebrar um deles, os testes avisam.</p></article>
+  </main>
+
+  <footer class="rodape">
+    <img src="../imagens/emblema.png" alt="" width="28" height="28">
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.1.9-alfa).</p>
+  </footer>
+  <script src="../site.js"></script>
+</body>
+</html>

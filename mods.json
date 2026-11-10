@@ -1,0 +1,38 @@
+{
+  "_como_usar": "Lista da aba Mods do site. Só o idealizador mexe aqui. Para pôr um mod: copie um bloco de 'mods', troque os campos e faça o commit. 'baixar' pode ser um link do GitHub, do itch ou um zip dentro do site. 'selo' é opcional: 'vem com o jogo', 'novo', 'com script'.",
+  "mods": [
+    {
+      "id": "mecanica_exemplo",
+      "nome": "Mecânica (exemplo com script)",
+      "autor": "MEKZORIO",
+      "versao": "1.0.0",
+      "jogo": "0.2.0 ou mais nova",
+      "descricao": "Um motor rotativo a carvão e uma caixa de engrenagem que prensa placas de ferro em engrenagens. Peças girando no modelo do Blockbench, janela própria e o script comentado linha a linha.",
+      "icone": "documentacao/exemplos/mecanica_exemplo.png",
+      "baixar": "documentacao/exemplos/mecanica_exemplo.zip",
+      "selos": ["vem com o jogo", "com script"]
+    },
+    {
+      "id": "fornalha_tijolos",
+      "nome": "Fornalha de tijolos (exemplo)",
+      "autor": "MEKZORIO",
+      "versao": "1.0.0",
+      "jogo": "0.1.0 ou mais nova",
+      "descricao": "Uma fornalha que derrete o dobro da de pedra, liberada por pesquisa. O jeito mais curto de ver item, máquina, receita, pesquisa, ícone, modelo e som num mod só de dados.",
+      "icone": "documentacao/exemplos/fornalha_tijolos.png",
+      "baixar": "documentacao/exemplos/fornalha_tijolos.zip",
+      "selos": ["vem com o jogo"]
+    },
+    {
+      "id": "exemplo_destilaria",
+      "nome": "Destilaria (exemplo)",
+      "autor": "MEKZORIO",
+      "versao": "1.0.0",
+      "jogo": "0.1.0 ou mais nova",
+      "descricao": "Um destilador elétrico que tira água por um cano e devolve água destilada por outro. Mostra líquido novo, tanques, portas de cano e categoria de receita nova.",
+      "icone": "documentacao/exemplos/exemplo_destilaria.png",
+      "baixar": "documentacao/exemplos/exemplo_destilaria.zip",
+      "selos": ["vem com o jogo"]
+    }
+  ]
+}

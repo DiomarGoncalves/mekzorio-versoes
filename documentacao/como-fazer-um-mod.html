@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Como fazer um mod — MEKZORIO</title>
+  <meta name="description" content="Do zero: pastas, manifesto, itens, máquinas, receitas, arte, som, scripts, multijogador e mapas.">
+  <meta name="theme-color" content="#14181e">
+  <link rel="icon" type="image/png" href="../imagens/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="../index.html" aria-label="MEKZORIO, início">
+      <img src="../imagens/emblema.png" alt="" width="36" height="36">
+      <span>MEKZORIO</span>
+    </a>
+    <button class="menu-botao" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="menu" class="menu">
+      <a href="../index.html">O jogo</a>
+      <a href="../mods.html">Mods</a>
+      <a href="index.html">Documentação</a>
+      <a class="menu-baixar" href="../index.html#baixar">Baixar</a>
+    </nav>
+  </header>
+
+  <main class="doc">
+    <aside class="doc-lado">
+      <nav class="doc-paginas"><a href="como-fazer-um-mod.html" aria-current="page">Como fazer um mod</a><a href="campos-do-json.html">Campos do JSON</a><a href="api-dos-scripts.html">API dos scripts</a></nav>
+      <div class="doc-indice"><p>Nesta página</p><div class="toc">
+<ul>
+<li><a href="#onde-colocar">Onde colocar</a></li>
+<li><a href="#manifestjson">manifest.json</a><ul>
+<li><a href="#versoes-nas-dependencias">Versões nas dependências</a></li>
+</ul>
+</li>
+<li><a href="#conteudo-contentjson">Conteúdo (content/*.json)</a><ul>
+<li><a href="#itens">Itens</a></li>
+<li><a href="#construcoes">Construções</a></li>
+<li><a href="#receitas">Receitas</a></li>
+<li><a href="#pesquisas">Pesquisas</a></li>
+<li><a href="#contratos">Contratos</a></li>
+<li><a href="#inimigos-e-meks">Inimigos e MEKs</a></li>
+<li><a href="#recursos-jazidas-e-terrenos">Recursos (jazidas) e terrenos</a></li>
+</ul>
+</li>
+<li><a href="#scripts-javascript">Scripts (JavaScript)</a></li>
+<li><a href="#arte-e-som-por-convencao-de-pastas">Arte e som (por convenção de pastas)</a></li>
+<li><a href="#multijogador">Multijogador</a></li>
+<li><a href="#mundos-salvos">Mundos salvos</a></li>
+<li><a href="#para-testar-rapido">Para testar rápido</a></li>
+<li><a href="#mapas-em-mods">Mapas em mods</a></li>
+</ul>
+</div>
+</div>
+    </aside>
+    <article class="doc-texto"><h1 id="como-fazer-um-mod">Como fazer um mod</h1>
+<p>Um mod é uma <strong>pasta</strong> com um <code>manifest.json</code> e, dentro dela, arquivos JSON de conteúdo. Pode também trazer imagens PNG, modelos <code>.bbmodel</code> (Blockbench), sons WAV e <strong>scripts em JavaScript</strong> (pasta <code>scripts/</code>).</p>
+<p>A maior parte de um mod é <strong>dados</strong>: item, máquina, receita, pesquisa e inimigo novos não precisam de código. Quando
+precisa de um comportamento que o JSON não tem (uma máquina que reage ao jogador, uma janela própria, peças girando,
+eventos), o mod traz um script. Os scripts rodam <strong>só no servidor</strong>, trancados: sem acesso aos seus arquivos, à
+internet ou ao resto do computador, com limite de memória e de tempo (veja <a href="#scripts-javascript">Scripts</a>).</p>
+<p>O jogo base é carregado pelo mesmo sistema: tudo o que <code>mods/base</code> faz, um mod também pode fazer.</p>
+<p>O jeito mais rápido de começar é <strong>copiar um mod de exemplo</strong> e mudar o que quiser:</p>
+<ul>
+<li><code>mods/fornalha_tijolos</code>: o mais simples (item, construção com portas, receita, pesquisa, ícone, modelo e som);</li>
+<li><code>mods/exemplo_destilaria</code>: com líquidos (líquido novo, tanques, portas de cano, categoria de receita nova);</li>
+<li><code>mods/mecanica_exemplo</code>: com script (motor rotativo e caixa de engrenagem, peças girando, janela própria).</li>
+</ul>
+<p>Esta página é o passo a passo. <strong>A lista completa de campos (cada tipo de construção, líquidos, veículos, módulos,
+pesquisas infinitas, regiões, plantas…) está em <a href="campos-do-json.html">Campos do JSON</a>.</strong></p>
+<h2 id="onde-colocar">Onde colocar</h2>
+<table>
+<thead>
+<tr>
+<th>Pasta</th>
+<th>Para quê</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mods/</code> (ao lado do jogo)</td>
+<td>Mods que vêm com o jogo: <code>base</code> e os exemplos.</td>
+</tr>
+<tr>
+<td>Pasta dos seus mods</td>
+<td>Os seus mods e os que você baixar. No jogo, abra <strong>Menu → Mods → Abrir pasta dos meus mods</strong>. No Linux ela fica em <code>~/.local/share/godot/app_userdata/MEKZORIO/mods</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Depois de colocar o mod na pasta, vá em <strong>Menu → Mods</strong>, marque o mod e clique em <strong>Aplicar</strong>.</p>
+<ul>
+<li>Se faltar uma dependência, ela é ativada sozinha quando está instalada.</li>
+<li>Se algo estiver errado, o jogo mostra <strong>todos</strong> os erros, cada um com o arquivo e o motivo.</li>
+</ul>
+<p>Se o mesmo mod (mesmo <code>id</code>) estiver nas duas pastas, vale a <strong>versão maior</strong>.</p>
+<h2 id="manifestjson"><code>manifest.json</code></h2>
+<pre><code class="language-jsonc">{
+  &quot;id&quot;: &quot;meu_mod&quot;,                       // letras minúsculas, números e _ (até 48)
+  &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Meu mod&quot;, &quot;en&quot;: &quot;My mod&quot; },
+  &quot;version&quot;: &quot;1.0.0&quot;,                    // sempre 3 números
+  &quot;authors&quot;: [ &quot;Seu nome&quot; ],
+  &quot;description&quot;: { &quot;pt-BR&quot;: &quot;O que o mod faz.&quot; },
+  &quot;gameVersion&quot;: &quot;&gt;=0.1.0&quot;,              // versões do jogo em que ele funciona
+  &quot;dependencies&quot;: { &quot;base&quot;: &quot;^0.1.0&quot;, &quot;?outro_mod&quot;: &quot;*&quot; },
+  &quot;side&quot;: &quot;both&quot;
+}
+</code></pre>
+<p>Coloque um <code>icon.png</code> (32×32, pixel art) ao lado do manifesto para ele aparecer na lista de mods.</p>
+<h3 id="versoes-nas-dependencias">Versões nas dependências</h3>
+<p>Uma dependência pode pedir uma versão exata ou uma faixa de versões:</p>
+<table>
+<thead>
+<tr>
+<th>Escreva</th>
+<th>Significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>qualquer versão</td>
+</tr>
+<tr>
+<td><code>1.2.3</code> ou <code>=1.2.3</code></td>
+<td>exatamente essa</td>
+</tr>
+<tr>
+<td><code>&gt;=1.2.0</code>, <code>&gt;1.2.0</code>, <code>&lt;=2.0.0</code>, <code>&lt;2.0.0</code></td>
+<td>maior/menor que</td>
+</tr>
+<tr>
+<td><code>^1.2.0</code></td>
+<td>1.2.0 ou mais nova, sem mudar o primeiro número (em <code>0.x</code>, sem mudar o segundo)</td>
+</tr>
+<tr>
+<td><code>~1.2.0</code></td>
+<td>1.2.0 ou mais nova, sem mudar os dois primeiros números</td>
+</tr>
+<tr>
+<td><code>&gt;=1.0.0 &lt;2.0.0</code></td>
+<td>as duas condições juntas</td>
+</tr>
+</tbody>
+</table>
+<p>Um <code>?</code> na frente do id (<code>"?outro_mod"</code>) torna a dependência <strong>opcional</strong>: o seu mod carrega mesmo sem ela, mas, se ela estiver ativa, carrega antes do seu.</p>
+<p>A ordem de carga é calculada sozinha: as dependências vêm antes, e o resto segue em ordem alfabética do <code>id</code>. Por isso a ordem é a mesma em qualquer computador.</p>
+<h2 id="conteudo-contentjson">Conteúdo (<code>content/*.json</code>)</h2>
+<p>Cada arquivo pode ter qualquer uma destas listas:</p>
+<ul>
+<li><code>items</code></li>
+<li><code>terrain</code></li>
+<li><code>resources</code></li>
+<li><code>buildings</code></li>
+<li><code>recipes</code></li>
+<li><code>research</code></li>
+<li><code>contracts</code></li>
+</ul>
+<p>Pode ter também <code>worldgen</code> e <code>player</code>, que normalmente só o <code>base</code> usa.</p>
+<p>Comentários <code>//</code> e vírgula sobrando no fim são aceitos. Um campo com nome errado vira um erro, para não passar despercebido.</p>
+<p><strong>Ids:</strong> um id sem prefixo é do seu mod (<code>"brick_furnace"</code> vira <code>meu_mod:brick_furnace</code>). Para usar algo de outro mod, ponha o prefixo: <code>"base:iron_plate"</code>.</p>
+<h3 id="itens">Itens</h3>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;tijolo_refratario&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Tijolo refratário&quot; }, &quot;stackSize&quot;: 100, &quot;color&quot;: &quot;#b0563c&quot;, &quot;fuel&quot;: 0 }
+</code></pre>
+<ul>
+<li><strong><code>fuel</code>:</strong> segundos que o item mantém uma máquina queimando. O carvão vale 20.</li>
+<li><strong><code>color</code>:</strong> cor usada enquanto não há um ícone.</li>
+</ul>
+<h3 id="construcoes">Construções</h3>
+<pre><code class="language-jsonc">{
+  &quot;id&quot;: &quot;brick_furnace&quot;, &quot;item&quot;: &quot;brick_furnace&quot;, &quot;color&quot;: &quot;#a4513a&quot;, &quot;size&quot;: [ 2, 2 ],
+  &quot;crafter&quot;: { &quot;category&quot;: &quot;smelting&quot;, &quot;fuel&quot;: true, &quot;speed&quot;: 2 },
+  &quot;ports&quot;: [ { &quot;x&quot;: 0, &quot;y&quot;: 0, &quot;side&quot;: &quot;west&quot;, &quot;type&quot;: &quot;input&quot; }, { &quot;x&quot;: 1, &quot;y&quot;: 0, &quot;side&quot;: &quot;east&quot;, &quot;type&quot;: &quot;output&quot; } ]
+}
+</code></pre>
+<p>Cada construção tem <strong>exatamente um</strong> comportamento. Os mais usados estão abaixo; a lista completa (reator, silo,
+bomba, canos, baterias, drones, trilhos, torreta…) está na <a href="campos-do-json.html#construções-buildings">referência</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Comportamento</th>
+<th>Campos (padrão)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>belt</code> (esteira)</td>
+<td><code>speed</code> (1.875 itens/s por faixa), <code>texture</code>, <code>rail</code></td>
+</tr>
+<tr>
+<td><code>miner</code> (mineradora)</td>
+<td><code>time</code> (2 s por minério), <code>fuel</code> (true)</td>
+</tr>
+<tr>
+<td><code>crafter</code> (fornalha, montadora)</td>
+<td><code>category</code> ou <code>categories</code>, <code>fuel</code> (true), <code>selectRecipe</code> (false), <code>speed</code> (1 = normal, 2 = o dobro; de 0.1 a 20)</td>
+</tr>
+<tr>
+<td><code>container</code> (baú)</td>
+<td><code>slots</code> (16)</td>
+</tr>
+<tr>
+<td><code>generator</code> (gerador)</td>
+<td><code>output</code> (kW), <code>fuelRate</code> (1)</td>
+</tr>
+<tr>
+<td><code>pole</code> (poste)</td>
+<td><code>reach</code> (7 tiles: fio até outros postes e cabo até as máquinas)</td>
+</tr>
+<tr>
+<td><code>lab</code> (laboratório)</td>
+<td><code>slots</code> (4)</td>
+</tr>
+<tr>
+<td><code>inserter</code> (braço)</td>
+<td><code>time</code> (0.8 s por item)</td>
+</tr>
+<tr>
+<td><code>splitter</code> (divisor)</td>
+<td><code>buffer</code> (2)</td>
+</tr>
+<tr>
+<td><code>tunnel</code> (subterrânea/aérea)</td>
+<td><code>range</code> (5), <code>speed</code>, <code>aerial</code> (false)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Energia:</strong> <code>"power": { "use": 90 }</code> (kW) faz uma mineradora, montadora, laboratório ou braço usar eletricidade em vez de carvão. A máquina se liga sozinha, por cabo, ao poste mais perto dentro do alcance dele.</li>
+<li><strong>Portas:</strong> <code>x</code>, <code>y</code> são o tile dentro da construção, na orientação original (a frente é o leste). <code>side</code> é <code>north</code>, <code>south</code>, <code>east</code> ou <code>west</code>, e <code>type</code> é <code>input</code> ou <code>output</code>.</li>
+</ul>
+<h3 id="receitas">Receitas</h3>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;brick_furnace&quot;, &quot;category&quot;: &quot;hand&quot;, &quot;group&quot;: &quot;energy&quot;, &quot;time&quot;: 1.5,
+  &quot;inputs&quot;: { &quot;base:stone_brick&quot;: 10 }, &quot;outputs&quot;: { &quot;brick_furnace&quot;: 1 } }
+</code></pre>
+<p>Categorias do jogo base:</p>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Onde é feita</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hand</code></td>
+<td>na mão e na montadora</td>
+</tr>
+<tr>
+<td><code>smelting</code></td>
+<td>nas fornalhas (só 1 ingrediente)</td>
+</tr>
+<tr>
+<td><code>assembling</code></td>
+<td>só na montadora</td>
+</tr>
+</tbody>
+</table>
+<p>Uma categoria nova só funciona se alguma construção do mod a fizer.</p>
+<p>O <code>group</code> é a aba da tela de fabricação (<code>energy</code>, <code>logistics</code>, <code>science</code>). Sem ele, a receita vai para a aba de produção.</p>
+<h3 id="pesquisas">Pesquisas</h3>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;brick_furnace&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Fornalha de tijolos&quot; }, &quot;description&quot;: { &quot;pt-BR&quot;: &quot;…&quot; },
+  &quot;cost&quot;: { &quot;base:automation_pack&quot;: 1 }, &quot;units&quot;: 15, &quot;time&quot;: 10,
+  &quot;prerequisites&quot;: [ &quot;base:automation&quot; ], &quot;unlocks&quot;: [ &quot;brick_furnace&quot; ] }
+</code></pre>
+<ul>
+<li><strong><code>cost</code>:</strong> pacotes por unidade.</li>
+<li><strong><code>units</code>:</strong> quantas unidades a pesquisa tem.</li>
+<li><strong><code>time</code>:</strong> segundos por unidade.</li>
+<li><strong><code>units: 0</code>:</strong> a pesquisa já vem concluída. Serve para organizar a árvore, como a Energia do jogo base.</li>
+<li><strong><code>unlocks</code>:</strong> as receitas listadas aqui começam <strong>bloqueadas</strong> até a pesquisa terminar.</li>
+<li><strong><code>nodeOnly: true</code>:</strong> nos mundos com a regra de progressão da Rede, o laboratório não pesquisa esse projeto.
+  Um contrato precisa concedê-lo em <code>rewardResearch</code>; a conclusão libera diretamente suas receitas, sem cobrar pacotes.
+  Não pode usar <code>units: 0</code>. Sem a regra (mundos antigos ou Sandbox), <code>cost</code>, <code>units</code>, <code>time</code> e pré-requisitos
+  continuam definindo a pesquisa normal. Criativo continua com tudo liberado.</li>
+</ul>
+<p>Um pré-requisito precisa ter sido carregado antes: num mod anterior ou mais acima no mesmo arquivo.</p>
+<h3 id="contratos">Contratos</h3>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;tijolos&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;…&quot; }, &quot;item&quot;: &quot;base:stone_brick&quot;, &quot;perMinute&quot;: 20, &quot;seconds&quot;: 120,
+  &quot;rewards&quot;: { &quot;base:iron_plate&quot;: 50 }, &quot;rewardResearch&quot;: [ &quot;brick_furnace&quot; ] }
+</code></pre>
+<p>Para um projeto exclusivo dos Nós, inclua <code>nodeOnly: true</code> na pesquisa e referencie seu ID em <code>rewardResearch</code>
+do último contrato da região. O carregador recusa um projeto exclusivo sem nenhum contrato que o libere.
+Confira se todos os materiais exigidos por esse contrato podem ser produzidos antes da liberação do projeto.
+Na primeira configuração do base: região 1 → eólica; 2 → solar; 3 → fundição elétrica; 4 → Automação 3.
+<code>rewardResearch</code> continua podendo conceder também pesquisas comuns, como já acontecia no Nó inicial.</p>
+<h3 id="inimigos-e-meks">Inimigos e MEKs</h3>
+<pre><code class="language-jsonc">&quot;enemies&quot;: [ { &quot;id&quot;: &quot;sentinela_blindada&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Sentinela blindada&quot; }, &quot;ai&quot;: &quot;sentinel&quot;,
+               &quot;health&quot;: 900, &quot;damage&quot;: 9, &quot;hitTime&quot;: 2, &quot;speed&quot;: 10, &quot;sight&quot;: 10, &quot;leash&quot;: 28, &quot;scrap&quot;: 4,
+               &quot;weight&quot;: 1, &quot;model&quot;: &quot;sentinela_blindada&quot; } ]
+</code></pre>
+<ul>
+<li><strong><code>ai</code>:</strong> o comportamento, um dos que o jogo sabe fazer: <code>sentinel</code> (vigia a torre), <code>warden</code> (Guardião do Nó),
+  <code>mek</code> (MEK de segurança do jogador), <code>rogue_mek</code> (MEK abandonado), <code>scavenger</code> (coletor de sucata), <code>dismantler</code>
+  (desmontador), <code>watcher</code> (sentinela voadora).</li>
+<li><strong>Números:</strong> <code>health</code>, <code>damage</code>, <code>hitTime</code> (segundos por golpe), <code>speed</code> (sentinela = 17), <code>sight</code> e <code>leash</code> (tiles:
+  até onde enxerga / até onde persegue), <code>scrap</code> (sucata ao cair). Os do jogo base estão em <code>mods/base/content/enemies.json</code>.</li>
+<li><strong><code>weight</code>:</strong> com mais de um inimigo do mesmo <code>ai</code>, a torre sorteia entre eles por esse peso (0 = nunca aparece sozinho).</li>
+<li><strong><code>model</code>:</strong> o <code>.bbmodel</code> (padrão: o próprio id; <code>base:warden</code> usa um do jogo). A animação <code>work</code> toca andando.</li>
+</ul>
+<h3 id="recursos-jazidas-e-terrenos">Recursos (jazidas) e terrenos</h3>
+<pre><code class="language-jsonc">&quot;resources&quot;: [ { &quot;id&quot;: &quot;estanho&quot;, &quot;item&quot;: &quot;estanho_minerio&quot;, &quot;color&quot;: &quot;#c8c8b4&quot;, &quot;terrain&quot;: [ &quot;base:rocky&quot; ],
+  &quot;generation&quot;: { &quot;scale&quot;: 40, &quot;coverage&quot;: 0.02, &quot;minAmount&quot;: 100, &quot;maxAmount&quot;: 800, &quot;starting&quot;: false } } ]
+</code></pre>
+<h2 id="scripts-javascript">Scripts (JavaScript)</h2>
+<p>Exemplo completo e comentado: <strong><code>mods/mecanica_exemplo</code></strong> (motor rotativo + caixa de engrenagem: máquina nova,
+peças girando, janela própria). Referência completa de cada função: <strong><a href="api-dos-scripts.html">API dos scripts</a></strong> (gerada do jogo). Para o VS Code completar e explicar as
+funções enquanto você escreve, copie <a href="mekzorio.d.ts"><code>mekzorio.d.ts</code></a> (vem com o jogo, na pasta <code>mods</code>) para a pasta <code>scripts/</code> do
+seu mod.</p>
+<p>Para comportamento que o jogo ainda não tem. O mod põe <code>scripts/main.js</code> (e outros <code>.js</code> que ele importar dessa
+pasta). O script roda <strong>só no servidor</strong> (no jogo sozinho, no servidor embutido): quem entra no servidor recebe só os
+dados e a arte do mod, nunca o <code>.js</code>.</p>
+<pre><code class="language-js">import { events, world, players, storage, after, commands, console } from &quot;mekzorio&quot;;
+
+events.onPlayerJoin(p =&gt; players.message(p.id, `Bem-vindo, ${p.name}!`));
+events.onCraft(c =&gt; { if (c.recipe === &quot;base:iron_plate&quot;) storage.set(&quot;placas&quot;, (storage.get(&quot;placas&quot;) ?? 0) + 1); });
+commands.register(&quot;placas&quot;, () =&gt; `Placas feitas desde o começo: ${storage.get(&quot;placas&quot;) ?? 0}`);
+events.onTick(30 * 60, () =&gt; console.log(&quot;mais um minuto&quot;, world.tick));
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>O que tem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>events</code></td>
+<td><code>onTick(ticks, fn)</code> (30 ticks = 1 s), <code>onPlayerJoin</code>, <code>onPlayerLeave</code>, <code>onChat</code>, <code>onBuild</code>, <code>onRemove</code>, <code>onCraft</code>, <code>onResearch</code>, <code>onContract</code>, <code>onDeath</code>, <code>onRocketLaunch</code>, <code>onEnemyDefeated</code></td>
+</tr>
+<tr>
+<td><code>world</code></td>
+<td><code>tick</code>, <code>seed</code>, <code>name</code>, <code>timeOfDay</code> (0 = meia-noite), <code>day</code>, <code>message(texto)</code>, <code>tile(x, y)</code>, <code>buildingAt(x, y)</code>, <code>findBuildings({type, x, y, radius})</code>, <code>dropItems(x, y, item, n)</code></td>
+</tr>
+<tr>
+<td><code>players</code></td>
+<td><code>list()</code>, <code>get(id)</code>, <code>message(id, texto)</code>, <code>teleport(id, x, y)</code>, <code>give(id, item, n)</code>, <code>take(id, item, n)</code>, <code>count(id, item)</code>, <code>isAdmin(id)</code></td>
+</tr>
+<tr>
+<td><code>storage</code></td>
+<td><code>get(chave)</code>, <code>set(chave, valor)</code>, <code>delete(chave)</code>, <code>keys()</code> — salvo com o mundo (até 1 milhão de caracteres por mod)</td>
+</tr>
+<tr>
+<td><code>commands</code></td>
+<td><code>register(nome, fn(jogador, args, texto), { admin, description })</code> → <code>/nome</code> no chat; o que <code>fn</code> devolve vai só para quem digitou</td>
+</tr>
+<tr>
+<td><code>after(ticks, fn)</code>, <code>random.int(min, max)</code>, <code>console.log/warn/error</code></td>
+<td><code>Math.random</code> tem semente (o mesmo em todo servidor)</td>
+</tr>
+<tr>
+<td><code>buildings</code></td>
+<td><code>onTick(tipo, ticks, fn(b))</code>, <code>get(id)</code>, <code>at(x, y)</code>, <code>find({...})</code>, <code>build(tipo, x, y, rotação)</code>; e <code>world.build</code>/<code>world.remove(id)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Máquina nova com script:</strong> no JSON, uma construção com um comportamento pronto (geralmente <code>container</code>, que dá os
+espaços de item que braços e esteiras usam) e <code>"script": true</code> — aí ela também pode ter <code>"power"</code>. O script dá o
+trabalho:</p>
+<pre><code class="language-js">buildings.onTick(&quot;meu_mod:prensa&quot;, 30, b =&gt; {
+  b.wantsPower = true;                          // com &quot;power&quot;: pede energia; b.power diz quanto chegou (0..1)
+  if (b.power &gt; 0.5 &amp;&amp; b.count(&quot;iron_plate&quot;) &gt;= 2) {
+    b.extract(&quot;iron_plate&quot;, 2);                 // tira (some)
+    b.insert(&quot;iron_gear&quot;, 1);                   // põe como um braço poria
+    b.data.set(&quot;feitas&quot;, (b.data.get(&quot;feitas&quot;) ?? 0) + 1);   // dados desta máquina, salvos com o mundo
+  }
+});
+</code></pre>
+<p>Cada <code>b</code> tem: <code>id</code>, <code>type</code>, <code>x</code>, <code>y</code>, <code>info</code> (tudo de uma vez), <code>working</code>, <code>power</code>, <code>enabled</code> (false = a máquina para,
+qualquer uma), <code>wantsPower</code>, <code>inventory</code>, <code>slots</code> (entrada, combustível, saída, subproduto), <code>fluids</code>, <code>count(item)</code>,
+<code>insert(item, n)</code>, <code>extract(item, n)</code>, <code>addFluid(líquido, n)</code>, <code>takeFluid(líquido, n)</code>, <code>neighbors()</code> (vizinhas com o
+lado), <code>data.get/set/delete</code>, <code>remove()</code>, <code>animate(...)</code> e <code>pose(...)</code> (abaixo).</p>
+<p><strong>Animações:</strong> o <code>.bbmodel</code> pode ter quantas animações quiser. Sem script, pelo estado, no JSON da construção:
+<code>"animations": { "working": "work", "idle": "parado", "noPower": "sem_energia" }</code> (trabalhando — padrão <code>work</code> —,
+parada e sem energia); no do inimigo: <code>"animations": { "walk": "andar", "idle": "respirar" }</code>. Pelo script:</p>
+<pre><code class="language-js">b.animate(&quot;abrir&quot;, { loop: false, speed: 1.5 });   // qualquer animação do modelo; b.animate(null) volta à do estado
+b.pose(&quot;eixo&quot;, { spin: [0, 180, 0] });            // gira sempre (graus por segundo), sem custo a cada tick
+b.pose(&quot;ponteiro&quot;, { rotation: [0, 0, 30] });     // pose fixa (graus) e/ou position [x, y, z]; b.pose(&quot;eixo&quot;, null) tira
+</code></pre>
+<p>As poses somam com a animação; mandar a mesma coisa de novo não custa nada (só vai aos jogadores quando muda).</p>
+<p><strong>Telas:</strong> o script descreve a janela com as peças do jogo e o jogo desenha com o visual dele (mesmas fontes, cores e
+escala). O jogador recebe só a descrição, nunca código.</p>
+<pre><code class="language-js">ui.show(jogador, { id: &quot;loja&quot;, title: &quot;Loja&quot;, width: 460, building: b.id /* opcional: abre junto a janela da máquina */, body: [
+  { type: &quot;text&quot;, text: &quot;Quantas placas?&quot;, color: &quot;accent&quot; },
+  { type: &quot;field&quot;, id: &quot;qtd&quot;, value: &quot;10&quot; },
+  { type: &quot;row&quot;, children: [ { type: &quot;button&quot;, id: &quot;pedir&quot;, text: &quot;Pedir&quot;, primary: true }, { type: &quot;button&quot;, id: &quot;fechar&quot;, text: &quot;Fechar&quot; } ] },
+  { type: &quot;bar&quot;, value: 0.4, text: &quot;40%&quot; },
+] }, ev =&gt; {   // ev = { button, fields: { qtd: &quot;10&quot; }, closed, player }
+  if (ev.button === &quot;pedir&quot;) players.give(ev.player.id, &quot;iron_plate&quot;, Number(ev.fields.qtd));
+  if (ev.button === &quot;fechar&quot;) ui.close(ev.player.id, &quot;loja&quot;);
+});
+</code></pre>
+<p>Peças: <code>text</code> (text, size, color), <code>button</code> (id, text, primary, disabled, tooltip), <code>field</code> (id, label, value,
+placeholder; Enter conta como clique com o id do campo), <code>row</code> (children), <code>bar</code> (value 0..1, text, color), <code>icon</code> (item,
+count, size), <code>image</code> (src: PNG da pasta do mod, width, height), <code>list</code> (items: texto ou { icon, text }, height), <code>tabs</code>
+(tabs: [{ title, body }]), <code>graph</code> (series: [{ values, color }], height), <code>separator</code>. Cores: <code>accent</code>, <code>danger</code>,
+<code>energy</code>, <code>dim</code>, <code>text</code> ou <code>#rrggbb</code>. Mandar <code>ui.show</code> de novo com o mesmo <code>id</code> atualiza a janela (o que o jogador
+digitou continua). Também: <code>ui.close(jogador, id)</code>, <code>ui.toast(jogador, texto, cor)</code> (aviso embaixo) e
+<code>ui.hud(jogador, id, texto)</code> (linha fixa no alto da tela; <code>null</code> tira).</p>
+<p><strong>Pesquisas e contratos:</strong> <code>research.list()</code> (cada uma com <code>done</code>, <code>available</code>, <code>current</code>, <code>units</code>, <code>unitsDone</code>,
+<code>level</code>, <code>repeat</code>, <code>delivery</code>, <code>effect</code>), <code>research.current</code>, <code>research.select(id)</code> (<code>null</code> = nenhuma),
+<code>research.isDone(id)</code>, <code>research.level(id)</code>, <code>research.grant(id)</code> (conclui e libera as receitas; infinita: +1 nível),
+<code>research.progress(unidades)</code> (na atual), <code>research.bonus(efeito)</code>; <code>contracts.list()</code> (por região: contrato ativo,
+item, por minuto, segundos pedidos, ritmo atual, tempo mantido, posição na fila) e <code>contracts.finish(região)</code> (fecha o
+ativo no próximo tick, com as recompensas). Eventos: <code>events.onResearch</code>, <code>events.onContract</code>.</p>
+<p><strong>Efeito novo de pesquisa infinita:</strong> no JSON, <code>"repeat": { "effect": "alcance", "perLevel": 5 }</code> (qualquer nome com
+letras minúsculas, números e _ vira efeito do mod, <code>meu_mod:alcance</code>). O jogo só soma os níveis; o script aplica, ex.:
+<code>const alcance = 8 + research.bonus("alcance") / 5;</code>. Os efeitos do jogo continuam: <code>mining_speed</code>, <code>crafting_speed</code>,
+<code>research_speed</code>.</p>
+<p><strong>Clique na máquina do mod:</strong> construção com <code>"script": true</code> avisa o servidor quando alguém clica nela:
+<code>buildings.onInteract("meu_mod:terminal", (b, jogador) =&gt; ui.show(jogador, {...}))</code>. Com <code>"ownWindow": true</code> no JSON,
+o clique abre só a janela do script (sem a janela padrão da máquina).</p>
+<p>Ids de item e construção como no JSON: <code>"base:iron_plate"</code> (sem prefixo, vale o <code>base</code>). Trancado: sem arquivos fora
+de <code>scripts/</code>, internet ou acesso ao computador; um laço infinito (mais de 250 ms numa chamada), mais de 64 MB ou
+recursão sem fim desligam só os scripts daquele mod, com aviso. Erros aparecem no console do servidor com
+<code>scripts/arquivo.js:linha:coluna</code>. No <code>servidor.json</code>, <code>"scripts": false</code> desliga todos os scripts.</p>
+<p><strong>Modo desenvolvedor</strong> (Opções → Interface): <strong>F8</strong> abre o console dos mods — mensagens e erros dos scripts, quanto
+cada mod gasta por tick, uma linha de JS para testar (<code>mekzorio.players.list()</code>, <code>mekzorio.world.tile(0, 0)</code>…) e
+<strong>Recarregar scripts</strong> (salve o <code>.js</code> e recarregue, sem fechar o mundo). <strong>F3</strong> mostra os ids do que está na mira.
+No servidor (ou em rede, sendo administrador): <code>/mods</code>, <code>/reload</code> e <code>/js &lt;mod&gt; &lt;código&gt;</code> no chat.</p>
+<h2 id="arte-e-som-por-convencao-de-pastas">Arte e som (por convenção de pastas)</h2>
+<table>
+<thead>
+<tr>
+<th>Arquivo no mod</th>
+<th>Usado como</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>textures/items/&lt;id&gt;.png</code></td>
+<td>ícone do item, 16×16, estilo pixel art calmo</td>
+</tr>
+<tr>
+<td><code>textures/resources/&lt;id&gt;.png</code>, <code>textures/terrain/&lt;id&gt;.png</code></td>
+<td>jazida e chão</td>
+</tr>
+<tr>
+<td><code>models/&lt;id da construção&gt;.bbmodel</code></td>
+<td>modelo 3D da construção</td>
+</tr>
+<tr>
+<td><code>sounds/&lt;id da construção&gt;_loop.wav</code></td>
+<td>som da máquina trabalhando, em laço; WAV mono de 16 bits</td>
+</tr>
+<tr>
+<td><code>sounds/&lt;nome&gt;_1.wav</code>, <code>_2.wav</code>…</td>
+<td>variações de um efeito; um mod carregado depois pode trocar um som do <code>base</code> com o mesmo nome</td>
+</tr>
+</tbody>
+</table>
+<p>Nos modelos, 16 unidades valem 1 tile, e a frente fica para <strong>+X</strong>. O jogador tem ~27 unidades de altura, então as máquinas devem ser bem maiores que ele.</p>
+<p>Os nomes das peças do modelo mudam como ele aparece no jogo:</p>
+<table>
+<thead>
+<tr>
+<th>Nome da peça</th>
+<th>Efeito no jogo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>contém <code>chimney</code>, <code>stack</code> ou <code>exhaust</code></td>
+<td>sai fumaça do topo da mais alta</td>
+</tr>
+<tr>
+<td>começa com <code>glow</code></td>
+<td>brilha com a cor da textura</td>
+</tr>
+<tr>
+<td>começa com <code>accent</code></td>
+<td>pega a cor do jogador</td>
+</tr>
+</tbody>
+</table>
+<p>A animação chamada <code>work</code> toca enquanto a máquina trabalha.</p>
+<p>Sem arte, o jogo usa a cor do campo <code>color</code> e um modelo simples. Dá para testar o mod antes de ter a arte.</p>
+<h2 id="multijogador">Multijogador</h2>
+<p>Como no Minecraft Bedrock: quem entra num servidor com mods usa <strong>os mods do servidor só enquanto joga nele</strong>. O jogo
+compara um resumo (hash) de todo o conteúdo; se for diferente, procura cada mod na versão exata do servidor — na pasta
+daquele servidor (o que já baixou dele), nos seus mods ou nos do jogo. Se tem todos, entra direto. Se falta algum,
+aparece <strong>"Este servidor usa mods"</strong> com cada mod e de onde vem, e <strong>Baixar e entrar</strong> traz só os dados e a arte para a
+pasta daquele servidor (<code>mods_servidores/&lt;endereço&gt;_&lt;porta&gt;</code> na pasta do jogo). Os mods ligados nos seus mundos não
+mudam. Do servidor nunca vem código: os scripts dos mods rodam no servidor. Se a versão do <strong>jogo</strong> for diferente, não
+dá para baixar: atualize o jogo ou o servidor.</p>
+<p>No servidor dedicado, em <code>servidor.json</code>:</p>
+<pre><code class="language-json">{ &quot;mods&quot;: [ &quot;fornalha_tijolos&quot; ], &quot;modsDir&quot;: &quot;mods&quot;, &quot;shareMods&quot;: true, &quot;scripts&quot;: true }
+</code></pre>
+<p><code>shareMods: false</code> não deixa baixar os mods pelo jogo (aí cada um instala); <code>scripts: false</code> desliga os scripts dos
+mods (só os dados valem).</p>
+<h2 id="mundos-salvos">Mundos salvos</h2>
+<p>O save guarda a lista de mods. Ao abrir um mundo, o jogo ativa sozinho os mods dele, se estiverem instalados. Se faltar algum, ele avisa qual é.</p>
+<h2 id="para-testar-rapido">Para testar rápido</h2>
+<pre><code class="language-bash">scripts/jogar.sh -- --mods fornalha_tijolos     # ativa mods só nesta vez, sem mexer nas opções
+</code></pre>
+<h2 id="mapas-em-mods">Mapas em mods</h2>
+<p>Um mod pode trazer mapas em <code>maps/&lt;id&gt;.json</code>. Eles aparecem em <strong>Novo mundo → Começar de</strong> quando o mod está ativo.
+Os mapas que vêm com o jogo (o Mapa de teste) ficam em <code>mods/base/maps/</code> e aparecem sempre; o jogo base não aparece na
+tela de Mods (ele não é um mod: está sempre ligado).
+O mapa não é um save pronto: é uma receita de montagem. Ao começar o mundo, o jogo gera o terreno pela seed, pinta o
+que o mapa pede e constrói tudo com as mesmas ações de um jogador — então ele sempre usa o conteúdo atual do jogo
+(e dos mods ativos). Exemplo completo: <code>mods/base/maps/teste.json</code>.</p>
+<pre><code class="language-jsonc">{
+  &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Meu mapa&quot;, &quot;en&quot;: &quot;My map&quot; },
+  &quot;description&quot;: { &quot;pt-BR&quot;: &quot;O que tem nele&quot; },
+  &quot;mode&quot;: &quot;creative&quot;,            // modo sugerido (career, creative ou sandbox); o jogador pode trocar
+  &quot;offset&quot;: [ -4, -4 ],          // posições contam a partir do ponto inicial + offset
+  &quot;terrain&quot;: [                   // retângulos pintados, na ordem
+    { &quot;from&quot;: [ 0, 0 ], &quot;to&quot;: [ 20, 10 ], &quot;terrain&quot;: &quot;grass&quot;, &quot;clearResource&quot;: true },
+    { &quot;from&quot;: [ 2, 2 ], &quot;to&quot;: [ 4, 4 ], &quot;resource&quot;: &quot;iron_ore&quot;, &quot;amount&quot;: 20000 }
+  ],
+  &quot;build&quot;: [                     // na ordem; &quot;_&quot; é só anotação
+    { &quot;id&quot;: &quot;pipe&quot;, &quot;at&quot;: [ 5, 0 ], &quot;to&quot;: [ 9, 0 ] },               // &quot;to&quot;: uma linha/retângulo da mesma peça
+    { &quot;id&quot;: &quot;assembler&quot;, &quot;at&quot;: [ 10, 2 ], &quot;rot&quot;: 0, &quot;recipe&quot;: &quot;iron_gear&quot;, &quot;insert&quot;: { &quot;iron_plate&quot;: 100 } },
+    { &quot;id&quot;: &quot;requester_chest&quot;, &quot;at&quot;: [ 14, 2 ], &quot;requests&quot;: { &quot;copper_plate&quot;: 200 } },
+    { &quot;id&quot;: &quot;train_stop&quot;, &quot;at&quot;: [ 0, 9 ], &quot;rot&quot;: 1, &quot;station&quot;: &quot;Base&quot; },
+    { &quot;vehicle&quot;: &quot;locomotive&quot;, &quot;at&quot;: [ 6, 10 ], &quot;rot&quot;: 0, &quot;insert&quot;: { &quot;coal&quot;: 50 } },
+    { &quot;train&quot;: [ 6, 10 ], &quot;schedule&quot;: [ { &quot;station&quot;: &quot;Base&quot;, &quot;wait&quot;: &quot;time&quot;, &quot;seconds&quot;: 10 } ], &quot;automatic&quot;: true }
+  ],
+  &quot;showroom&quot;: { &quot;at&quot;: [ 0, 30 ], &quot;width&quot;: 60 }   // opcional: uma de cada construção e veículo carregados
+}
+</code></pre>
+<ul>
+<li><code>rot</code>: 0 leste, 1 sul, 2 oeste, 3 norte. Ids sem <code>mod:</code> são do jogo base.</li>
+<li><code>mode</code> / <code>filter</code>: braço (<code>"auto"</code>, <code>"fuel"</code>, <code>"input"</code> + filtro de item), bomba de vagão (<code>"fill"</code> encher, <code>"empty"</code> esvaziar) e divisor (<code>"left"</code> ou <code>"right"</code>: por onde sai o item do <code>filter</code>; o resto sai pelo outro lado).</li>
+<li><code>wait</code> do roteiro: <code>time</code> (com <code>seconds</code>), <code>full</code> ou <code>empty</code>.</li>
+<li>O que não couber (lugar ocupado, id que não existe) vira um aviso no log; o resto do mapa é montado.</li>
+<li>Para conferir um mapa sem abrir o jogo: <code>dotnet run --project src/Automacao.Tools -- mapa-teste</code> (monta o mapa de teste do jogo base,
+  roda 40 s e diz o que funcionou).</li>
+<li>Para ver no jogo, com fotos de cada área: <code>--novo-mundo 2026 --modo criativo --mapa-mod base/teste
+  --auto-kit --capturas PASTA</code> (o piloto anda pelas áreas e salva uma imagem de cada).</li>
+<li>Dicas de montagem: o <code>rot</code> também gira as portas dos baús (um baú com <code>"rot": 1</code> solta para o sul, direto na entrada
+  de cima de uma montadora); um baú com vários itens só solta o da primeira pilha, então para alimentar uma máquina com
+  vários ingredientes de um baú só use um braço (ele só pega o que a máquina aceita). A câmera olha do sul: o que fica
+  logo ao norte de uma máquina alta some atrás dela, então ponha baús e braços a oeste, a leste ou ao sul.</li>
+<li>Ainda não dá para configurar filtro ou modo do braço pelo mapa (só no jogo).</li>
+</ul>
+<p>O mapa de teste (vem com o jogo) tem: energia (vapor, carvão com baús de reserva, sol, baterias, vento), mineração → fundição →
+montadora, esteiras, drones, petróleo → plástico e combustível sólido, trem em linha fechada, pesquisa (pacotes
+vermelho e verde → laboratórios), o começo a carvão (mineradora e fornalha de pedra), aço, tijolos e armazém, a cadeia
+da eletrificação (lítio, vidro, silício, bateria, circuito avançado, pacote azul), os níveis de montadora (pacote roxo
+de 6 ingredientes na montadora 3, braço rápido) e a vitrine. No criativo tudo já vem pesquisado, então os laboratórios
+não aceitam pacotes: eles ficam esperando no baú ao lado.</p></article>
+  </main>
+
+  <footer class="rodape">
+    <img src="../imagens/emblema.png" alt="" width="28" height="28">
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.1.9-alfa).</p>
+  </footer>
+  <script src="../site.js"></script>
+</body>
+</html>

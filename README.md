@@ -74,6 +74,16 @@ testados em PCs fracos.
 | ![Fábrica](imagens/fabrica.jpg) | ![Trem](imagens/trem.jpg) |
 | ![Montadoras](imagens/montadoras.jpg) | ![Jetpack](imagens/jetpack.jpg) |
 
+## Mods
+
+No site há a **[aba Mods](https://diomargoncalves.github.io/mekzorio-versoes/mods.html)** (mods escolhidos e testados)
+e a **[documentação para fazer mods](https://diomargoncalves.github.io/mekzorio-versoes/documentacao/)** (dados em
+JSON, modelos do Blockbench e scripts em JavaScript).
+
+- A lista da aba Mods é o arquivo `mods.json`: para pôr um mod, copie um bloco, troque os campos e faça o commit.
+- A pasta `documentacao/` é gerada do jogo: no projeto do jogo, `python3 scripts/site_documentacao.py` atualiza tudo
+  (páginas, `mekzorio.d.ts` e os mods de exemplo em zip).
+
 ## Achou um erro?
 
 Abra uma **[Issue](../../issues/new/choose)** contando o que aconteceu, o que você estava fazendo e, se der, com
