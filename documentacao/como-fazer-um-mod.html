@@ -106,8 +106,8 @@ pesquisas infinitas, regiões, plantas…) está em <a href="campos-do-json.html
   &quot;version&quot;: &quot;1.0.0&quot;,                    // sempre 3 números
   &quot;authors&quot;: [ &quot;Seu nome&quot; ],
   &quot;description&quot;: { &quot;pt-BR&quot;: &quot;O que o mod faz.&quot; },
-  &quot;gameVersion&quot;: &quot;&gt;=0.1.0&quot;,              // versões do jogo em que ele funciona
-  &quot;dependencies&quot;: { &quot;base&quot;: &quot;^0.1.0&quot;, &quot;?outro_mod&quot;: &quot;*&quot; },
+  &quot;gameVersion&quot;: &quot;&gt;=0.2.0&quot;,              // versões do jogo em que ele funciona
+  &quot;dependencies&quot;: { &quot;base&quot;: &quot;&gt;=0.2.0&quot;, &quot;?outro_mod&quot;: &quot;*&quot; },
   &quot;side&quot;: &quot;both&quot;
 }
 </code></pre>
@@ -148,6 +148,8 @@ pesquisas infinitas, regiões, plantas…) está em <a href="campos-do-json.html
 </tr>
 </tbody>
 </table>
+<p>Para o <code>base</code> (o próprio jogo), use <code>&gt;=</code>: o <code>^0.1.0</code> recusa a 0.2.0, porque em <code>0.x</code> o segundo número
+não pode mudar. Se o jogo disser "precisa de base ^0.1.0, mas a versão instalada é 0.2.0", troque para <code>"&gt;=0.1.0"</code>.</p>
 <p>Um <code>?</code> na frente do id (<code>"?outro_mod"</code>) torna a dependência <strong>opcional</strong>: o seu mod carrega mesmo sem ela, mas, se ela estiver ativa, carrega antes do seu.</p>
 <p>A ordem de carga é calculada sozinha: as dependências vêm antes, e o resto segue em ordem alfabética do <code>id</code>. Por isso a ordem é a mesma em qualquer computador.</p>
 <h2 id="conteudo-contentjson">Conteúdo (<code>content/*.json</code>)</h2>
@@ -551,7 +553,7 @@ não aceitam pacotes: eles ficam esperando no baú ao lado.</p></article>
 
   <footer class="rodape">
     <img src="../imagens/emblema.png" alt="" width="28" height="28">
-    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.1.9-alfa).</p>
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.2.0-alfa).</p>
   </footer>
   <script src="../site.js"></script>
 </body>

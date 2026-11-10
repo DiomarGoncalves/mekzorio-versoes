@@ -1,5 +1,35 @@
 # Novidades
 
+## v0.2.0-alfa
+
+> Não conecta com servidores da v0.1.x: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor,
+> que ele se atualiza sozinho ao ligar; se não atualizar, Reinstalar o servidor). Mundos e saves antigos abrem
+> normalmente. Fez um mod a partir de um exemplo e ele pede `"base": "^0.1.0"`? Troque para `">=0.1.0"`.
+
+**Mods com scripts.** Além de dados (JSON), modelos do Blockbench e sons, um mod agora pode trazer **scripts em
+JavaScript**: máquinas com comportamento próprio, janelas com as peças do jogo, peças do modelo girando, comandos no
+chat, pesquisas e contratos. Os scripts rodam **só no servidor e trancados** — sem acesso aos seus arquivos, à
+internet ou ao resto do computador, com limite de memória e de tempo. Para começar, o jogo traz o mod de exemplo
+**Mecânica**: um motor rotativo a carvão e uma caixa de engrenagem que prensa placas em engrenagens. A
+**[documentação completa](documentacao/index.html)** e a **[aba Mods](mods.html)** estão no site.
+
+- **Mods no servidor como no Bedrock:** ao entrar num servidor com mods, o jogo mostra a lista e baixa só o que falta,
+  só para aquela partida. Os seus mods não mudam.
+- **Modo desenvolvedor** (Opções → Interface): **F8** abre o console dos mods (o que os scripts escrevem, erros com
+  arquivo e linha, recarregar scripts, rodar uma linha de JavaScript) e o **F3** mostra os ids.
+- **Inimigos e MEKs em dados:** vida, dano, velocidade, visão e modelo de cada inimigo vêm de um arquivo; um mod pode
+  criar os seus.
+- **Exportar e importar mundo:** um arquivo só (pasta "MEKZORIO - Mundos" nos Documentos) para mandar um mundo ou um
+  mapa pronto para um amigo. No Carregar mundo e no menu de pausa; avisa se faltar algum mod.
+- **Construir em 1ª pessoa:** o lugar da peça aparece no chão (verde cabe, vermelho não) com uma seta para onde ela
+  manda; arrastar esteira e trilho segue o caminho; a câmera não atravessa as máquinas.
+- **Veículos:** a mira acerta o carro em qualquer parte; **duas pessoas no carro e no avião** (quem entra primeiro
+  dirige); o boneco vai sentado no carro, no helicóptero e no avião; **E** dentro do carro abre o porta-malas.
+- **Q larga o item** da mão no chão.
+- **Produção:** janela menor, com rolagem, e um **gráfico de energia** dos últimos 10 minutos (o que as máquinas pedem
+  e o que as redes dão).
+- Árvores maiores nas câmeras 3D.
+
 ## v0.1.9-alfa
 
 > Não conecta com servidores da v0.1.8-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o
