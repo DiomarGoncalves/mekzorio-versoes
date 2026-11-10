@@ -1,5 +1,15 @@
 # Novidades
 
+## v0.2.1-alfa
+
+> Não conecta com a v0.2.0-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
+
+- **Colisão nas árvores** (opção no Novo mundo, desligada por padrão): o tronco bloqueia quem anda e os carros; dá
+  para passar entre as árvores, e voando não conta.
+- **Correção:** duas cópias diferentes da 0.2.0 tinham o mesmo número de rede e davam "mensagem inválida do servidor:
+  bytes sobrando na mensagem" ao entrar. A 0.2.1 deixa tudo igual de novo.
+
 ## v0.2.0-alfa
 
 > Não conecta com servidores da v0.1.x: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor,
