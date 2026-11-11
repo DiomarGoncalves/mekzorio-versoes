@@ -12,10 +12,13 @@
     abre uma nova no pé do barranco. Jetpack, avião e helicóptero passam por cima.
   - **Construir:** máquinas só no plano; esteira, cano, poste e trilho acompanham a rampa, e o trem sobe por ela.
   - **É um teste:** pode mudar ou sair nas próximas versões.
-- **Voar mais alto:** o avião sobe até 40 tiles e o helicóptero até 32, e sobem mais rápido. Passando por cima de um
-  morro, a aeronave sobe e desce suave.
-- **Árvores novas:** carvalho, pinheiro e árvore do pântano mais realistas, com galhos à mostra, copa em tufos e mais
-  detalhe. Ficaram mais altas, com a copa acima da cabeça: na mata, em primeira pessoa, dá para enxergar entre elas.
+- **Voar mais alto:** o avião sobe até 40 tiles e o helicóptero até 32, e sobem mais rápido. Por cima dos morros a
+  aeronave segue reta, na mesma altura; voando baixo demais, ela bate no morro.
+- **Árvores novas e variadas:** mais realistas, com galhos à mostra, copa em tufos e mais detalhe, e cada mata mistura
+  várias formas: carvalho, bétula branca, árvore de copa larga, abeto, pinheiro de casca vermelha, salgueiro, cipreste
+  e mangue. A copa fica acima da cabeça: na mata, em primeira pessoa, dá para enxergar entre elas.
+- **Opções novas (Gráficos):** campo de visão (FOV) da primeira pessoa e distância de visão, para enxergar mais longe
+  nas câmeras 3D (pesa mais; num servidor, o dono pode limitar com `MaxViewRadius`).
 - **Matas mais ralas** (mundos novos): as florestas fechadas têm menos árvores.
 - **Ícones novos:** Picareta de aço e Carga de demolição.
 - **Ferrovia antiga:** não nasce mais em mundos novos. Os mundos que já têm continuam com ela.
