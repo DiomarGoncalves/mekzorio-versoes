@@ -30,6 +30,12 @@
   - **Restaurar:** com a região religada, clique no trilho. Cada clique restaura até 60 trilhos, a 1 pedra cada, e a
     ferrugem some em onda.
   - **Depois:** ponha uma locomotiva e ela vai de uma estação à outra. À noite os postes do trecho restaurado acendem.
+- **Morros (teste)** (opção em Novo mundo, desligada por padrão):
+  - **O que muda:** planaltos grandes e altos, de topo plano, com barranco em volta e mais minério em cima.
+  - **Subir:** só por rampa. Há rampas naturais, e a Carga de demolição abre uma nova no pé do barranco. Descer dá
+    de qualquer lugar.
+  - **Construir:** máquinas só no plano; esteira, cano e poste acompanham a rampa.
+  - **É um teste:** pode mudar ou sair nas próximas versões.
 - **Carregar mundo:** os botões Exportar e Apagar não somem mais quando o mundo tem muitos mods.
 
 ## v0.2.3-alfa

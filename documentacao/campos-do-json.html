@@ -435,6 +435,11 @@ erro (não passa despercebido), e cada erro diz o arquivo, o id e o motivo.</p>
 <td><code>{ "radius": 24, "seconds": 120, "finds": 3, "patch": 3, "amount": [4000, 8000], "resources": [ids] }</code>; precisa de <code>power</code>: a cada <code>seconds</code> com energia revela um veio <code>patch</code>×<code>patch</code> de um dos <code>resources</code> (todos com <code>"prospected": true</code>) num lugar livre a até <code>radius</code> tiles, com <code>amount</code> por tile, e marca no mapa; para depois de <code>finds</code> veios</td>
 </tr>
 <tr>
+<td><code>blast</code></td>
+<td>carga de demolição (morros, teste)</td>
+<td><code>{ "fuse": 3 }</code> (segundos): só se põe no pé de um barranco, com a frente virada para ele; no fim do pavio explode e abre uma rampa de 3 × 5 tiles para o nível de cima. Só tem efeito em mundos com a regra Morros</td>
+</tr>
+<tr>
 <td><code>silo</code></td>
 <td>silo de foguete</td>
 <td>ver abaixo (junto com <code>crafter</code> de receita fixa)</td>
