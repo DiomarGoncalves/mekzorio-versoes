@@ -777,6 +777,21 @@ pela <code>density</code>, como qualquer planta.</p>
 <td>Com mais de um inimigo do mesmo <code>ai</code>, a torre sorteia por esse peso (0 = nunca sozinho: só quando um script cria, com <code>enemies.spawn</code>).</td>
 </tr>
 <tr>
+<td><code>range</code></td>
+<td>0</td>
+<td>Maior que 0: atira de longe, a até esses tiles, em vez de bater de perto (0 a 20).</td>
+</tr>
+<tr>
+<td><code>blast</code></td>
+<td>0</td>
+<td>Maior que 0: ao encostar no alvo explode — o <code>damage</code> em tudo nesse raio de tiles (no jogador, metade) — e some (0 a 8).</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>—</td>
+<td>Papel nas guarnições das torres e nas invasões (só com <code>ai</code> <code>sentinel</code>): <code>swarm</code> (enxame), <code>ranged</code> (atirador), <code>bomber</code> (detonador) ou <code>heavy</code> (triturador). Com mais de um do mesmo papel, o jogo sorteia. Use <code>weight</code> 0 para ele não entrar também no sorteio das sentinelas comuns.</td>
+</tr>
+<tr>
 <td><code>model</code></td>
 <td>o id</td>
 <td>O <code>.bbmodel</code> (<code>"base:warden"</code> usa um do jogo).</td>
@@ -828,7 +843,7 @@ pela <code>density</code>, como qualquer planta.</p>
 <tr>
 <td><code>abandonedLines</code></td>
 <td>—</td>
-<td>Linhas de produção abandonadas (mundos novos; decisão 216): <code>cell</code> (192, múltiplo de 32: tamanho das células), <code>chance</code> (0.5: de a célula ter uma linha), <code>minDistance</code> (110: nunca mais perto do início) e <code>layouts</code>: as plantas, cada uma com <code>id</code>, <code>weight</code> (1: chance relativa), <code>ores</code> (minérios sorteados para nascer embaixo das mineradoras) <code>regions</code> (só nas células da região do Nó mais perto que estiver na lista; sem o campo, em qualquer uma) e <code>pieces</code>: <code>building</code> (a construção), <code>at</code> ([x, y] relativo à planta), <code>facing</code> (<code>east</code>, <code>south</code>, <code>west</code> ou <code>north</code>; <code>east</code> se faltar) e <code>recipe</code> (montadora: a receita que ela fazia; volta com ela). As peças nascem paradas e enferrujadas; com o Nó da região religado, o MEK zelador restaura cada uma que o jogador pagar (metade da receita da máquina). Sem o campo, nenhuma linha. A ferrovia antiga entre os Nós (decisão 218) usa o trilho <code>base:rail</code> e a estação <code>base:train_stop</code> e não tem campo próprio.</td>
+<td>Linhas de produção abandonadas (mundos novos; decisão 216): <code>cell</code> (192, múltiplo de 32: tamanho das células), <code>chance</code> (0.5: de a célula ter uma linha), <code>minDistance</code> (110: nunca mais perto do início) e <code>layouts</code>: as plantas, cada uma com <code>id</code>, <code>weight</code> (1: chance relativa), <code>ores</code> (minérios sorteados para nascer embaixo das mineradoras) <code>regions</code> (só nas células da região do Nó mais perto que estiver na lista; sem o campo, em qualquer uma), <code>since</code> (5: versão do gerador a partir da qual a planta nasce — planta nova com <code>since</code> 6 não muda os mundos criados antes) e <code>pieces</code>: <code>building</code> (a construção), <code>at</code> ([x, y] relativo à planta), <code>facing</code> (<code>east</code>, <code>south</code>, <code>west</code> ou <code>north</code>; <code>east</code> se faltar) e <code>recipe</code> (montadora: a receita que ela fazia; volta com ela). As peças nascem paradas e enferrujadas; com o Nó da região religado, o MEK zelador restaura cada uma que o jogador pagar (metade da receita da máquina). Sem o campo, nenhuma linha. A ferrovia antiga entre os Nós (decisão 218) usa o trilho <code>base:rail</code> e a estação <code>base:train_stop</code> e não tem campo próprio.</td>
 </tr>
 <tr>
 <td><code>biomes</code></td>
@@ -913,7 +928,7 @@ cor do jogador. A animação <code>work</code> toca enquanto a máquina trabalha
 
   <footer class="rodape">
     <img src="../imagens/emblema.png" alt="" width="28" height="28">
-    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.2.3-alfa).</p>
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.2.4-alfa).</p>
   </footer>
   <script src="../site.js"></script>
 </body>

@@ -1,5 +1,37 @@
 # Novidades
 
+## v0.2.4-alfa
+
+> Não conecta com a v0.2.3-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente. A ferrovia e as linhas novas só aparecem em
+> mundos criados a partir desta versão.
+
+- **Mais inimigos:**
+  - **Carrapato:** pequeno e rápido, ataca em bando.
+  - **Atirador:** acerta de longe, sem chegar perto.
+  - **Detonador:** corre até o alvo e explode, ferindo tudo em volta.
+  - **Triturador:** lento e muito resistente, derruba muro.
+  - **Torres mais cheias:** além das sentinelas, cada torre de vigia tem um acampamento em volta, maior quanto mais
+    longe do início.
+- **Nível novo "Invasões"** (em Novo mundo → Guardiões; é o mais difícil):
+  - **Como funciona:** depois dos primeiros 15 minutos, ondas saem do lado da torre viva mais perto e marcham até a
+    sua fábrica. Elas crescem conforme você avança.
+  - **Como se defender:** muros, torretas com munição e MEKs de segurança. Derrubar as torres em volta da base acaba
+    com as invasões daquele lado.
+- **Inimigos de cara nova:** a sentinela, o Guardião do Nó e os quatro novos ganharam formas arredondadas, com olho
+  grande aceso, no lugar dos caixotes.
+- **Usinas abandonadas** (mundos novos): geradores a carvão que, restaurados pelo MEK zelador, se abastecem sozinhos e
+  dão energia para quem puxar um poste.
+- **Linhas abandonadas de cada região** (mundos novos): fábrica de cabos com turbinas eólicas, fazenda solar, vidraria
+  elétrica, fábrica de engrenagens e olaria. A montadora volta já com a receita.
+- **Ferrovia antiga entre as regiões** (mundos novos):
+  - **O que se encontra:** trilhos enferrujados ligando as regiões vizinhas, com uma estação em cada ponta e postes de
+    luz apagados ao lado.
+  - **Restaurar:** com a região religada, clique no trilho. Cada clique restaura até 60 trilhos, a 1 pedra cada, e a
+    ferrugem some em onda.
+  - **Depois:** ponha uma locomotiva e ela vai de uma estação à outra. À noite os postes do trecho restaurado acendem.
+- **Carregar mundo:** os botões Exportar e Apagar não somem mais quando o mundo tem muitos mods.
+
 ## v0.2.3-alfa
 
 > Não conecta com a v0.2.2-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
@@ -29,16 +61,6 @@
     (o mouse em cima mostra quanto); o MEK vai até lá e conserta com faíscas, uma peça por vez. Restaurada, ela é a
     máquina normal: a linha volta a minerar e fundir e as placas chegam no baú.
   - **Noite:** o sítio acordado fica com luz âmbar.
-  - **Usinas abandonadas:** geradores a carvão que, restaurados, se abastecem sozinhos e dão energia para quem puxar
-    um poste.
-  - **Cada região tem as suas:** fábrica de cabos com turbinas eólicas, fazenda solar, vidraria elétrica, fábrica de
-    engrenagens e olaria. A montadora volta já com a receita.
-- **Ferrovia antiga entre as regiões** (mundos novos):
-  - **O que se encontra:** trilhos enferrujados ligando as regiões vizinhas, com uma estação em cada ponta e postes de
-    luz apagados ao lado.
-  - **Restaurar:** com a região religada, clique no trilho. Cada clique restaura até 60 trilhos, a 1 pedra cada, e a
-    ferrugem some em onda.
-  - **Depois:** ponha uma locomotiva e ela vai de uma estação à outra. À noite os postes do trecho restaurado acendem.
 
 ## v0.2.2-alfa
 
