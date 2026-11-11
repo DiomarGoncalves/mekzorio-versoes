@@ -708,7 +708,15 @@ seguintes levam o <code>payload</code> e trazem a <code>reward</code>.</p>
   &quot;sapling&quot;: &quot;muda_pinheiro&quot;, &quot;grows&quot;: &quot;pinheiro&quot;, &quot;growSeconds&quot;: 300 }
 </code></pre>
 <p><code>kind</code>: <code>tree</code> (corta e dá <code>amount</code> de <code>item</code>) ou <code>decor</code> (só enfeite). <code>density</code> = chance por bioma. <code>sapling</code>,
-<code>grows</code> e <code>growSeconds</code> deixam replantar.</p>
+<code>grows</code> e <code>growSeconds</code> deixam replantar. <code>sway</code> (0 a 0.5, padrão 0.08 na árvore e 0.05 no enfeite) = quanto o topo
+balança com vento forte, em tiles; 0 deixa parado (pedras, cacto). O tronco da árvore fica firme.</p>
+<p><code>kind</code> também pode ser <code>wreck</code> (destroço, resto da Rede antiga): desmonta-se segurando o clique como uma árvore e dá
+<code>amount</code> de <code>item</code>, não deixa construir em cima, mas o cortador de árvores não mexe nele. <code>remnant</code> põe o destroço nos
+sítios de restos da geração (<code>belt</code>, <code>rail</code>, <code>pole</code>, <code>machine</code> ou <code>car</code>; com mais de um no mesmo papel, o jogo
+sorteia), e <code>align</code> (true) vira o desenho para o vizinho igual (esteira e trilho em linha). Sem <code>remnant</code>, ele só nasce
+pela <code>density</code>, como qualquer planta.</p>
+<pre><code class="language-jsonc">{ &quot;id&quot;: &quot;trator_velho&quot;, &quot;kind&quot;: &quot;wreck&quot;, &quot;item&quot;: &quot;base:mechanical_scrap&quot;, &quot;amount&quot;: 8, &quot;remnant&quot;: &quot;car&quot; }
+</code></pre>
 <h2 id="inimigos-e-meks-enemies">Inimigos e MEKs (<code>enemies</code>)</h2>
 <pre><code class="language-jsonc">{ &quot;id&quot;: &quot;sentinela_blindada&quot;, &quot;name&quot;: { &quot;pt-BR&quot;: &quot;Sentinela blindada&quot; }, &quot;ai&quot;: &quot;sentinel&quot;,
   &quot;health&quot;: 900, &quot;damage&quot;: 9, &quot;hitTime&quot;: 2, &quot;speed&quot;: 10, &quot;sight&quot;: 10, &quot;leash&quot;: 28, &quot;scrap&quot;: 4, &quot;weight&quot;: 1,
@@ -813,6 +821,11 @@ seguintes levam o <code>payload</code> e trazem a <code>reward</code>.</p>
 <td>Tamanho (tiles) das regiões de bioma.</td>
 </tr>
 <tr>
+<td><code>remnants</code></td>
+<td>—</td>
+<td>Sítios de restos da Rede antiga (mundos novos): <code>cell</code> (56: o mapa é dividido em células desse tamanho, 32 a 512), <code>chance</code> (0.3: de cada célula ter um sítio) e <code>minDistance</code> (70: nunca mais perto do início). As peças são as plantas de <code>kind</code> <code>wreck</code> com <code>remnant</code>. Sem o campo, nenhum resto.</td>
+</tr>
+<tr>
 <td><code>biomes</code></td>
 <td>—</td>
 <td>Lista de biomas: <code>id</code>, <code>name</code>, <code>color</code>, <code>temperature</code> e <code>moisture</code> (<code>[mín, máx]</code>, 0 a 100), <code>terrains</code> (que terrenos aparecem) e <code>resources</code> (multiplicador das jazidas: <code>{ "base:iron_ore": 1.5 }</code>).</td>
@@ -895,7 +908,7 @@ cor do jogador. A animação <code>work</code> toca enquanto a máquina trabalha
 
   <footer class="rodape">
     <img src="../imagens/emblema.png" alt="" width="28" height="28">
-    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.2.2-alfa).</p>
+    <p>MEKZORIO © DiomarGoncalves. Todos os direitos reservados. Documentação gerada do jogo (versão 0.2.3-alfa).</p>
   </footer>
   <script src="../site.js"></script>
 </body>
