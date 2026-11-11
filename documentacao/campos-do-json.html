@@ -826,6 +826,11 @@ pela <code>density</code>, como qualquer planta.</p>
 <td>Sítios de restos da Rede antiga (mundos novos): <code>cell</code> (56: o mapa é dividido em células desse tamanho, 32 a 512), <code>chance</code> (0.3: de cada célula ter um sítio) e <code>minDistance</code> (70: nunca mais perto do início). As peças são as plantas de <code>kind</code> <code>wreck</code> com <code>remnant</code>. Sem o campo, nenhum resto.</td>
 </tr>
 <tr>
+<td><code>abandonedLines</code></td>
+<td>—</td>
+<td>Linhas de produção abandonadas (mundos novos; decisão 216): <code>cell</code> (192, múltiplo de 32: tamanho das células), <code>chance</code> (0.5: de a célula ter uma linha), <code>minDistance</code> (110: nunca mais perto do início) e <code>layouts</code>: as plantas, cada uma com <code>id</code>, <code>weight</code> (1: chance relativa), <code>ores</code> (minérios sorteados para nascer embaixo das mineradoras) e <code>pieces</code>: <code>building</code> (a construção), <code>at</code> ([x, y] relativo à planta) e <code>facing</code> (<code>east</code>, <code>south</code>, <code>west</code> ou <code>north</code>; <code>east</code> se faltar). As peças nascem paradas e enferrujadas; com o Nó da região religado, o MEK zelador restaura cada uma que o jogador pagar (metade da receita da máquina). Sem o campo, nenhuma linha.</td>
+</tr>
+<tr>
 <td><code>biomes</code></td>
 <td>—</td>
 <td>Lista de biomas: <code>id</code>, <code>name</code>, <code>color</code>, <code>temperature</code> e <code>moisture</code> (<code>[mín, máx]</code>, 0 a 100), <code>terrains</code> (que terrenos aparecem) e <code>resources</code> (multiplicador das jazidas: <code>{ "base:iron_ore": 1.5 }</code>).</td>

@@ -20,10 +20,15 @@
   - **O que se encontra:** sítios abandonados pelo mapa, com linhas de esteira enferrujada, trilho velho, postes
     caídos, carcaças de máquina e carros abandonados.
   - **Desmontar rende:** é como cortar árvore, e dá engrenagens, placas, cabo e sucata.
-- **MEKs zeladores:**
-  - **Região desligada:** junto de cada carcaça há um MEK de manutenção antigo, caído e apagado.
-  - **Depois de religar o Nó da região:** ele se levanta e cuida do sítio, consertando com faíscas, para e pia
-    quando você chega perto e deixa o lugar com luz âmbar à noite.
+- **Linhas de produção abandonadas** (mundos novos):
+  - **O que se encontra:** pelo mapa, longe do início, linhas paradas e enferrujadas da Rede antiga: uma mineradora
+    sobre ferro ou cobre que mandava o minério por esteiras até um divisor, duas fornalhas e um baú (ou uma mina de
+    carvão com baú).
+  - **MEK zelador:** cada linha tem um MEK de manutenção antigo, caído e apagado enquanto a região está desligada.
+  - **Restaurar:** depois de religar o Nó da região, ele se levanta. Clique numa peça e pague metade do material dela
+    (o mouse em cima mostra quanto); o MEK vai até lá e conserta com faíscas, uma peça por vez. Restaurada, ela é a
+    máquina normal: a linha volta a minerar e fundir e as placas chegam no baú.
+  - **Noite:** o sítio acordado fica com luz âmbar.
 
 ## v0.2.2-alfa
 
