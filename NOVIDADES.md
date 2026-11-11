@@ -11,6 +11,19 @@
 - **Pouso suave:** o helicóptero (e qualquer descida) vai amaciando no último tile em vez de parar de uma vez no chão.
 - **Mapa sem travadinhas voando:** andando rápido, o mapa novo agora chega e é desenhado aos poucos, em vez de uma
   fileira inteira no mesmo instante (era isso que dava a travadinha a cada trecho, principalmente de avião).
+- **Um mundo mais vivo:**
+  - **Vento:** árvores, capim, flores e arbustos balançam, mais na ventania e na chuva.
+  - **Sons:** de dia, pássaros e folhas na mata e ondinhas na beira dos lagos.
+  - **Noite:** vaga-lumes onde há vegetação e grilos mais fortes na mata.
+  - **Bichinhos:** bem menos besouros e pássaros de lata correndo de você.
+- **Restos da Rede antiga** (mundos novos):
+  - **O que se encontra:** sítios abandonados pelo mapa, com linhas de esteira enferrujada, trilho velho, postes
+    caídos, carcaças de máquina e carros abandonados.
+  - **Desmontar rende:** é como cortar árvore, e dá engrenagens, placas, cabo e sucata.
+- **MEKs zeladores:**
+  - **Região desligada:** junto de cada carcaça há um MEK de manutenção antigo, caído e apagado.
+  - **Depois de religar o Nó da região:** ele se levanta e cuida do sítio, consertando com faíscas, para e pia
+    quando você chega perto e deixa o lugar com luz âmbar à noite.
 
 ## v0.2.2-alfa
 
