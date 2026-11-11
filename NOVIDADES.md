@@ -29,6 +29,16 @@
     (o mouse em cima mostra quanto); o MEK vai até lá e conserta com faíscas, uma peça por vez. Restaurada, ela é a
     máquina normal: a linha volta a minerar e fundir e as placas chegam no baú.
   - **Noite:** o sítio acordado fica com luz âmbar.
+  - **Usinas abandonadas:** geradores a carvão que, restaurados, se abastecem sozinhos e dão energia para quem puxar
+    um poste.
+  - **Cada região tem as suas:** fábrica de cabos com turbinas eólicas, fazenda solar, vidraria elétrica, fábrica de
+    engrenagens e olaria. A montadora volta já com a receita.
+- **Ferrovia antiga entre as regiões** (mundos novos):
+  - **O que se encontra:** trilhos enferrujados ligando as regiões vizinhas, com uma estação em cada ponta e postes de
+    luz apagados ao lado.
+  - **Restaurar:** com a região religada, clique no trilho. Cada clique restaura até 60 trilhos, a 1 pedra cada, e a
+    ferrugem some em onda.
+  - **Depois:** ponha uma locomotiva e ela vai de uma estação à outra. À noite os postes do trecho restaurado acendem.
 
 ## v0.2.2-alfa
 
