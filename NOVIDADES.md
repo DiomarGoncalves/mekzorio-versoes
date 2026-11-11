@@ -8,11 +8,16 @@
 - **Morros (teste)** (opção em Novo mundo, desligada por padrão):
   - **O que muda:** planaltos grandes de topo plano, com barranco em volta, em até 7 alturas, e mais minério em cima.
   - **Picos:** os morros mais altos têm veio profundo aflorando no topo, à vista, sem precisar de sonda.
-  - **Subir:** só por rampa. Há rampas naturais, e a Carga de demolição abre uma nova no pé do barranco. Descer dá
-    de qualquer lugar.
+  - **Subir e descer:** só por rampa, a pé, de carro ou para os inimigos. Há rampas naturais, e a Carga de demolição
+    abre uma nova no pé do barranco. Jetpack, avião e helicóptero passam por cima.
   - **Construir:** máquinas só no plano; esteira, cano, poste e trilho acompanham a rampa, e o trem sobe por ela.
   - **É um teste:** pode mudar ou sair nas próximas versões.
+- **Voar mais alto:** o avião sobe até 40 tiles e o helicóptero até 32, e sobem mais rápido. Passando por cima de um
+  morro, a aeronave sobe e desce suave.
+- **Árvores mais altas:** tronco comprido e copa acima da cabeça. Na mata, em primeira pessoa, dá para enxergar entre
+  as árvores.
 - **Matas mais ralas** (mundos novos): as florestas fechadas têm menos árvores.
+- **Ícones novos:** Picareta de aço e Carga de demolição.
 - **Ferrovia antiga:** não nasce mais em mundos novos. Os mundos que já têm continuam com ela.
 
 ## v0.2.4-alfa
