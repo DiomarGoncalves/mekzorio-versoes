@@ -19,6 +19,12 @@
   e mangue. A copa fica acima da cabeça: na mata, em primeira pessoa, dá para enxergar entre elas.
 - **Opções novas (Gráficos):** campo de visão (FOV) da primeira pessoa e distância de visão, para enxergar mais longe
   nas câmeras 3D (pesa mais; num servidor, o dono pode limitar com `MaxViewRadius`).
+- **Paredões com pedras:** os barrancos altos dos morros ganharam pedras encaixadas na parede.
+- **Jetpack com altura de verdade:** Espaço sobe e Shift desce. Soltando, ele cai devagar e pousa sozinho. Por cima de
+  um morro segue reto; baixo demais, bate no barranco.
+- **Câmera dirigindo:** nas câmeras 3D, a roda do mouse afasta ou aproxima a câmera do carro, do avião, do
+  helicóptero e do trem.
+- **Fios nos morros:** os fios, os cabos e o círculo de alcance do poste ficam na altura certa no alto dos morros.
 - **Matas mais ralas** (mundos novos): as florestas fechadas têm menos árvores.
 - **Ícones novos:** Picareta de aço e Carga de demolição.
 - **Ferrovia antiga:** não nasce mais em mundos novos. Os mundos que já têm continuam com ela.
