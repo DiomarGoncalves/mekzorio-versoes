@@ -1,5 +1,20 @@
 # Novidades
 
+## v0.2.5-alfa
+
+> Não conecta com a v0.2.4-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
+
+- **Morros (teste)** (opção em Novo mundo, desligada por padrão):
+  - **O que muda:** planaltos grandes de topo plano, com barranco em volta, em até 7 alturas, e mais minério em cima.
+  - **Picos:** os morros mais altos têm veio profundo aflorando no topo, à vista, sem precisar de sonda.
+  - **Subir:** só por rampa. Há rampas naturais, e a Carga de demolição abre uma nova no pé do barranco. Descer dá
+    de qualquer lugar.
+  - **Construir:** máquinas só no plano; esteira, cano, poste e trilho acompanham a rampa, e o trem sobe por ela.
+  - **É um teste:** pode mudar ou sair nas próximas versões.
+- **Matas mais ralas** (mundos novos): as florestas fechadas têm menos árvores.
+- **Ferrovia antiga:** não nasce mais em mundos novos. Os mundos que já têm continuam com ela.
+
 ## v0.2.4-alfa
 
 > Não conecta com a v0.2.3-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
@@ -30,12 +45,6 @@
   - **Restaurar:** com a região religada, clique no trilho. Cada clique restaura até 60 trilhos, a 1 pedra cada, e a
     ferrugem some em onda.
   - **Depois:** ponha uma locomotiva e ela vai de uma estação à outra. À noite os postes do trecho restaurado acendem.
-- **Morros (teste)** (opção em Novo mundo, desligada por padrão):
-  - **O que muda:** planaltos grandes e altos, de topo plano, com barranco em volta e mais minério em cima.
-  - **Subir:** só por rampa. Há rampas naturais, e a Carga de demolição abre uma nova no pé do barranco. Descer dá
-    de qualquer lugar.
-  - **Construir:** máquinas só no plano; esteira, cano e poste acompanham a rampa.
-  - **É um teste:** pode mudar ou sair nas próximas versões.
 - **Carregar mundo:** os botões Exportar e Apagar não somem mais quando o mundo tem muitos mods.
 
 ## v0.2.3-alfa
