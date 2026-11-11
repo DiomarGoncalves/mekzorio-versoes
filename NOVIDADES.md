@@ -14,8 +14,8 @@
   - **É um teste:** pode mudar ou sair nas próximas versões.
 - **Voar mais alto:** o avião sobe até 40 tiles e o helicóptero até 32, e sobem mais rápido. Passando por cima de um
   morro, a aeronave sobe e desce suave.
-- **Árvores mais altas:** tronco comprido e copa acima da cabeça. Na mata, em primeira pessoa, dá para enxergar entre
-  as árvores.
+- **Árvores novas:** carvalho, pinheiro e árvore do pântano mais realistas, com galhos à mostra, copa em tufos e mais
+  detalhe. Ficaram mais altas, com a copa acima da cabeça: na mata, em primeira pessoa, dá para enxergar entre elas.
 - **Matas mais ralas** (mundos novos): as florestas fechadas têm menos árvores.
 - **Ícones novos:** Picareta de aço e Carga de demolição.
 - **Ferrovia antiga:** não nasce mais em mundos novos. Os mundos que já têm continuam com ela.
