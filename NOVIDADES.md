@@ -1,5 +1,17 @@
 # Novidades
 
+## v0.2.3-alfa
+
+> Não conecta com a v0.2.2-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
+
+- **Avião que plana:** soltando o acelerador o avião não para mais no ar para cair reto. Ele perde velocidade, abaixa
+  o bico e desce aos poucos, sempre para a frente; perto do chão arredonda, encosta e rola até parar. Shift continua
+  descendo mais rápido.
+- **Pouso suave:** o helicóptero (e qualquer descida) vai amaciando no último tile em vez de parar de uma vez no chão.
+- **Mapa sem travadinhas voando:** andando rápido, o mapa novo agora chega e é desenhado aos poucos, em vez de uma
+  fileira inteira no mesmo instante (era isso que dava a travadinha a cada trecho, principalmente de avião).
+
 ## v0.2.2-alfa
 
 > Não conecta com a v0.2.1-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
