@@ -21,8 +21,7 @@
   nas câmeras 3D (pesa mais; num servidor, o dono pode limitar com `MaxViewRadius`).
 - **Paredões novos:** os barrancos dos morros viraram paredões de terra, pedra ou arenito, com a grama caindo pela
   beirada, blocos e pilares de pedra no pé, saliências com grama e cipós pendurados.
-- **Visão mais limpa:** voando alto, a neblina do horizonte não cobre mais o chão logo embaixo, e as texturas ficam
-  nítidas de longe.
+- **Visão mais limpa:** voando alto, a neblina do horizonte não cobre mais o chão logo embaixo.
 - **Jetpack com altura de verdade:** Espaço sobe e Shift desce. Soltando, ele cai devagar e pousa sozinho. Por cima de
   um morro segue reto; baixo demais, bate no barranco.
 - **Câmera dirigindo:** nas câmeras 3D, a roda do mouse afasta ou aproxima a câmera do carro, do avião, do
