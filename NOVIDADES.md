@@ -1,11 +1,27 @@
 # Novidades
 
+## v0.2.6-alfa
+
+> Conecta com a v0.2.5-alfa (mesmo protocolo): jogo e servidor podem ser atualizados em momentos diferentes. Mundos e
+> saves antigos abrem normalmente.
+
+- **Morros ficam:** agora vêm ligados por padrão no Novo mundo e nos mundos novos do servidor dedicado (`Hills` no
+  `servidor.json` desliga). Mundos já salvos continuam como estavam.
+- **Mata mais leve:** de longe as árvores ficam numa versão mais simples e sem sombra, e capim e flores só aparecem
+  perto. Numa mata fechada são uns 40% menos triângulos na tela, e de perto nada muda.
+- **Pouso no alto dos morros:** avião e helicóptero pousam em cima do planalto. Na beirada do barranco eles não
+  encostam: ficam pairando baixo até sair dela.
+- **Carga de demolição em 3D:** feixe de dinamite encostado no barranco e caixa detonadora com alavanca e luz
+  vermelha, que acende enquanto o pavio queima.
+- **Trilho com curva na rampa:** a linha pode vir pelo pé do barranco, fazer a curva, subir a rampa e virar de novo lá
+  em cima; o trem faz o caminho sozinho.
+
 ## v0.2.5-alfa
 
 > Não conecta com a v0.2.4-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
 > atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
 
-- **Morros (teste)** (opção em Novo mundo, desligada por padrão):
+- **Morros** (opção em Novo mundo; nesta versão ainda desligada por padrão):
   - **O que muda:** planaltos grandes de topo plano, com barranco em volta, em até 7 alturas, e mais minério em cima.
   - **Picos:** os morros mais altos têm veio profundo aflorando no topo, à vista, sem precisar de sonda.
   - **Subir e descer:** só por rampa, a pé, de carro ou para os inimigos. Há rampas naturais, e a Carga de demolição
