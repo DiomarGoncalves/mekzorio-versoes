@@ -1,10 +1,23 @@
 # Novidades
 
-## v0.2.6-alfa
+## v0.2.7-alfa
 
-> Conecta com a v0.2.5-alfa (mesmo protocolo): jogo e servidor podem ser atualizados em momentos diferentes. Mundos e
-> saves antigos abrem normalmente.
+> Não conecta com a v0.2.5-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
 
+- **Asfalto:** um piso novo (pesquisa Pavimentação, na planta química) em que se anda 70% mais rápido. Ganha sozinho
+  meio-fio nas bordas e faixa amarela no meio da pista, sobe as rampas e emenda nos cruzamentos.
+- **Trocar o piso:** pôr um piso em cima de outro troca direto e devolve o antigo. O carro também corre mais na
+  estrada: caminho de pedra +15%, concreto +25%, asfalto +35%.
+- **Fundação:** levanta o chão um nível (2 tiles) e empilha até 50 tiles (pesquisa Fundações, na montadora). Em cima
+  se constrói como no alto de um morro. Posta na beirada de um morro, fica rente ao planalto, para crescer para o lado.
+  A lateral tem pilares e vigas, nada de bloco liso. Coletar tira uma por vez.
+- **Rampa de concreto:** 3 × 5 tiles, como a natural (R gira). Liga o chão a uma fundação ou a um planalto, e boneco,
+  carro e trem sobem por ela.
+- **Elevador de carga:** um par, embaixo e em cima, que sobe ou desce os itens das esteiras até 50 tiles, com a torre
+  e os itens subindo. A esteira comum não passa mais por cima da parede de uma fundação.
+- **Fantasma no alto:** a prévia da construção e das plantas coladas aparece em cima do morro e deitada na rampa, como
+  a peça vai ficar.
 - **Morros ficam:** agora vêm ligados por padrão no Novo mundo e nos mundos novos do servidor dedicado (`Hills` no
   `servidor.json` desliga). Mundos já salvos continuam como estavam.
 - **Mata mais leve:** de longe as árvores ficam numa versão mais simples e sem sombra, e capim e flores só aparecem
