@@ -17,6 +17,8 @@
   paradas, a lista rola.
 - Um caminhão só espera atrás de outro que vai para a mesma doca (fila); os outros passam direto.
 - Asfalto, concreto ou caminho posto em cima de uma jazida agora sai ao coletar (a jazida continua lá embaixo).
+- **Asfalto com relevo:** a pista agora é uma laje um pouco acima do chão, com o meio-fio descendo até a terra. Quem
+  anda, dirige ou está construído em cima sobe junto.
 - **Mapa de teste:** uma avenida com duas docas e dois caminhões indo e voltando sozinhos, para ver como funciona.
 - **Carga de demolição mais fácil:** com a mira perto de um barranco, ela encaixa no pé dele e vira para ele sozinha;
   se não servir, o aviso diz por quê.
