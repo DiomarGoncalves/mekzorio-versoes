@@ -12,6 +12,7 @@
 - **Doca de caminhão:** um depósito 2 × 2 com nome, como a estação do trem. O caminhão para na estrada em frente a
   ela: "carregar até encher" tira da doca, "descarregar até esvaziar" põe nela. Esteiras enchem e esvaziam a doca
   como um baú.
+- **Mapa de teste:** uma avenida com duas docas e dois caminhões indo e voltando sozinhos, para ver como funciona.
 - **Carga de demolição mais fácil:** com a mira perto de um barranco, ela encaixa no pé dele e vira para ele sozinha;
   se não servir, o aviso diz por quê.
 
