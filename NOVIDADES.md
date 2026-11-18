@@ -9,11 +9,12 @@
   meio-fio nas bordas e faixa amarela no meio da pista, sobe as rampas e emenda nos cruzamentos.
 - **Trocar o piso:** pôr um piso em cima de outro troca direto e devolve o antigo. O carro também corre mais na
   estrada: caminho de pedra +15%, concreto +25%, asfalto +35%.
-- **Fundação:** levanta o chão um nível (2 tiles) e empilha até 50 tiles (pesquisa Fundações, na montadora). Em cima
+- **Fundação:** cada peça levanta um quadrado de 3 × 3 tiles um nível (2 tiles), as peças encaixam lado a lado, e
+  empilha até 50 tiles (pesquisa Fundações, na montadora). Em cima
   se constrói como no alto de um morro. Posta na beirada de um morro, fica rente ao planalto, para crescer para o lado.
-  A lateral tem pilares e vigas, nada de bloco liso. Coletar tira uma por vez.
+  A lateral tem pilares e vigas, nada de bloco liso. O fantasma mostra o quadrado na altura certa. Coletar tira a peça.
 - **Rampa de concreto:** 3 × 5 tiles, como a natural (R gira). Liga o chão a uma fundação ou a um planalto, e boneco,
-  carro e trem sobem por ela.
+  carro e trem sobem por ela. Basta mirar em qualquer parte dela: ela se encaixa e, se não couber, diz por quê.
 - **Elevador de carga:** um par, embaixo e em cima, que sobe ou desce os itens das esteiras até 50 tiles, com a torre
   e os itens subindo. A esteira comum não passa mais por cima da parede de uma fundação.
 - **Fantasma no alto:** a prévia da construção e das plantas coladas aparece em cima do morro e deitada na rampa, como
