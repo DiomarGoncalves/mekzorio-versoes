@@ -13,6 +13,9 @@
   uma fundação. A tomada d'água fica em cima e a turbina no pé, e a peça encaixa sozinha perto da mira. Com água
   chegando pelo cano de cima, dá **400 kW, dia e noite**. A água sai no pé e pode girar outra usina no barranco de
   baixo. Para levar a água lá para cima, use o cano subterrâneo, que atravessa o barranco.
+- **A bomba d'água agora gasta energia** (150 kW): ligue um poste perto dela. Com qualquer energia na rede ela
+  puxa o ritmo cheio; sem energia, para. A usina a vapor precisa de um gerador a carvão ou de uma bateria na mesma
+  rede para dar a partida; depois se mantém sozinha. Em mundos antigos, bomba sem poste perto fica parada.
 - **Mapa de teste:** uma estação de beneficiamento funcionando (minério → britador → lavadora → fornalha).
 - A janela da máquina diz "Juntando material: 3 de 4" enquanto o braço traz o resto, em vez de "Parada".
 
