@@ -1,5 +1,20 @@
 # Novidades
 
+## v0.2.8-alfa
+
+> Não conecta com a v0.2.7-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
+
+- **Caminhão** (pesquisa Caminhões): porta-malas de 40 espaços, dirige-se à mão como o carro. Com um roteiro e o
+  Automático ligado, vai sozinho de doca em doca pela estrada (caminho de pedra, concreto, asfalto ou rampa de
+  concreto), pela mão direita. Numa avenida de 2 tiles, cada sentido usa a sua fileira, e numa pista de 1 tile dois
+  caminhões se cruzam.
+- **Doca de caminhão:** um depósito 2 × 2 com nome, como a estação do trem. O caminhão para na estrada em frente a
+  ela: "carregar até encher" tira da doca, "descarregar até esvaziar" põe nela. Esteiras enchem e esvaziam a doca
+  como um baú.
+- **Carga de demolição mais fácil:** com a mira perto de um barranco, ela encaixa no pé dele e vira para ele sozinha;
+  se não servir, o aviso diz por quê.
+
 ## v0.2.7-alfa
 
 > Não conecta com a v0.2.5-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
