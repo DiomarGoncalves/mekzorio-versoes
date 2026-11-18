@@ -12,6 +12,11 @@
   cada sentido usa a sua fileira, e numa pista de 1 tile dois caminhões se cruzam.
 - **Doca de caminhão:** um depósito 2 × 2 com nome, como a estação do trem. O caminhão encosta na frente dela: "carregar até encher" tira da doca, "descarregar até esvaziar" põe nela. Esteiras enchem e esvaziam a doca
   como um baú.
+- **Roteiro em passos** (caminhão e trem): cada parada é um cartão numerado. Para montar a viagem, é só clicar nas
+  docas (ou estações) na ordem — "vai na A, depois na B" — e escolher Carregar, Descarregar ou Esperar. Com muitas
+  paradas, a lista rola.
+- Um caminhão só espera atrás de outro que vai para a mesma doca (fila); os outros passam direto.
+- Asfalto, concreto ou caminho posto em cima de uma jazida agora sai ao coletar (a jazida continua lá embaixo).
 - **Mapa de teste:** uma avenida com duas docas e dois caminhões indo e voltando sozinhos, para ver como funciona.
 - **Carga de demolição mais fácil:** com a mira perto de um barranco, ela encaixa no pé dele e vira para ele sozinha;
   se não servir, o aviso diz por quê.
