@@ -1,5 +1,21 @@
 # Novidades
 
+## v0.2.9-alfa
+
+> Não conecta com a v0.2.8-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
+
+- **Britador e lavadora de minério** (pesquisa Beneficiamento de minério): o britador quebra o minério de ferro ou de
+  cobre, e a lavadora lava o britado com água e faz concentrado. Cada concentrado vira uma placa na fornalha: no fim,
+  **4 minérios rendem 6 placas**. Sobram pedra (do britador) e escória (da lavadora): tire com um braço, senão a
+  máquina para.
+- **Usina hidrelétrica** (pesquisa Hidrelétrica): monte em cima de um barranco de um nível, do morro ou da borda de
+  uma fundação. A tomada d'água fica em cima e a turbina no pé, e a peça encaixa sozinha perto da mira. Com água
+  chegando pelo cano de cima, dá **400 kW, dia e noite**. A água sai no pé e pode girar outra usina no barranco de
+  baixo. Para levar a água lá para cima, use o cano subterrâneo, que atravessa o barranco.
+- **Mapa de teste:** uma estação de beneficiamento funcionando (minério → britador → lavadora → fornalha).
+- A janela da máquina diz "Juntando material: 3 de 4" enquanto o braço traz o resto, em vez de "Parada".
+
 ## v0.2.8-alfa
 
 > Não conecta com a v0.2.7-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
