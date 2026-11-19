@@ -1,5 +1,29 @@
 # Novidades
 
+## v0.3.0-alfa
+
+> Não conecta com a v0.2.9-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente; os rios só aparecem em mundos novos.
+
+- **Recicladora** (pesquisa Reciclagem): desmonta qualquer coisa feita à mão ou na montadora e devolve metade dos
+  ingredientes (2 circuitos voltam como 1 placa de ferro e 3 cabos). A escória vira placa de ferro e pedra, e a sucata
+  mecânica vira aço, engrenagem e cabo.
+- **Estufa** (pesquisa Estufa): com água pelo cano e energia para a luz, cultiva madeira sem cortar o mapa, ou mudas
+  de árvore. A muda se planta com ela na mão, clicando na terra, e vira árvore perto de um cortador de árvores: dá
+  para fazer um bosque de madeira sem fim.
+- **Coqueria e alto-forno** (pesquisa Alto-forno): a coqueria transforma 2 carvões em 1 coque, um combustível melhor.
+  O alto-forno faz 1 aço em 4 segundos com 3 placas de ferro e 1 coque, ou direto com 3 concentrados de ferro da
+  lavadora. A fornalha leva 16 segundos e 5 placas.
+- **Caminhão-tanque** (pesquisa Caminhão-tanque): leva 2000 de qualquer líquido. A doca de líquido se liga por cano:
+  no modo Encher ela enche o caminhão, e no modo Esvaziar ela recebe dele e manda para o cano. Bom para levar água ao
+  alto do morro ou petróleo de longe.
+- **Rios** (mundos novos com morros): rios que serpenteiam pelo mapa e descem os morros em cachoeiras. Uma usina
+  hidrelétrica encostada no rio, lá em cima do barranco, gira sozinha: **400 kW sem cano e sem bomba**.
+- **Aterro** (pesquisa Aterro, 20 pedras): com ele na mão, clique na água para virar terra e atravessar um rio ou
+  lago a pé, de caminhão ou de trem.
+- **Mapa de teste:** estações da recicladora, da estufa e do alto-forno, e um caminhão-tanque levando água do lago
+  até um tanque.
+
 ## v0.2.9-alfa
 
 > Não conecta com a v0.2.8-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
