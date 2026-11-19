@@ -1,5 +1,17 @@
 # Novidades
 
+## v0.3.1-alfa
+
+> Não conecta com a v0.3.0-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente.
+
+- **Roda d'água** (pesquisa Roda d'água, logo depois de Líquidos): posta na beira de um rio, com a seta virada para a
+  água, gira com a correnteza e dá **60 kW, dia e noite, sem combustível**. É pouca energia, mas funciona em qualquer
+  trecho de rio, não só na cachoeira. No lago a água está parada e a roda não gira (a janela dela avisa).
+- **Ponte** (pesquisa Aterro e pontes): posta tile a tile em cima da água, deixa o rio passando por baixo, com
+  guarda-corpo e pilares. Em cima passam gente, caminhão e trilho. Não vai na cachoeira. Coletar devolve a peça e a
+  água (tire antes o que estiver construído em cima).
+
 ## v0.3.0-alfa
 
 > Não conecta com a v0.2.9-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
