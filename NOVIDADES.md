@@ -1,5 +1,22 @@
 # Novidades
 
+## v0.3.2-alfa
+
+> Não conecta com a v0.3.1-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente; lagos e raros nos morros só em mundos novos.
+
+- **Rios terminam em lagos:** perto do início e dos Nós, o rio agora deságua num lago em vez de acabar de repente.
+- **Recursos raros nos morros:** em cima das serras nascem quartzo, lítio, petróleo e urânio (o da região do Nó mais
+  perto); ferro, cobre, carvão e pedra ficam embaixo, no plano. Os Nós continuam com as jazidas deles.
+- **Borracha e pneus** (pesquisa Borracha): a estufa cultiva látex de seringueira, a planta química transforma látex e
+  enxofre em borracha, e a montadora faz pneus. Caminhão, caminhão-tanque e avião agora pedem pneus.
+- **Torre de radar** (pesquisa Radar): com energia, a antena gira e revela o mapa (M) num raio de 160 tiles, mesmo de
+  longe. Uma invasão que sai ou chega na área dela fica marcada no mapa.
+- **Inimigos e MEKs arredondados:** MEK abandonado, desmontador (com serras girando), coletor de sucata, sentinela
+  voadora e os MEKs do jogador ganharam o mesmo estilo dos inimigos novos.
+- **Servidor:** o conteúdo do jogo agora vai dentro do executável; a pasta `mods` fica só para os mods do servidor.
+- Os mods de exemplo não vêm mais junto com o jogo (estão no site, na aba Mods).
+
 ## v0.3.1-alfa
 
 > Não conecta com a v0.3.0-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
