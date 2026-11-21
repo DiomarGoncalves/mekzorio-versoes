@@ -3,9 +3,11 @@
 ## v0.3.2-alfa
 
 > Não conecta com a v0.3.1-alfa: atualize o jogo e o servidor juntos (no Pterodactyl: reinicie o servidor, que ele se
-> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente; lagos e raros nos morros só em mundos novos.
+> atualiza sozinho ao ligar). Mundos e saves antigos abrem normalmente; lagos, raros nos morros e a borda nova do início só em mundos novos.
 
 - **Rios terminam em lagos:** perto do início e dos Nós, o rio agora deságua num lago em vez de acabar de repente.
+- **Início sem círculo:** a planície do começo não termina mais num círculo perfeito; neve, deserto e floresta chegam
+  aos poucos, com uma borda natural (mundos novos).
 - **Recursos raros nos morros:** em cima das serras nascem quartzo, lítio, petróleo e urânio (o da região do Nó mais
   perto); ferro, cobre, carvão e pedra ficam embaixo, no plano. Os Nós continuam com as jazidas deles.
 - **Borracha e pneus** (pesquisa Borracha): a estufa cultiva látex de seringueira, a planta química transforma látex e
